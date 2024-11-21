@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+// application.php
+
+require '../vendor/autoload.php';
+
+$container = require '../config/container.php';
+$config = $container->get('config');
+
+use Symfony\Component\Console\Application;
+use Olodoc\Command\GenerateHtmlCommand;
+
+$application = new Application();
+
+//
+// ... register commands
+// 
+$application->add(new GenerateHtmlCommand($config));
+
+$application->run();

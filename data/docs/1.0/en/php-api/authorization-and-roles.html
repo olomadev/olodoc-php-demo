@@ -1,0 +1,262 @@
+<h2>Authorization and Roles</h2>
+<p>After the authentication process is successful, the following operations occur respectively:</p>
+<ol>
+<li>The roles of the authenticated user are stored in the token.</li>
+<li>In the <b>AuthorizationMiddleware</b>, the <b>PermissionModel-&gt;findPermissions()</b> method reads the authorizations of the relevant roles and decides whether the user is authorized for the relevant route.</li>
+</ol>
+<pre data-line="8"><code class="language-json line-numbers">{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9........",
+    "user": {
+        "id": "21615870-4f89-4ab8-b91e-af6370a3089e",
+        "firstname": "Demo",
+        "lastname": "Admin",
+        "email": "demo@example.com",
+        "roles": [
+            "admin"
+        ]
+    },
+    "expiresAt": "2022-08-03 11:58:22"
+}</code></pre>
+<h3>AuthorizationMiddleware</h3>
+<p>In order to perform authorization control on your routes, you must attach the <kbd>Mezzio\Authorization\AuthorizationMiddleware</kbd> class to the relevant route as a middleware. This way the middleware class can start checking authorization for each role.</p>
+<pre data-line="3"><code class="language-php line-numbers">$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);
+$app-&gt;route('/api/companies/update/:companyId', $companies, ['PUT']);
+$app-&gt;route('/api/companies/delete/:companyId', $companies, ['DELETE']);
+$app-&gt;route('/api/companies/findAll', $companies, ['GET']);
+$app-&gt;route('/api/companies/findAllByPaging',$companies, ['GET']);
+$app-&gt;route('/api/companies/findOneById/:companyId', $companies, ['GET']);</code></pre>
+<h3>SQL Codes</h3>
+<p>In order for roles and authorizations to work, the following tables must be defined in the database. These tables are already defined in the demo application. You can obtain more up-to-date SQL codes from the database file of the demo application.</p>
+<pre><code class="language-sql">/*
+    Roles table
+*/
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `roleId` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `roleKey` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `roleName` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `roleLevel` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`roleId`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `roles`(`roleId`,`roleKey`,`roleName`,`roleLevel`) VALUES 
+('6be6178d-fe99-47b6-90d5-2a0c4d25b6dc','admin','Administrator',10),
+('9d548023-899f-461e-bd45-c925a66499ee','sales','Sales',5),
+/*
+    Permissions table
+*/
+DROP TABLE IF EXISTS `permissions`;
+
+CREATE TABLE `permissions` (
+  `permId` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `moduleName` varchar(60) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `route` varchar(160) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `method` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `action` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`permId`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `permissions`(`permId`,`moduleName`,`route`,`method`,`action`) values 
+('060ecb64-7387-4073-8a42-5b8ce38013f9','Companies','/api/companies/findAllByPaging','GET','list');
+/*
+    Role Permissions assignment table
+*/
+DROP TABLE IF EXISTS `rolePermissions`;
+CREATE TABLE `rolePermissions` (
+  `roleId` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `permId` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  PRIMARY KEY (`roleId`,`permId`) USING BTREE,
+  KEY `fk_role_perms_to_perms` (`permId`) USING BTREE,
+  CONSTRAINT `fk_role_perms_to_perms` FOREIGN KEY (`permId`) REFERENCES `permissions` (`permId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_role_perms_to_roles` FOREIGN KEY (`roleId`) REFERENCES `roles` (`roleId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `rolePermissions`(`roleId`,`permId`) VALUES 
+('6be6178d-fe99-47b6-90d5-2a0c4d25b6dc','060ecb64-7387-4073-8a42-5b8ce38013f9');
+/*
+    User Roles table
+*/
+DROP TABLE IF EXISTS `userRoles`;
+CREATE TABLE `userRoles` (
+  `userId` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `roleId` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  PRIMARY KEY (`userId`,`roleId`) USING BTREE,
+  KEY `fk_role_to_roles` (`roleId`) USING BTREE,
+  CONSTRAINT `fk_role_to_roles` FOREIGN KEY (`roleId`) REFERENCES `roles` (`roleId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_roleUser_to_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `userRoles`(`userId`,`roleId`) values 
+('--add-your--user--id--','6be6178d-fe99-47b6-90d5-2a0c4d25b6dc');</code></pre>
+<h3>Authorization</h3>
+<p>The <kbd>isGranted</kbd> method is used to check whether a role has authorization for the incoming request.</p>
+<pre><code class="language-php">declare(strict_types=1);
+
+namespace Mezzio\Authorization;
+
+use Psr\Http\Message\ServerRequestInterface;
+
+interface AuthorizationInterface
+{
+    /**
+     * Check if a role is granted for the request
+     */
+    public function isGranted(string $role, ServerRequestInterface $request): bool;
+}</code></pre>
+<p>When the application runs, as seen in the <kbd>config\config.php</kbd> file, from Olobase components with <b>Olobase\Mezzio\ConfigProvider::class</b>;</p>
+<pre data-line="19"><code class="language-php line-numbers">&lt;?php
+declare(strict_types=1);
+
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
+
+// To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
+// `config/autoload/local.php`.
+$cacheConfig = [
+    'config_cache_path' =&gt; 'data/cache/config-cache.php',
+];
+
+$aggregator = new ConfigAggregator([
+    \Mezzio\Authentication\LaminasAuthentication\ConfigProvider::class,
+    \Mezzio\Authentication\ConfigProvider::class,
+    /*.. */
+
+    \Olobase\Mezzio\ConfigProvider::class, // Olobase php components
+
+    /*.. */
+], $cacheConfig['config_cache_path']);
+
+return $aggregator-&gt;getMergedConfig();</code></pre>
+<p>the <b>AuthorizationFactory</b> class is included in your application as follows.</p>
+<pre data-line="18"><code class="language-php line-numbers">&lt;?php
+declare(strict_types=1);
+
+namespace Olobase\Mezzio;
+
+class ConfigProvider
+{
+    /**
+     * Return application-level dependency configuration.
+     *
+     * @return ServiceManagerConfigurationType
+     */
+    public function getDependencyConfig()
+    {
+        return [
+            'factories' =&gt; [
+                \Mezzio\Authentication\UserInterface::class =&gt; Authentication\DefaultUserFactory::class,
+                \Mezzio\Authorization\AuthorizationInterface::class =&gt; Authorization\AuthorizationFactory::class,
+                Error\ErrorWrapperInterface::class =&gt; Error\ErrorWrapperFactory::class,
+                Authentication\JwtEncoderInterface::class =&gt; Authentication\JwtEncoderFactory::class,
+                ColumnFiltersInterface::class =&gt; ColumnFiltersFactory::class,
+                DataManagerInterface::class =&gt; DataManagerFactory::class,
+            ],
+        ];
+    }
+}</code></pre>
+<p>The following code block shows the content of the <kbd>Olobase\Mezzio\Container\AuthorizationFactory</kbd> class.</p>
+<pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+namespace Olobase\Mezzio\Container;
+
+use Olobase\Mezzio\Authorization\Authorization;
+use Olobase\Mezzio\Authorization\PermissionModelInterface;
+use Psr\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+
+class AuthorizationFactory implements FactoryInterface
+{
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        return new Authorization($container-&gt;get(PermissionModelInterface::class));
+    }
+}</code></pre>
+<p>As you can see, the <kbd>Olobase\Mezzio\Authorization\Authorization</kbd> class is called from the <kbd>Olobase\Mezzio\Container\AuthorizationFactory</kbd> class.</p>
+<h3>Olobase\Mezzio\Authorization\Authorization</h3>
+<p>As in the example in the <kbd>Authorization</kbd> class of the following Olobase code, the <b>isGranted</b> method is <b>true</b> if the user role has authority to the current route, otherwise <b>false</b > returns to value.</p>
+<pre data-line="23,43"><code class="language-php line-numbers">&lt;?php
+declare(strict_types=1);
+
+namespace Olobase\Mezzio\Authorization;
+
+use Mezzio\Authorization\AuthorizationInterface;
+use Mezzio\Authorization\Exception;
+use Mezzio\Router\RouteResult;
+use Psr\Http\Message\ServerRequestInterface;
+
+use function sprintf;
+use function in_array;
+
+class Authorization implements AuthorizationInterface
+{
+    private $permissions = array();
+
+    public function __construct(PermissionModelInterface $permissionModel)
+    {
+        $this-&gt;permissions = $permissionModel-&gt;findPermissions();
+    }
+
+    public function isGranted(string $role, ServerRequestInterface $request) : bool
+    {
+        $routeResult = $request-&gt;getAttribute(RouteResult::class, false);
+        if (false === $routeResult) {
+            throw new Exception\RuntimeException(sprintf(
+                'The %s attribute is missing in the request; cannot perform authorizations',
+                RouteResult::class
+            ));
+        }
+        // No matching route. Everyone can access.
+        if ($routeResult-&gt;isFailure()) {
+            return true;
+        }
+        $permissions = $this-&gt;getPermissions($role);
+        if (false == $permissions) {
+            return false;
+        }
+        // Check user has permission to the route
+        //
+        $routeName = $routeResult-&gt;getMatchedRouteName();
+        if (in_array($routeName, $permissions)) {
+            return true;
+        }
+        return false;
+    }
+
+    private function getPermissions(string $role)
+    {
+        if (! empty($this-&gt;permissions[$role])) {
+            return $this-&gt;permissions[$role];
+        }
+        return false;
+    }
+}</code></pre>
+<h3>PermissionModel</h3>
+<p>Your <kbd>App\Model\PermissionModel</kbd> class is called from the <kbd>Olobase\Mezzio\Authorization</kbd> class and the <b>isGranted</b> method decides which role has which privileges.</p>
+<pre><code class="language-php">$this-&gt;permissions = $permissionModel-&gt;findPermissions();
+print_r($this-&gt;permissions);
+/*
+Array
+(
+    [admin] =&gt; Array
+    (
+        [0] =&gt; /api/companies/create^POST
+        [1] =&gt; /api/companies/update/:companyId^PUT
+        [2] =&gt; /api/companies/findOneById/:companyId^GET
+        [3] =&gt; /api/companies/delete/:companyId^DELETE
+        [4] =&gt; /api/companies/findAllByPaging^GET
+        [5] =&gt; /api/companies/findAll^GET
+
+    [sales] =&gt; Array
+    (
+        [0] =&gt; /api/expenses/findOneById/:expenseId^GET
+    )
+)
+*/</code></pre>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">Authorizations are cached in the <b>PermissionModel</b> and a good amount of performance gain is achieved for each authorization request.</div>

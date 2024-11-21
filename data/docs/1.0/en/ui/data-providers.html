@@ -1,0 +1,322 @@
+<h2>Data Providers</h2>
+<p>The main purpose of Olobase Admin is to manage remote resources from a specific API. When it needs to communicate with your backend API for any standardized CRUD operation, it calls the adapted method in your provider that will be responsible for fetching or updating the resource data.</p>
+<pre><code class="language-html">- packages
+    - admin
+        - providers
+            - data
+                jsonServer.js</code></pre>
+<div class="mb-5">
+<div class="nav nav-tabs" role="tablist">
+<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabs-00" type="button" role="tab" aria-controls="tabs-00" aria-selected="true">List</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-01" type="button" role="tab" aria-controls="tabs-01" aria-selected="false">Create</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-02" type="button" role="tab" aria-controls="tabs-02" aria-selected="false">Update</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-03" type="button" role="tab" aria-controls="tabs-03" aria-selected="false">Delete</button>
+</div>
+<div class="tab-content">
+<div class="tab-pane fade show active p-3" id="tabs-00" role="tabpanel" aria-labelledby="tabs-tab00"><pre><code class="language-js">// Fetching books
+let { data, total } = await provider.getList("books", { page: 1, perPage: 10 });
+console.log(data);
+
+// Fetching one book
+let { data } = await provider.getOne("books", { id: 1 });
+console.log(book)</code></pre></div>
+<div class="tab-pane fade  p-3" id="tabs-01" role="tabpanel" aria-labelledby="tabs-tab01"><pre><code class="language-js">// Create new book
+await provider.create("books", { data: { title: "My title" } })</code></pre></div>
+<div class="tab-pane fade  p-3" id="tabs-02" role="tabpanel" aria-labelledby="tabs-tab02"><pre><code class="language-js">// Update title book
+await provider.update("books", { id: book.id, data: { title: "New title" } });</code></pre></div>
+<div class="tab-pane fade  p-3" id="tabs-03" role="tabpanel" aria-labelledby="tabs-tab03"><pre><code class="language-js">// Delete book
+await provider.delete("books", { id: book.id });</code></pre></div>
+</div>
+</div>
+<p>All fetch methods of a data provider are standardized to ensure compatibility of Olobase Admin with any API server. This is the adapter model that allows for all kinds of different providers for each type of backend of any exchange protocol, whether it's REST, GraphQL, or even SOAP.</p>
+<p><img  src="data:image/jpeg;base64, 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" alt="Data Providers" / class="img-fluid" /></p>
+<p>To give Olobase Admin the ability to retrieve remote source data, a specific data provider needs to be injected into the constructor method as explained in the next section. This data provider defaults to <kbd>JsonServerProvider</kbd>.</p>
+<h3>API Contract</h3>
+<p>As always with any adapter model approach, all data providers must comply with a specific contract to allow communication with Olobase Admin. The next object represents the minimum contract that must be implemented:</p>
+<pre><code class="language-js line-numbers">const dataProvider = {
+  getList:    (resource, params) =&gt; Promise,
+  getOne:     (resource, params) =&gt; Promise,
+  getMany:    (resource, params) =&gt; Promise,
+  create:     (resource, params) =&gt; Promise,
+  update:     (resource, params) =&gt; Promise,
+  updateMany: (resource, params) =&gt; Promise,
+  delete:     (resource, params) =&gt; Promise,
+  deleteMany: (resource, params) =&gt; Promise,
+  copy:       (resource, params) =&gt; Promise,
+  copyMany:   (resource, params) =&gt; Promise,
+}</code></pre>
+<h3>Supported API Operation Methods</h3>
+<div class="table-responsive">
+<table class="table">
+  <tr>
+    <td><b>getList</b></td>
+    <td>
+      <kbd>Data Iterator</kbd> component for displaying a list of resources within a data table or any custom list layout components. It also supports searching, filtering, sorting, and optional relationship fetching.
+    </td>
+  </tr>
+  <tr>
+    <td><b>getOne</b></td>
+    <td>It is used to show details of the resource, especially the <kbd>Show</kbd> action or the data table show actions.</td>
+  </tr>
+  <tr>
+    <td><b>getMany</b></td>
+    <td>It is used only for the <kbd>AutoCompleter</kbd> component to fetch all available selections by IDs on initial load, whether in editing page content or query context filtering.</td>
+  </tr>
+  <tr>
+    <td><b>create</b></td>
+    <td>Used by <kbd>VaForm</kbd> to create new resources.</td>
+  </tr>
+  <tr>
+    <td><b>update</b></td>
+    <td>Used by <kbd>VaForm</kbd> to update the existing resource.</td>
+  </tr>
+  <tr>
+    <td><b>delete</b></td>
+    <td>Simple delete action called when interacting with <kbd>Delete Button</kbd>.</td>
+  </tr>
+</table>
+</div>
+<h3>Setting Up a Data Provider</h3>
+<p>Data providers are very simple to use. They can take a simple API URL or a custom HTTP client of your choice as the first <kbd>constructor</kbd> argument. If you need to share some headers throughout the admin application, use the full object; It's especially useful for authentication-related topics.</p>
+<p><kbd>src/plugins/admin.js</kbd></p>
+<pre data-line="27"><code class="language-js line-numbers">import {
+  jsonServerDataProvider,
+  jwtAuthProvider,
+} from "olobase-admin/src/providers";
+import { en, tr } from "olobase-admin/src/locales";
+import config from "@/_config";
+
+let admin = new OlobaseAdmin(import.meta.env);
+/**
+ * Install admin plugin
+ */
+export default {
+  install: (app, http, resources) =&gt; {
+    // console.error(app.config.globalProperties)
+    admin.setOptions({
+      app,
+      router,
+      resources,
+      store,
+      i18n,
+      dashboard: "dashboard",
+      downloadUrl: "/files/findOneById/",
+      readFileUrl: "/files/readOneById/",
+      title: "Demo",
+      routes,
+      locales: { en, tr },
+      dataProvider: jsonServerDataProvider(http),
+      authProvider: jwtAuthProvider(http),
+      http,
+      canAction: null,
+      // canAction: ({ resource, action, can }) =&gt; {
+      //   if (can(["admin"])) {
+      //     return true;
+      //   }
+      //   // any other custom actions on given resource and action...
+      // },
+      options: config,
+    });
+    admin.init();
+    OlobaseAdmin.install(app); // install layouts &amp; components
+    app.provide("i18n", i18n);
+    app.provide("router", router);
+    app.provide("admin", admin); // make injectable
+    app.component("PageNotFound", PageNotFound);
+  },
+};</code></pre>
+<h3>Writing Your Own Data Provider</h3>
+<p>Writing your own data provider is pretty simple. Note the method call signatures by copying the JsonServerProvider.
+As mentioned before each provider method takes 2 arguments:</p>
+<ul>
+<li>resource: represents the string name of the relevant resource and must be the resource API URL base for each call.</li>
+<li>params : a specific object tailored to each type of API call.</li>
+</ul>
+<h3>Method Call Signatures</h3>
+<p>The following table lists which parameters can be sent in the second parameter for each provider method.</p>
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>Parameter Format</th>
+      <th>Response</th>
+    </tr>  
+  </thead>
+  <tbody>
+    <tr>
+      <td>getList</td>
+      <td>Lists data</td>
+      <td>
+        { pagination: { page: Number , perPage: Number }, sort: [{ by: String, desc: Boolean }], filter: Object }, include: String[], fields: { [resource]: String[] } }
+      </td>
+      <td>{ data: Resource[], total: Number }</td>
+    </tr>
+    <tr>
+      <td>getOne</td>
+      <td>Returns a resource (data) by id</td>
+      <td>{ id: Any }</td>
+      <td>{ data: Resource }</td>
+    </tr>
+    <tr>
+      <td>getMany</td>
+      <td>Returns multiple data based on id</td>
+      <td>{ ids: Array, include: String[], fields: { [resource]: String[] } }</td>
+      <td>{ data: Resource[] }</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td>Creates new data</td>
+      <td>{ data: Object }</td>
+      <td>{ data: Resource }</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td>Updates a default resource (data)</td>
+      <td>{ id: Any, data: Object }</td>
+      <td>{ data: Resource }</td>
+    </tr>
+    <tr>
+      <td>updateMany</td>
+      <td>Updates multiple data</td>
+      <td>{ ids: Array, data: Object }</td>
+      <td>empty</td>
+    </tr>
+    <tr>
+      <td>delete</td>
+      <td>Deletes current data</td>
+      <td>{ id: Any }</td>
+      <td>empty</td>
+    </tr>
+    <tr>
+      <td>deleteMany</td>
+      <td>Deletes multiple data</td>
+      <td>{ ids: Array }</td>
+      <td>empty</td>
+    </tr>
+    <tr>
+      <td>copy</td>
+      <td>Copies the selected data</td>
+      <td>{ id: Any }</td>
+      <td>{ data: Resource }</td>
+    </tr>
+    <tr>
+      <td>copyMany</td>
+      <td>Copies multiple selected data</td>
+      <td>{ ids: Array }</td>
+      <td>{ data: Resource }</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Here are some valid examples of calls to Olobase Admin in each resource repository module:</p>
+<pre><code class="language-js">dataProvider.getList("books", {
+  pagination: { page: 1, perPage: 15 },
+  sort: [{ by: "publication_date", desc: true }, { by: "title", desc: false }],
+  filter: { author: "Cassandra" },
+  include: ["media", "reviews"],
+  fields: { books: ["isbn", "title"], reviews: ["status", "author"] }
+});
+dataProvider.getOne("books", { id: 1 });
+dataProvider.getMany("books", { ids: [1, 2, 3] });
+dataProvider.create("books", { data: { title: "Lorem ipsum" } });
+dataProvider.update("books", { id: 1, data: { title: "New title" } });
+dataProvider.updateMany("books", { ids: [1, 2, 3], data: { commentable: true } });
+dataProvider.delete("books", { id: 1 });
+dataProvider.deleteMany("books", { ids: [1, 2, 3] });</code></pre>
+<h3>Handling Errors</h3>
+<p>In case of any server side errors, i.e. when the response status is outside the 2xx range, you simply return a rejection promise with a specific Object containing at least a descriptive error message as well as the HTTP status code. This status is passed to the authentication provider to allow you to perform a specific authentication action based on a specific status code.</p>
+<p>In case of multiple errors, we return to <kbd>error</kbd>, and in case of an empty response or server error from the server, we return to the general <kbd>error</kbd> error.</p>
+<pre><code class="language-js">try {
+  let response = await this.admin.http('post', url, data);
+} catch (e) {
+    if (
+      &amp;&amp; e.response 
+      &amp;&amp; e.response.status === 400 
+      &amp;&amp; e.response["data"] 
+      &amp;&amp; e.response["data"]["data"]
+      &amp;&amp; e.response["data"]["data"]["error"]
+      ) {
+      this.admin.message("error", e.response.data.data.error);
+    }
+}</code></pre>
+<p>Expected error object format:</p>
+<div class="table-responsive">
+<table class="table">
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>error</td>
+    <td>string</td>
+    <td>Error message to be displayed in Snackbar</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>number</td>
+    <td>Response status code sent by the server</td>
+  </tr>
+  <tr>
+    <td>errors</td>
+    <td>array</td>
+    <td>Error objects sent by the server for client-side validation support</td>
+  </tr>
+</table>
+</div>
+<h3>Store</h3>
+<p>You can use all data provider methods for each resource in your custom <b>CRUD</b> pages or any authenticated custom page directly from the <b>Vuex</b> store. You have 2 different methods, one with the mapActions <b>Vuex</b> helper and the other with the global <b>$store</b> instance where you can use dispatch.</p>
+<p>The following code shows both ways of getting data from your providers under one example:</p>
+<pre><code class="language-js line-numbers">&lt;template&gt;
+  &lt;v-row&gt;
+    &lt;v-col v-for="item in data" :key="item.id"&gt;
+      {{ item.name }}
+    &lt;/v-col&gt;
+  &lt;/v-row&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      data: [],
+    }
+  },
+  async mounted() {
+    /**
+     * Use the global vuex store instance.
+     * You need to provide the name of the resource followed by the provider method you want to call.
+     * Each provider methods needs a `params` argument which is the same object described above.
+     */
+    this.data = await this.$store.dispatch("publishers/getList", {
+      pagination: {
+        page: 1,
+        perPage: 5,
+      },
+    });
+
+    /**
+     * Use the registered global method which use global `api` store module.
+     * Then you need to provide a object argument of this format : `{ resource, params }`
+     */
+    this.data = await this.getList({
+      resource: "publishers",
+      params: {
+        pagination: {
+          page: 1,
+          perPage: 5,
+        },
+      },
+    });
+  },
+  methods: {
+    ...mapActions({
+      getList: "api/getList",
+    }),
+  },
+};
+&lt;/script&gt;</code></pre>

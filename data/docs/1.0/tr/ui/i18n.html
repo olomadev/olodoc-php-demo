@@ -1,0 +1,353 @@
+<h2>Yerelleştirme</h2>
+<p><a href="/ui/plugins.html">Pluginler</a> bölümünde görüldüğü gibi, tüm uluslararasılaştırma desteği için Olobase Admin, <a href="https://vue-i18n.intlify.dev/" target="_blank">Vue I18n</a>'i kullanacaktır. Her yerel ayar için anahtar/değer tabanlı bir JSON dosyası kullanılır. Vue I18n aynı zamanda tekil/çoğul formatın yanı sıra sayılar, para birimleri ve tarihler gibi gelişmiş formatları da destekler.</p>
+<h3>Vue I18n</h3>
+<p>Vuei18n kütüphanesi mevcut projenizin altında aşağıdaki dosyadan yüklenir.</p>
+<p><kbd>src/i18n/index.js</kbd></p>
+<pre><code class="language-js line-numbers">import { createI18n } from "vue-i18n";
+import pluralRules from "./rules/pluralization";
+import numberFormats from "./rules/numbers.js";
+import datetimeFormats from "./rules/datetime.js";
+/**
+ * app messages
+ */
+import _en from "./locales/en.json" assert { type: "json" };
+import _tr from "./locales/tr.json" assert { type: "json" };
+
+const i18n = createI18n({
+  locale: import.meta.env.VITE_DEFAULT_LOCALE,
+  fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE,
+  legacy: false,
+  globalInjection: true,
+  // forceStringify: false,
+  messages: { tr: _tr, en: _en },
+  runtimeOnly: false,
+  pluralRules,
+  numberFormats,
+  datetimeFormats,
+});
+/**
+ * import vuetify admin locales
+ */
+import { en, tr } from "olobase-admin/src/locales";
+/**
+ * build vuetify admin messages
+ */
+const vaMessages = { en, tr };
+/**
+ * load vuetify admin i18n locales
+ */
+Object.keys(vaMessages).forEach((locale) =&gt; {
+  i18n.global.mergeLocaleMessage(locale, { va: vaMessages[locale] });
+})
+export default i18n</code></pre>
+<h3>Varsayılan Yerel Dil</h3>
+<p><b>LanguageSwitcher</b> bileşeni kullanıcının varsayılan dil değerini belirlemesini sağlar.</p>
+<p><kbd>src/views/Login.vue</kbd></p>
+<p><img  src="data:image/png;base64, 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" alt="Switch Locale" / class="img-fluid" /></p>
+<p>Dil değiştirme bileşenini diğer sayfalarınızda da ekleyebilirsiniz. Takip eden örnekte <b>LanguageSwitcher</b> bileşeninin <b>Login.vue</b> sayfasındaki kullanımını gösteriliyor.</p>
+<div class="mb-5">
+<div class="nav nav-tabs" role="tablist">
+<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabs-00" type="button" role="tab" aria-controls="tabs-00" aria-selected="true">Trans Class</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-01" type="button" role="tab" aria-controls="tabs-01" aria-selected="false">Template</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-02" type="button" role="tab" aria-controls="tabs-02" aria-selected="false">Script</button>
+</div>
+<div class="tab-content">
+<div class="tab-pane fade show active p-3" id="tabs-00" role="tabpanel" aria-labelledby="tabs-tab00"><p><kbd>src/i18n/translation.js</kbd></p>
+<pre data-line="13"><code class="language-js line-numbers">import i18n from "@/i18n";
+import { nextTick } from "vue";
+import store from "../store";
+
+const Trans = {
+  /*
+  * code shortened for readability
+  */
+  async switchLanguage(newLocale) {
+    Trans.currentLocale = newLocale;
+    store.commit('SET_LOCALE', newLocale);
+    cookies.set("lang", newLocale); // we user cookies
+    document.querySelector("html").setAttribute("lang", newLocale);
+  },
+  /*
+  * code shortened for readability
+  */
+}</code></pre></div>
+<div class="tab-pane fade  p-3" id="tabs-01" role="tabpanel" aria-labelledby="tabs-tab01"><p><kbd>src/views/Login.vue</kbd></p>
+<pre><code class="language-html">&lt;template&gt;
+  &lt;div&gt;
+    &lt;LanguageSwitcher /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre></div>
+<div class="tab-pane fade  p-3" id="tabs-02" role="tabpanel" aria-labelledby="tabs-tab02"><p><kbd>src/views/Login.vue</kbd></p>
+<pre><code class="language-js">import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
+
+export default {
+  components: { LanguageSwitcher },
+}</code></pre></div>
+</div>
+</div>
+<p>Varsayılan yerel dil kullanıcı giriş yaptıktan sonra tarayıcının <b>çerezler</b> adlı yerel deposuna kayıt edilir. Uygulamayı ziyaret eden kullanıcı eğer önceden bir yerel dil seçmiş ise bu değer çerezlerden, eğer çerezlerde de bulunamaz ise <kbd>VITE_DEFAULT_LOCALE</kbd> değerinden elde edilir.</p>
+<p><kbd>src/i18n/index.js</kbd></p>
+<pre data-line="2"><code class="language-js line-numbers">const i18n = createI18n({
+  locale: import.meta.env.VITE_DEFAULT_LOCALE,
+  fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE,
+  legacy: false,
+  globalInjection: true,
+  // forceStringify: false,
+  messages: { tr: _tr, en: _en },
+  runtimeOnly: false,
+  pluralRules,
+  numberFormats,
+  datetimeFormats,
+});</code></pre>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">Tüm yerel ayarlar, varsayılan olarak <kbd>src/18n/locales/</kbd> dizininde, dile göre bir JSON dosyası içerisinde depolanır.</div>
+<pre><code class="language-html">├── src
+│   ├── i18n
+│   │   ├── locales
+│   │   │   ├── en.js
+│   │   │   ├── tr.js</code></pre>
+<h3>Desteklenen Diller</h3>
+<p>Desteklenen dillere yeni bir dil eklemek ya da çıkarmak istediğiniz de <kbd>src/.env.dev</kbd>, <kbd>src/.env.prod</kbd> dosyasınlarındaki <kbd>VITE_SUPPORTED_LOCALES</kbd> değişkenini de güncellemelisiniz.</p>
+<pre><code class="language-html">VITE_DEFAULT_LOCALE=tr
+VITE_FALLBACK_LOCALE=en
+VITE_SUPPORTED_LOCALES=en,tr
+VITE_API_URL=http://demo.local/api
+VITE_LICENSE_KEY=</code></pre>
+<h3>Vuetify</h3>
+<p>Tam kullanıcı arayüzü yerelleştirme desteği için Olobase Admin yerel ayarları tek başına yeterli değildir. Vuetify, Olobase Admin'de eklenti olarak kullanıldığından, <a href="https://vuetifyjs.com/en/features/internationalization/" target="_blank">Vuetify i18n</a> içinde de yerelleştirme kuralları belirtmeniz gerekir.</p>
+<p><kbd>src/plugins/vuetify.js</kbd></p>
+<pre data-line="5,30,32"><code class="language-js line-numbers">// Styles
+import "vuetify/styles";
+
+// Translations provided by Vuetify
+import { en, tr } from "vuetify/locale";
+import Trans from "@/i18n/translation";
+const defaultLang = Trans.guessDefaultLocale();
+
+// Composables
+import { createVuetify } from "vuetify";
+
+const defaultTheme = {
+  dark: false,
+  colors: {
+    background: "#FFFFFF",
+    surface: "#FFFFFF",
+    primary: localStorage.getItem("themeColor")
+      ? localStorage.getItem("themeColor")
+      : "#0a7248",
+    secondary: "#eeeeee",
+    error: "#ed0505",
+    info: "#00CAE3",
+    // success: '#4CAF50',
+    // warning: '#FB8C00',
+  },
+};
+// Vuetify 
+export default createVuetify({
+  locale: {
+    locale: Trans.supportedLocales.includes(defaultLang) ? defaultLang : import.meta.env.VITE_DEFAULT_LOCALE,
+    fallback: "en",
+    messages: { tr, en },
+  },
+  theme: {
+    defaultTheme: "defaultTheme",
+    themes: {
+      defaultTheme,
+    },
+  },
+});</code></pre>
+<h3>Resources (Kaynaklar)</h3>
+<p>Olobase Admin'deki tüm varsayılan kullanıcı arayüzü etiketlerinin doğru şekilde yerelleştirilmesi gerekir. Ayrıca Vue I18n sayesinde kendi özel yerel ayarlarınızı herhangi bir özel sayfa üzerinde kullanabilirsiniz. Peki ya kaynakların adı ve tüm kaynak özellik etiketleri ne olacak ? Vue I18n'den gelen <b>$t</b> fonksiyonunu CRUD sayfalarının her yerinde, tüm bileşenlere etiketler atamak zorunda kalmak sıkıcı olabilir.</p>
+<p>Bu kodu en aza indirmek için Olobase Admin, basit bir adlandırma kuralını izleyerek kaynak veya <b>source</b> adından hedef çeviri anahtarını tahmin etmeye çalışacaktır. Olobase Admin, seçim, radyo düğmesi vb. gibi tüm seçim tabanlı alan veya giriş bileşenleri için kullanılabilecek yerelleştirilmiş numaralandırmaları bile destekler. Yerelleştirilmiş kaynağa özel tüm etiketlerin, ana kaynaklar anahtarının altına varsayılan olarak <kbd>src/locales/{locale}.json</kbd> olan kendi i18n json yerel ayarınıza eklenmesi gerekir. Kaynaklar altındaki her çeviri anahtarı, <kbd>src/resources/index.js</kbd> dosyasında ayarlanan geçerli kaynak adlarıyla eşleşmelidir.</p>
+<p>Daha sonra dil ayarlarınıza aşağıdaki desteklenen anahtarları koyabilirsiniz:</p>
+<div class="table-responsive">
+<table class="table">
+   <thead>
+      <tr>
+         <th>Anahtar</th>
+         <th>Açıklama</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td><strong>name</strong></td>
+         <td>Kaynağın tekil ve çoğul biçimdeki adı, özellikle her sayfa başlığında ve bazı bağlam mesajlarında kullanılır.</td>
+      </tr>
+      <tr>
+         <td><strong>titles</strong></td>
+         <td>Her CRUD eylemi için yerelleştirilmiş başlıklar. Geçerli alt anahtarlar <code>list</code>, <code>show</code>, <code>create</code> veya <code>edit</code>'tir.</td>
+      </tr>
+      <tr>
+         <td><strong>fields</strong></td>
+         <td>Her kaynak özelliği için yerelleştirilmiş etiketler.</td>
+      </tr>
+      <tr>
+         <td><strong>enums</strong></td>
+         <td>Kaynak özelliği için yerelleştirilmiş numaralandırmalar; her numaralandırma, anahtarın hedeflenen özelliğin geçerli bir değerine karşılık gelmesi gereken bir anahtar-değer çifti dizisidir.</td>
+      </tr>
+   </tbody>
+</table>
+</div>
+<p>Her kaynak etiketi türü için uymanız gereken adlandırma çeviri anahtarları formatı aşağıda verilmiştir:</p>
+<div class="table-responsive">
+<table class="table">
+   <thead>
+      <tr>
+         <th>Anahtar</th>
+         <th>I18n anahtar yol biçimi</th>
+         <th><code>users</code> modülü için örnek</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td><strong>name</strong></td>
+         <td><code>resources.{resource}.name</code></td>
+         <td><code>resources.users.name</code></td>
+      </tr>
+      <tr>
+         <td><strong>titles</strong></td>
+         <td><code>resources.{resource}.titles</code></td>
+         <td><code>resources.users.titles</code></td>
+      </tr>
+      <tr>
+         <td><strong>fields</strong></td>
+         <td><code>resources.{resource}.fields.{source}</code></td>
+         <td><code>resources.users.fields.name</code></td>
+      </tr>
+      <tr>
+         <td><strong>enums</strong></td>
+         <td><code>resources.{resource}.enums.{source}.{value}</code></td>
+         <td><code>resources.users.enums.roles</code></td>
+      </tr>
+   </tbody>
+</table>
+</div>
+<p>İşte bir <kbd>users</kbd> modülü ve <kbd>en</kbd> yereline ait bir örnek:</p>
+<p><kbd>src/locales/en.json</kbd></p>
+<pre><code class="language-js">{
+  //...
+  "resources": {
+    "users": {
+      "name": "User | Users",
+      "titles": {
+        "list": "List all users",
+        "show": "Details of user {name}",
+        "create": "Create new user",
+        "edit": "Edit user {name}"
+      },
+      "fields": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "password_confirmation": "Password Confirmation",
+        "active": "Active",
+        "roles": "Roles",
+        "createdAt": "Creation Date",
+        "updatedAt": "Modification Date"
+      },
+      "enums": {
+        "roles": {
+          "admin": "Admin",
+          "editor": "Editor",
+          "author": "Author"
+        }
+      }
+    }
+  }
+}</code></pre>
+<h3>Tekil ve Çoğul</h3>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">Kaynak adınız bir çizgiyle ayrılmış hem tekil hem de çoğul biçimlere sahip olmalıdır. Olobase Admin bağlama göre doğru formatı seçecektir.</div>
+<h3>Varsayılan Olarak Uygulayın</h3>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">Birden fazla yerel ayarı destekleme niyetiniz olmasa bile, her zaman bu yöntemi kullanmalısınız.</div>
+<h3>Enumerik Değerler (enums)</h3>
+<p>Seçme veya radyo bileşenleri için işlevsel yerelleştirilmiş seçeneklere sahip olmak amacıyla, numaralandırma anahtarınızın bu bileşenin kaynak desteğiyle aynı şekilde adlandırılması gerekir.</p>
+<h3>Sayfa Başlıkları</h3>
+<p>Bu özel anahtar isteğe bağlıdır ve esas olarak tam kontrolle uç durum yerelleştirme yönetimi için kullanılır. Varsayılan olarak, Olobase Admin şu başlık biçimini oluşturacaktır: <kbd>{action} {resource}</kbd> (ör. Kullanıcı listesi), aksiyon, CRUD eyleminin yerelleştirilmiş adıdır ve resource, kaynağın yerelleştirilmiş adıdır.</p>
+<p>Ancak bazen daha iyi tanımlama için gösterme ve düzenleme eylemine yönelik belirli bir kaynak özelliği ekleyerek daha fazlasını isteyebilirsiniz. Bu, yerelleştirilmiş etikette nitelik adınızı parantez içine ekleyerek kolayca yapılır. Örneğin, <kbd>{name} #{id}</kbd>, burada <b>name</b> yer tutucusu, kullanıcı kaynak özelliğinin adı ile değiştirilecektir.</p>
+<h3>Override (Ezmek)</h3>
+<p>Eğer bir bileşen içerisinde belirli bir özelliğin ezme davranışı sergilemesini istiyorsanız özellik adı ve değerini açıkça belirtmelisiniz.
+Örneğin label özelliğinin aşağıdaki gibi belirtmek varsayılan label değerinin ezilmesini ve yeni değerin etkin olmasını sağlar. Bunu her bileşen için uygulayabilirsiniz.</p>
+<pre><code class="language-js">&lt;va-select-input
+  :label="$t('demo.currencyId')"
+  reference="currencies"
+  v-model="model.currencyId"
+&gt;&lt;/va-select-input&gt;</code></pre>
+<h3>Tarih ve Sayı Biçimi Kuralları</h3>
+<p>Yerelleştirilmiş sayı ve tarih alanı kaynak değerleri için muhtemelen <kbd>DateField</kbd> ve <kbd>NumberField</kbd>'ı kullanacaksınız. Bu bileşenler, başlık altında belirli Vue I18n işlevlerini kullanacaktır:</p>
+<pre><code class="language-html">├── src
+│   ├── i18n
+│   │   ├── rules
+│   │   │   ├── datetime.js
+│   │   │   ├── numbers.js</code></pre>
+<ul>
+<li>Tarih kuralları için bu <a href="https://vue-i18n.intlify.dev/guide/essentials/datetime.html" target="_blank">linke tıklayınız</a>.</li>
+<li>Numara kuralları için bu <a href="https://vue-i18n.intlify.dev/guide/essentials/number.html" target="_blank">linke tıklayınız</a></li>
+</ul>
+<p><kbd>src/i18n/rules/datetime.js</kbd></p>
+<pre><code class="language-js">export default {
+  en: {
+    year: {
+      year: "numeric",
+    },
+    month: {
+      month: "short",
+    },
+    shortFormat: {
+      dateStyle: "short",
+    },
+    longFormat: {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    },
+  },
+  tr: {
+    year: {
+      year: "numeric",
+    },
+    month: {
+      month: "short",
+    },
+    shortFormat: {
+      dateStyle: "short",
+    },
+    longFormat: {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    },
+  },
+};</code></pre>
+<p>Örneğin yukarıdaki gibi tanımlanan bir tarih kuralı i18n/index.js içerisinde tanımlanır. </p>
+<p><kbd>src/i18n/index.js</kbd></p>
+<pre><code class="language-js">import { createI18n } from "vue-i18n";
+import pluralRules from "./rules/pluralization";
+import numberFormats from "./rules/numbers.js";
+import datetimeFormats from "./rules/datetime.js";
+import _en from "./locales/en.json";
+import _tr from "./locales/tr.json";
+
+const i18n = createI18n({
+  locale: import.meta.env.VITE_DEFAULT_LOCALE,
+  fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE,
+  legacy: false,
+  globalInjection: true,
+  // forceStringify: false,
+  messages: { tr: _tr, en: _en },
+  runtimeOnly: false,
+  pluralRules,
+  numberFormats,
+  datetimeFormats,
+});</code></pre>
+<h3>DateField</h3>
+<pre><code class="language-js">&lt;date-field source="creationDate" format="short"&gt;&lt;/date-field&gt;</code></pre>
+<h3>NumberField</h3>
+<pre><code class="language-js">&lt;number-field source="price" format="currency"&gt;&lt;/number-field&gt;</code></pre>

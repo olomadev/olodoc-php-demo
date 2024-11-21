@@ -1,0 +1,41 @@
+<?php 
+    $this->headTitle(
+        $this->translate('Olodoc - Welcome')
+    );
+    $this->headMeta("olodoc, oloma, documentation, generator", "keywords");
+    $this->headMeta(
+        "Olodoc Php Documentation Generator with JWT Auth", 
+        "description"
+    );
+    $this->placeholder('user')->set($user);
+?>
+<!-- WELCOME -->
+<section class="pt-lg-12 pt-md-10 pt-8">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-12 col-lg-12 order-md-1">
+
+        <div class="mb-7">
+          <!-- Heading -->
+          <h1 class="text-center text-md-start display-4">
+            <?php echo $this->translate("Welcome to Olodoc")?>
+          </h1>
+          <!-- Text -->
+          <p class="lead text-center text-md-start">
+            <?php echo $this->translate("This page is a sample landing page that will take you to the documentation")?>.
+          </p>
+          <!-- Buttons -->
+          <div class="text-center text-md-start pt-4">
+            <a href="<?php echo OLODOC_URL ?>/<?php echo DOCS ?>/index.html" class="btn btn-primary-soft">
+              <?php echo $this->translate("Go to Documentation")?>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- / .row -->
+  </div> <!-- / .container -->
+</section>
+
+

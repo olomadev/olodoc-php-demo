@@ -1,0 +1,63 @@
+<?php
+$this->layout('layout::default');
+        
+$metaDescription = mb_strimwidth(strip_tags($pageContent), 0, 160, "...");
+// $this->headMeta($metaKeywords, "", "keywords");
+$this->headMeta($metaDescription, "description");
+
+$this->placeholder('version')->set($version);
+$this->placeholder('pageJavascript')->set($pageJavascript);
+$this->placeholder('documentManager')->set($documentManager);
+?>
+<!-- CONTENT -->
+<section>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-12 col-lg-3 col-md-12 col-sm-12 px-lg-0 border-bottom border-bottom-lg-0 border-end-lg border-gray-300 sidenav">
+          <!-- Side nav bar begin -->
+          <div class="collapse d-lg-block" id="sidenavCollapse">
+            <div class="py-md-5 py-lg-5 ps-lg-4 ps-3 pe-4">
+
+              <?php echo $pageVersionCombobox ?>
+              <?php echo $pageSearchBoxInput ?>
+
+              <nav class="pagination-nav mt-3">
+                <?php echo $pageSidebarHeaderLink ?>
+              </nav>
+
+              <ul class="nav flex-column bs-sidenav mt-3">
+                <?php echo $pageSideNavbarLinks ?>
+              </ul>
+            </div>
+          </div>
+          <!-- Side nav bar end -->
+      </div>
+
+      <div id="middle-content" class="document-content col-lg-6 col-md-12 col-sm-12 pt-lg-5 pt-md-3 pt-sm-3">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <?php echo $pageBreadCrumbs ?>    
+        </nav>
+
+        <?php print_r($pageMeta); ?>
+
+        <!-- Markdown content -->
+        <?php echo $pageContent ?>
+
+        <!-- Pagination Bar -->
+        <nav class="pagination-nav mt-5">
+          <?php echo $pageFooter ?>
+        </nav>
+      </div>
+
+      <!-- Sponsors -->
+      <div class="document-content col-12 col-lg-2 col-xl-2 ps-4 pt-lg-5 pt-md-3 pt-sm-3">
+        <h6 class="text-uppercase">Sponsors</h6>
+          <div class="border border-gray-300" style="width:250px;height: 600px;">
+        </div>
+      </div>
+
+    </div><!-- / .row -->
+  </div> <!-- / .container --> 
+</section>

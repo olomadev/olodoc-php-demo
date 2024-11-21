@@ -1,0 +1,306 @@
+<h2>Kaynaklar (Resources)</h2>
+<p><b>Resource</b>, Olobase Admin tarafından yönetilebilen, yani <kbd>created/read/updated/deleted</kbd> gibi belirli bir sunucu varlığı anlamına gelir. Kaynaklar tüm bu CRUD işlemlerine izin veren geçerli bir API uç noktasına karşılık gelmelidir. Takip eden kod örneği, daha önce görüldüğü gibi Olobase Admin constructor metoduna gönderilmesi gereken beklenen yapının bir örneğini temsil eder:</p>
+<p><kbd>src/resources/index.js</kbd></p>
+<pre><code class="language-js">export default [
+  {
+    name: "users",
+    icon: "mdi-account",
+    label: "name",
+    routes: ["list"],
+    permissions: ["admin"],
+  },
+  {
+    name: "userss",
+    icon: "mdi-alien",
+    label: "name",
+    translatable: true,
+    permissions: ["admin", "anotherrole"],
+  },
+  {
+    name: "users-children",
+    icon: "mdi-baby-carriage",
+    label: "name",
+    except: ["delete"],
+  },
+];</code></pre>
+<h3>Resource Nesne Yapısı</h3>
+<p>Bir kaynak nesnesi bu yapıya uymalıdır:</p>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Anahtar</th>
+            <th>Tür</th>
+            <th>Açıklama</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <strong>name</strong>
+            </td>
+            <td><code>string</code></td>
+            <td>İstemci tarafı yönlendirici temel yolu için kullanılacak zorunlu, benzersiz bir kaynak adı</td>
+        </tr>
+        <tr>
+            <td><strong>api</strong></td>
+            <td><code>string</code></td>
+            <td>API tabanı yol çağrılarına karşılık gelir. Varsayılan olarak yukarıdaki ada eşittir</td></tr>
+            <tr>
+                <td><strong>icon</strong></td>
+                <td><code>string</code>
+            </td>
+            <td>Kenar çubuğundaki veya liste sayfasındaki tanımlayıcı simge. <a href="https://pictogrammers.com/library/mdi/" target="_blank">MDI</a> icon listesindeki simgelerden biri olmalıdır.
+            </td>
+        </tr>
+        <tr>
+            <td><strong>label</strong></td>
+            <td><code>string</code>, <code>function</code></td>
+            <td>Örneklenmiş bir kaynağı tanımlayan isimdir</td>
+        </tr>
+        <tr>
+            <td><strong>include</strong></td>
+            <td><code>array</code>, <code>object</code></td>
+            <td>Veri sağlayıcı içindeki diğer eylemler için tüm <code>GET</code> tabanlı yöntemler için veri sağlayıcılara eklenecek bazı ek nesne veya diziler</td>
+        </tr>
+        <tr>
+            <td><strong>routes</strong></td>
+            <td><code>array</code></td>
+            <td>Bu kaynak için kullanılabilir rotaların listesi.</td>
+        </tr>
+        <tr>
+            <td><strong>actions</strong></td>
+            <td><code>array</code></td>
+            <td>Bu kaynak için geçerli eylemlerin listesi.</td>
+        </tr>
+        <tr>
+            <td><strong>except</strong></td>
+            <td><code>array</code></td>
+            <td>Reddedilen işlemler, <code>actions</code> açıkça ayarlanmışsa kullanılmaz.</td>
+        </tr>
+        <tr>
+            <td><strong>translatable</strong></td>
+            <td><code>boolean</code></td>
+            <td>Bu kaynağın çevrilip çevrilemeyeceğini belirtir.</td>
+        </tr>
+        <tr>
+            <td><strong>permissions</strong></td>
+            <td><code>array</code></td>
+            <td>Kaynağı kullanıcı izinlerine göre etkinleştirmeyi sağlayan rol listesi.</td>
+        </tr>
+        <tr>
+            <td><strong>autocompleteFields</strong></td>
+            <td><code>array</code></td>
+            <td>Aşırı getirmeyi önlemek için VaAutocompleteInput içindeki API'den döndürülecek kaynak alanlarının listesi.</td>
+        </tr>
+        </tbody>
+</table>
+</div>
+<h3>Label</h3>
+<p>Label özelliği bir dize veya işlev alabilir ve varsayılan olarak label özelliğine eşittir. Bir kullanıcı kaynağının adı olarak, hedeflenen kaynağın geçerli bir özelliğini temsil eden basit durum için dize kullanın. Tam kaynak API nesnesini alan basit bir geri çağırma olan bir işlevin kullanılması, (r) =&gt; <code>${r.title} (${r.isbn})</code> gibi daha karmaşık özellik birleşimini döndürmenize olanak tanır.</p>
+<p>Bu etiket, her CRUD sayfasını gösterme ve düzenlemenin yanı sıra tüm referans tabanlı alanlar ve girişler (<b>VaReferenceField, VaReferenceArrayField, VaAutocompleteInput, VaSelectInput, VaRadioGroupInput</b>) için varsayılan sayfa başlığı olarak kullanılacaktır.</p>
+<h3>Actions</h3>
+<p>Eylemler için listele <b>/ show / create / edit / delete</b> arasında seçim yapmalısınız. Hiçbir eylem veya istisna ayarlanmadıysa, 5 işlemin tümü varsayılan olarak etkindir. Kaldırılan tüm eylemler tüm crud sayfalarına yansıtılacak ve Vue Router da buna göre uyarlanacaktır. Örneğin, [&quot;show&quot;] dışında bir ayar yaparsanız, rotayı gösterme devre dışı bırakılır ve ilgili kaynakla ilişkilendirilen tüm gösteri eylemleri (çoğunlukla düğmeler) devre dışı bırakılır.</p>
+<h3>Eylemleri Engellemek</h3>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">Bunun yalnızca istemci tarafı oluşturma rotalarını devre dışı bırakacağını ve eylem düğmelerinin davranışını değiştireceğini unutmayın. Kaynak API modülünde her zaman tüm eylemler yöntemi mevcuttur. İstenmeyen eylemleri önlemek için arka ucunuzdaki yetkileri buna göre uyarlayın.</div>
+<h3>API Uç Noktalarını Yeniden Kullanın</h3>
+<p>Aynı arka uç kaynağı API uç noktasını farklı kaynaklar için mükemmel bir şekilde yeniden kullanabilirsiniz. Yalnızca aktif kaynakları gösteren bir birinci grup crud sayfalarını ve yalnızca arşivlenmiş olanları gösteren ayrı bir ikinci crud sayfaları grubunu hayal edin. Bunun için api özelliğini kullanın. Kaynak deposu modülündeki API varsayılan temel yolunu geçersiz kılacaktır. Daha sonra <b>src/resources/{name-1}</b> ve <b>src/resources/{name-2}</b> içindeki her CRUD sayfası aynı API uç noktasını kullanacaktır.</p>
+<p>Takip eden örneğe gözatın:</p>
+<pre data-line="11"><code class="language-js line-numbers">export default [
+  {
+    name: "users",
+    icon: "mdi-account",
+    label: "name",
+    routes: ["list"],
+    permissions: ["admin"],
+  },
+  {
+    name: "archived-users",
+    api: "users",
+    icon: "mdi-account",
+    label: "name",
+    routes: ["list"],
+    permissions: ["admin"],
+  },
+];</code></pre>
+<p>Yukarıdaki konfigürasyon ile <b>archived-users</b> kaynağı, <b>users</b> kaynağıyla aynı API uç noktalarını yeniden kullanabilecek.</p>
+<h3>Resource CRUD Sayfaları ve API Modülleri</h3>
+<p>Olobase Admin'in gerekli tüm CRUD rotalarını ve API eylem yapılarını yeniden oluşturması için yukarıdaki kaynak bilgileri temel olarak yeterlidir. Her CRUD rotası <kbd>${ResourceName}${Action}</kbd> adlı bir bileşeni arar. Ve 4 eylem sayfası desteklenir: <b>List</b>, <b>Show</b>, <b>Create</b> ve <b>Edit</b>. Bu nedenle, <b>users</b> adı verilen belirli bir kaynak ve bir oluşturma rotası için Olobase Admin, <b>UsersCreate</b> sayfa bileşenini arar. Bulunamazsa 404 hata sayfasına geri döner. Bu yüzden tek yapmanız gereken, tüm CRUD kaynak sayfalarınızı bu bileşen adlandırma kuralını göz önünde bulundurarak kaydetmektir. Bu sıkıcı görevi kolaylaştırmak için, <kbd>src/plugins/loader.js</kbd> dosyası bu dosyaları içe aktararak <kbd>src/resources</kbd>dizini içindeki tüm <b>.vue</b> dosyalarını arar ve bunlara uygun bir bileşen adı vererek ana Vue örneğine <b>otomatik</b> olarak kaydeder. Bu nedenle sadece bir kaynak klasörü içindeki her eylem için kaynağın adını alacak bir <b>.vue</b> bileşeni oluşturmanız yeterlidir.</p>
+<p>Users kaynaklarına bir örnek:</p>
+<pre><code class="language-html">resources
+├── users-children (Kaynak bilgisinin veya adının kebap case formatı)
+│   ├── Create.vue
+│   ├── Edit.vue
+│   ├── Form.vue (Hem Create.vue hem de Edit.vue görünümleri için yeniden kullanılan form bileşeni)
+│   ├── List.vue
+│   └── Show.vue
+│
+├── users (Bunun için doğrudan listeleme özelliğini kullandığımız için burada Create.vue veya Edit.vue dosyalarına gerek yok)
+│   ├── Form.vue
+│   ├── List.vue
+│   └── Show.vue
+│
+└── index.js (Yukarıda görüldüğü gibi kaynaklar dosya tanımlayıcısı)</code></pre>
+<h3>Bileşik Adı</h3>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">Ad kaynağı bileşik bir formatsa, her kelimenin arasına kısa çizgi veya alt çizgi kullanın (bu, kebap case biçimidir). Örnek: <b>users-children</b>.</div>
+<h3>Aksiyon Eşleme</h3>
+<p>Devam ettirilecek bazı hızlı tablolar (örnek olarak <b>users-children</b> kaynak adını alıyoruz).</p>
+<h3>Aksiyon Rotası ve API Eşleme</h3>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Aksiyon</th>
+            <th>Vue Rotası</th>
+            <th>API Çağrı Biçimi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <strong>list</strong>
+            </td>
+            <td><code>/users-children</code></td>
+            <td><strong>GET</strong> <code>/users-children</code></td>
+        </tr>
+        <tr>
+            <td><strong>show</strong></td>
+            <td><code>/users-children/{id}</code></td>
+            <td><strong>GET</strong> <code>/users-children/{id}</code></td>
+        </tr>
+        <tr>
+            <td><strong>create</strong></td>
+            <td><code>/users-children/create</code></td>
+            <td><strong>POST</strong> <code>/users-children</code></td>
+        </tr>
+        <tr>
+            <td><strong>edit</strong></td>
+            <td><code>/users-children/{id}/edit</code></td>
+            <td><strong>PUT</strong> <code>/users-children/{id}</code></td>
+        </tr>
+        <tr>
+            <td><strong>delete</strong></td>
+            <td>-</td>
+            <td><strong>DELETE</strong> <code>/users-children/{id}</code></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h3>Aksiyon Bileşen Eşleme</h3>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Aksiyon</th>
+            <th>Vue Bileşeni</th>
+            <th>"src/resources" Dosya Yolu</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>list</strong></td>
+            <td><code>UsersChildrenList</code></td>
+            <td><code>/users-children/List.vue</code></td>
+        </tr>
+        <tr>
+            <td><strong>show</strong></td>
+            <td><code>UsersChildrenShow</code></td>
+            <td><code>/users-children/Show.vue</code></td>
+        </tr>
+        <tr>
+            <td><strong>create</strong></td>
+            <td><code>UsersChildrenCreate</code></td>
+            <td><code>/users-children/Create.vue</code></td>
+        </tr>
+        <tr>
+            <td><strong>edit</strong></td>
+            <td><code>UsersChildrenEdit</code></td>
+            <td><code>/users-children/Edit.vue</code></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h3>Enjekte Edilen Özellikler (Props)</h3>
+<p>Kolay yeniden kullanım için her CRUD sayfasına aşağıdaki aksesuarlar eklenir:</p>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Aksiyon</th>
+            <th>Vue Bileşeni</th>
+            <th>"src/resources" Dosya Yolu</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>resource</strong></td>
+            <td><code>object</code></td>
+            <td>Geçerli rotaya bağlı kaynak nesne tanımlayıcısı</td>
+        </tr>
+        <tr>
+            <td><strong>title</strong></td>
+            <td><code>string</code></td>
+            <td>Kaynak eylem sayfasının yerelleştirilmiş başlığı</td>
+        </tr>
+        <tr>
+            <td><strong>id</strong></td>
+            <td><code>id</code></td>
+            <td>Görüntülenecek veya düzenlenecek mevcut kaynağın kimliği</td>
+        </tr>
+        <tr>
+            <td><strong>item</strong></td>
+            <td><code>object</code></td>
+            <td>Görüntülenecek, düzenlenecek veya kopyalanacak mevcut öğe</td>
+        </tr>
+        <tr>
+            <td><strong>permissions</strong></td>
+            <td><code>array</code></td>
+            <td>Mevcut kullanıcı izinleri</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h3>Link Yardımcıları</h3>
+<p>Uygulamanıza, özellikle kenar çubuğuna, kaynak sayfalarını listelemeye veya oluşturmaya işaret eden bazı bağlantılar yerleştirmeniz gerekebilir. Bunun için, sizin için bu formatı oluşturacak <b>getResourceLink()</b> ve <b>getResourceLinks()</b> yardımcı metotlarını kullanabilirsiniz. Ayrıca bu yardımcılar, bu kaynağın bu özel eylemi için mevcut kullanıcıların izinlerini test edecek ve başarısız olursa <code>false</code> değerini döndürecektir.</p>
+<p>Takip eden kod örneği, kaynak simgesinin yanı sıra yerelleştirilmiş kaynak etiketiyle birlikte kullanıcı sayfası listesine bir bağlantı nesnesi döndürecektir. Bu işlevi, bir bağlantı nesnesi olduğu için geçerli herhangi bir layout menüsü desteğine yerleştirmeniz yeterlidir. Yanlış bir menü oluşturulmayacağı için izinlerle uğraşmanıza veya <b>null</b> testi eklemenize gerek yok.</p>
+<pre><code class="language-js">[
+  //...
+  this.admin.getResourceLink("users"),
+  //...
+]</code></pre>
+<p>Aynı anda birçok kaynak bağlantısı oluşturmak için <b>getResourceLinks()</b>'i kullanın. Bu metot yalnızca kullanıcıların kaynak eylemi izinlerine sahip olduğu bağlantılar getirecektir.</p>
+<pre><code class="language-js">[
+  //...
+  ...this.admin.getResourceLinks([
+    "publishers",
+    "authors",
+    "books",
+    "reviews",
+  ]),
+  //...
+]</code></pre>
+<p>Bu yardımcılar için, oluşturulan varsayılanı geçersiz kılacak kaynak adı yerine tam bağlantı nesnesini iletebilirsiniz. Örneğin bu kod, kullanıcı oluşturma sayfasına artı simgesi ve metin olarak <b>&quot;Create new user&quot;</b> içeren yeni bir bağlantı oluşturacaktır:</p>
+<pre><code class="language-js">[
+  //...
+  this.admin.getResourceLink({ name: "users", action: "create", icon: "mdi-plus", text: "Create new user" }),
+  //...
+]</code></pre>
+<p>The <b>getResourceLinks()</b> helper also supports a hierarchical menu in the following form:</p>
+<pre><code class="language-js">[
+  //...
+  ...admin.getResourceLinks([
+    {
+      icon: "mdi-globe-model",
+      text: "Publishers",
+      expanded: true,
+      children: [
+        admin.getResourceLink({ name: "publishers", icon: "mdi-view-list", text: "List" }),
+        admin.getResourceLink({ name: "publishers", icon: "mdi-plus", text: "Create" }),
+      ],
+    },
+    "authors",
+    "books",
+    "reviews",
+  ]),
+  //...
+]</code></pre>

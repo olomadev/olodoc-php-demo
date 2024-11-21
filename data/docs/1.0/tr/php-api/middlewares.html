@@ -1,0 +1,140 @@
+<h2>Ara Katmanlar</h2>
+<p>Mezzio, pipeline ve yönlendirilmiş ara katman yazılımı dışında uygulamalar oluşturmanıza olanak tanır. Pipeline ara katmanı, uygulamanızın iş akışını tanımlayan ara katman yazılımıdır. Bunlar genellikle uygulamanın her yürütülmesinde çalışır ve aşağıdaki gibi örnek işlevler içerir:</p>
+<ul>
+<li>Error işleyici</li>
+<li>Dil belirleme</li>
+<li>Oturum ayarları</li>
+<li>Kimlik doğrulama ve yetkilendirme</li>
+</ul>
+<p>Yönlendirilmiş ara yazılım, yalnızca belirli URI yollarına ve HTTP yöntemlerine yanıt veren ara katman yazılımıdır. Örnek olarak, /users yoluna yalnızca HTTP POST isteklerine yanıt veren bir ara katman yazılımı isteyebilirsiniz.</p>
+<p>Mezzio, aşağıdakilerden herhangi birini kullanarak ara katman yazılımı tanımlamanıza olanak tanır:</p>
+<h3>PSR-15 Ara Katman Örneği</h3>
+<p><a href="https://www.php-fig.org/psr/psr-15/" target="_blank">PSR-15 spesifikasyonu</a>, HTTP sunucusu ara katmanını ve <a href="https://www.php-fig.org/psr/psr-7/" target="_blank">PSR-7 HTTP mesajlarını</a> tüketen istek işleyicilerini kapsar. Mezzio, hem MiddlewareInterface'i uygulayan ara yazılımı hem de RequestHandlerInterface'i uygulayan istek işleyicilerini kabul eder.</p>
+<p>Örnek olarak:</p>
+<p><kbd>src/App/Middleware/SomeMiddleware.php</kbd></p>
+<pre><code class="language-php">use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+class SomeMiddleware implements MiddlewareInterface
+{
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    {
+        // do something and return a response, or
+        // delegate to another request handler capable
+        // of returning a response via:
+        //
+        // return $handler-&gt;handle($request);
+    }
+}</code></pre>
+<h3>Konfigürasyon</h3>
+<p>Uygulamanızda Mezzio ara katmanlarının uygulamaya dahil edilmesi ve çıkartılması gibi işlemler takip eden örnekte olduğu gibi <b>config/pipeline.php</b> dosyası içerisinde yapılır.</p>
+<p><kbd>config/pipeline.php</kbd></p>
+<pre><code class="language-php">// Pipeline middleware:
+$app-&gt;pipe([
+    FirstMiddleware::class,
+    SecondMiddleware::class,
+]);
+
+// Routed middleware:
+$app-&gt;get('/foo', [
+    FirstMiddleware::class,
+    SecondMiddleware::class,
+]);</code></pre>
+<p>Bu dizilerdeki değerler, bu bölümde tanımlandığı gibi herhangi bir geçerli ara katman yazılımı türü olabilir.</p>
+<h3>Yetki Doğrulama Katmanı</h3>
+<p>Aşağıda uygulamanızda yetki doğrulama kontrollerini yapan ve yaygın olarak kullanılan <b>JwtAuthenticationMiddleware</b> katmanı örnek olarak gösteriliyor.</p>
+<p><kbd>src/App/Middleware/JwtAuthenticationMiddleware.php</kbd></p>
+<pre><code class="language-php">&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Middleware;
+
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\AuthenticationInterface;
+use Firebase\JWT\ExpiredException;
+use Laminas\Diactoros\Response\JsonResponse;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Laminas\I18n\Translator\TranslatorInterface as Translator;
+
+class JwtAuthenticationMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var AuthenticationInterface
+     */
+    protected $auth;
+
+    public function __construct(AuthenticationInterface $auth, Translator $translator)
+    {
+        $this-&gt;auth = $auth;
+        $this-&gt;translator = $translator;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    {        
+        try {
+            $user = $this-&gt;auth-&gt;authenticate($request);
+            if (null !== $user) {
+                return $handler-&gt;handle($request-&gt;withAttribute(UserInterface::class, $user));
+            }
+        } catch (ExpiredException $e) {
+
+            // 401 Unauthorized response
+            // Response Header = 'Token-Expired: true'
+
+            return new JsonResponse(['data' =&gt; ['error' =&gt; $this-&gt;translator-&gt;translate('Token Expired')]], 401, ['Token-Expired' =&gt; 1]);
+        }
+        return $this-&gt;auth-&gt;unauthorizedResponse($request);
+    }
+}</code></pre>
+<p>Takip eden örnekte yukarıdaki yetki doğrulama katmanına ait bir konfigürasyon gösteriliyor.</p>
+<pre><code class="language-php">return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+
+    $auth = [
+        JwtAuthenticationMiddleware::class,
+        Mezzio\Authorization\AuthorizationMiddleware::class,
+    ];
+    // Account
+    $app-&gt;route('/api/account/findMe', [...$auth, ...[App\Handler\Account\FindMeHandler::class]], ['GET']);
+    $app-&gt;route('/api/account/update', [...$auth, ...[App\Handler\Account\UpdateHandler::class]], ['PUT']);
+    $app-&gt;route('/api/account/updatePassword', [...$auth, ...[App\Handler\Account\UpdatePasswordHandler::class]], ['PUT']);
+};</code></pre>
+<p>Örnekte görüldüğü gibi <b>account</b> modülüne ait tüm rota adreslerinde yapılacak olan CRUD işlemlerinde yetki doğrulama katmanı devreye sokularak kullanıcının oturum açıp açmadığı kontrol edilmektedir. Oturumunun süresi dolmuş bir kullanıcıya ise katman sayesinde aşağıdaki gibi bir <b>401</b> yanıtı gönderilmektedir.</p>
+<pre><code class="language-php">return new JsonResponse(
+    [
+        'data' =&gt; [
+            'error' =&gt; $this-&gt;translator-&gt;translate('Token Expired')
+        ]
+    ], 
+    401, 
+    [
+        'Token-Expired' =&gt; 1
+    ]
+);</code></pre>
+<h3>Çağrılabilir Ara Katman</h3>
+<p>Bazen tek seferlik ara katman yazılımı için bir sınıf oluşturmak istemeyebilirsiniz. Bu nedenle Mezzio, <kbd>Psr\Http\Server\MiddlewareInterface</kbd> ile aynı imzayı kullanan çağrılabilir bir PHP sağlamanıza izin verir:</p>
+<pre><code class="language-php">use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+function (ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+{
+    // do something and return a response, or
+    // delegate to another request handler capable
+    // of returning a response via:
+    //
+    // return $handler-&gt;handle($request);
+}</code></pre>
+<p>Bir not: her iki argüman da bir yazım ipucu gerektirmez ve kılavuzdaki örnekler, çağrılabilir ara yazılımı gösterirken yazım ipuçlarını atlayacaktır.</p>
+<h3>Servis Tabanlı Ara Katman</h3>
+<p>Ara katman yazılımınızı sağlamak için bir bağımlılık ekleme kapsayıcısı kullanılmasını teşvik ediyoruz. Bu nedenle Mezzio, hem işlem hattı hem de yönlendirilmiş ara katman yazılımı için hizmet adlarını kullanmanıza da olanak tanır. Genel olarak hizmet adları, belirli ara katman sınıfı adları olacaktır, ancak bir hizmete çözümlenen geçerli herhangi bir dize olabilir.</p>
+<p>Mezzio'ya ara katman yazılımı için bir hizmet adı sağlandığında, ara yazılımı bir <kbd>Mezzio\Middleware\LazyLoadingMiddleware</kbd> örneğinde dahili olarak dekore eder ve yalnızca gönderildiğinde yüklenmesine izin verir.</p>
+<p>Daha fazla ayrıntı için aşağıdaki  <a href="https://docs.mezzio.dev/mezzio/v3/cookbook/host-segregated-middleware/" target="_blank">bağlantıya tıklayın</a>.</p>

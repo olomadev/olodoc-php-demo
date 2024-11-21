@@ -1,0 +1,34 @@
+
+<?php 
+$this->headTitle('404 Page Not Found');
+$this->placeholder('404')->set(true);
+?>
+
+<!-- WELCOME -->
+<section class="pt-md-11" style="margin-top:100px;">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+
+    <div class="col-12 order-md-1" data-aos="fade-up">
+        <!-- Heading -->
+        <div class="mb-10 d-flex justify-content-center align-items-center">
+            <div class="card col-md-4 bg-white shadow-md p-5">
+
+                <div class="text-center">
+                    <h1><?php echo $this->translate('404 Page Not Found') ?></h1>
+                    <p><?php echo $this->translate('You\'re looking for a page that doesn\'t exist or may have been moved')?>.</p>
+                    <button class="btn"><a href="<?php echo HTTP_PREFIX.CURRENT_ORIGIN?>"><?php echo $this->translate('Go to Home Page') ?></a></button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- / .row -->
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+  </div> <!-- / .container -->
+</section>
