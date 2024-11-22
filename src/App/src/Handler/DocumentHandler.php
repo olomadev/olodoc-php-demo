@@ -50,7 +50,7 @@ class DocumentHandler implements RequestHandlerInterface
                 404
             );
         }
-        $data['pageMeta'] = $pageGenerator->getMeta();
+        $data['meta'] = $pageGenerator->getMeta();
         $data['pageFooter'] = $pageGenerator->getPagination()->generate(
             $this->translator->translate("Previous"),
             $this->translator->translate("Next")

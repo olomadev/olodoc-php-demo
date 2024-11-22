@@ -26,7 +26,7 @@
 <h3>Resource Object Structure</h3>
 <p>A resource object must follow this structure:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Key</th>
@@ -94,7 +94,7 @@
             <td>List of source fields to return from API in VaAutocompleteInput to prevent overfetching.</td>
         </tr>
         </tbody>
-</table>
+</table></div>
 </div>
 <h3>Label</h3>
 <p>The label property can take a string or a function and is equal to the label property by default. As the name of a user resource, use a string for the simple case that represents a valid property of the targeted resource. Using a function, which is a simple callback that takes the full source API object, allows you to return a more complex combination of properties, such as (r) =&gt; <code>${r.title} (${r.isbn})</code>.</p>
@@ -102,7 +102,9 @@
 <h3>Actions</h3>
 <p>For actions you must choose between list <b>/ show / create / edit / delete</b>. If no actions or exceptions are set, all 5 actions are enabled by default. All removed actions will be reflected in all crud pages and Vue Router will adapt accordingly. For example, if you set anything other than [&quot;show&quot;], showing the route will be disabled and any show actions (mostly buttons) associated with that resource will be disabled.</p>
 <h3>Disabling Actions</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Note that this will only disable client-side rendering routes and change the behavior of action buttons. The all actions method is always available in the source API module. Adapt the permissions in your backend accordingly to prevent unwanted actions.</div>
+<blockquote>
+<p>Note that this will only disable client-side rendering routes and change the behavior of action buttons. The all actions method is always available in the source API module. Adapt the permissions in your backend accordingly to prevent unwanted actions.</p>
+</blockquote>
 <h3>Reuse API Endpoints</h3>
 <p>You can perfectly reuse the same backend resource API endpoint for different resources. Imagine a first set of crud pages showing only active sources, and a separate second set of crud pages showing only archived ones. Use the API feature for this. It will override the API default base path in the resource repository module. Then every CRUD page in <b>src/resources/{name-1}</b> and <b>src/resources/{name-2}</b> will use the same API endpoint.</p>
 <p>Check out the following example:</p>
@@ -142,12 +144,14 @@
 │
 └── index.js (Resources file descriptor as seen above)</code></pre>
 <h3>Compound Name</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">If the name source is a compound format, use a hyphen or dash between each word (this is the kebab case format). Example: <b>users-children</b>.</div>
+<blockquote>
+<p>If the name source is a compound format, use a hyphen or dash between each word (this is the kebab case format). Example: <b>users-children</b>.</p>
+</blockquote>
 <h3>Action Mapping</h3>
 <p>Some quick tables to persist (we take the resource name <b>users-children</b> as an example).</p>
 <h3>Action Route and API Mapping</h3>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Action</th>
@@ -184,11 +188,11 @@
             <td><strong>DELETE</strong> <code>/users-children/{id}</code></td>
         </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>Action Component Mapping</h3>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Action</th>
@@ -218,12 +222,12 @@
             <td><code>/users-children/Edit.vue</code></td>
         </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>Injected Props</h3>
 <p>The following accessories are added to each CRUD page for easy reuse:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Eylem</th>
@@ -258,7 +262,7 @@
             <td>Current user permissions</td>
         </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>Link Helpers</h3>
 <p>You may need to place some links in your app, especially in the sidebar, that point to listing or creating resource pages. For this, you can use the <b>getResourceLink()</b> and <b>getResourceLinks()</b> helper methods that will create this format for you. Additionally these helpers will test the permissions of existing users for this particular action of this resource and return <code>false</code> if it fails.</p>

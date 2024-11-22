@@ -18,7 +18,7 @@ export default {
 <h3>Main Layout</h3>
 <p>The customizable main layout with one slot for each area is called <kbd>VaLayout</kbd>.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Name</th>
@@ -43,15 +43,17 @@ export default {
          <td>2nd left or right side area where you can put everything you need.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">This slot composition system allows for complete customization. You can completely customize or replace each component. Please browse to <kbd>/src/layout/Admin.vue</kbd>. You must make customizations on this file.</div>
+<blockquote>
+<p>This slot composition system allows for complete customization. You can completely customize or replace each component. Please browse to <kbd>/src/layout/Admin.vue</kbd>. You must make customizations on this file.</p>
+</blockquote>
 <h3>Menu Links</h3>
 <p>See <a href="/ui/layout.html#Links">links</a> below.</p>
 <h3>VaAppBar</h3>
 <p>The default <kbd>VAppBar</kbd> contains the application title, header menus, direct resource creation links, global refresh action, profile menu. The profile user drop-down menu does not appear in guest mode.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Property</th>
@@ -116,7 +118,7 @@ export default {
          <td>Removes AppBar shadow.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Resource Links</h3>
 <p>If the current user has permissions, creating action links will be automatically created from your saved resources.</p>
@@ -349,7 +351,7 @@ export default {
 <h3>Footer</h3>
 <p>This section is a footer area that allows displaying some corporate information in the <a href="https://vuetifyjs.com/en/components/footers/" target="_blank">VFooter</a> component.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <thead>
     <tr>
        <th>Property</th>
@@ -364,12 +366,12 @@ export default {
        <td>Menu links.</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 </div>
 <p><img  src="data:image/png;base64, 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" alt="SideBar" / class="img-fluid" /></p>
 <p><b>Slots</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
     <tr>
        <th>Name</th>
@@ -382,7 +384,7 @@ export default {
          <td>Information on the right.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Breadcrumbs</h3>
 <p>Automatically creates hierarchical links from the current route using the <a href="https://vuetifyjs.com/en/components/breadcrumbs/" target="_blank">v-breadcrumbs</a> component for breadcrumbs.</p>
@@ -424,7 +426,7 @@ export default {
 &lt;/template&gt;</code></pre>
 <p>For more details, check out the <kbd>companies</kbd> module in our <b>demo</b> application.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
        <tr>
           <th>Property</th>
@@ -444,7 +446,7 @@ export default {
          <td>Width of the opened section.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Menu Links</h3>
 <p>Any navigation menu that can be placed in components that support navigation is a simple array of objects that represent a link. Components that support navigation; It consists of a total of 4 different components: <b>header</b>, <b>profile</b>, <b>sidebar</b> and <b>footer</b> menu.</p>
@@ -497,7 +499,7 @@ export default {
 <p>To create the menu dynamically based on authorizations, see <a href="/ui/authorization.html#OR%20and%20&&%20Conditions">related document</a>.</p>
 <p>Object link structure:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
        <tr>
           <th>Property</th>
@@ -547,5 +549,5 @@ export default {
          <td>It turns the link into a separator for the sidebar menu only. All other features within it are disabled.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>

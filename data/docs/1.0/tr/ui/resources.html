@@ -26,7 +26,7 @@
 <h3>Resource Nesne Yapısı</h3>
 <p>Bir kaynak nesnesi bu yapıya uymalıdır:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Anahtar</th>
@@ -94,7 +94,7 @@
             <td>Aşırı getirmeyi önlemek için VaAutocompleteInput içindeki API'den döndürülecek kaynak alanlarının listesi.</td>
         </tr>
         </tbody>
-</table>
+</table></div>
 </div>
 <h3>Label</h3>
 <p>Label özelliği bir dize veya işlev alabilir ve varsayılan olarak label özelliğine eşittir. Bir kullanıcı kaynağının adı olarak, hedeflenen kaynağın geçerli bir özelliğini temsil eden basit durum için dize kullanın. Tam kaynak API nesnesini alan basit bir geri çağırma olan bir işlevin kullanılması, (r) =&gt; <code>${r.title} (${r.isbn})</code> gibi daha karmaşık özellik birleşimini döndürmenize olanak tanır.</p>
@@ -102,7 +102,9 @@
 <h3>Actions</h3>
 <p>Eylemler için listele <b>/ show / create / edit / delete</b> arasında seçim yapmalısınız. Hiçbir eylem veya istisna ayarlanmadıysa, 5 işlemin tümü varsayılan olarak etkindir. Kaldırılan tüm eylemler tüm crud sayfalarına yansıtılacak ve Vue Router da buna göre uyarlanacaktır. Örneğin, [&quot;show&quot;] dışında bir ayar yaparsanız, rotayı gösterme devre dışı bırakılır ve ilgili kaynakla ilişkilendirilen tüm gösteri eylemleri (çoğunlukla düğmeler) devre dışı bırakılır.</p>
 <h3>Eylemleri Engellemek</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Bunun yalnızca istemci tarafı oluşturma rotalarını devre dışı bırakacağını ve eylem düğmelerinin davranışını değiştireceğini unutmayın. Kaynak API modülünde her zaman tüm eylemler yöntemi mevcuttur. İstenmeyen eylemleri önlemek için arka ucunuzdaki yetkileri buna göre uyarlayın.</div>
+<blockquote>
+<p>Bunun yalnızca istemci tarafı oluşturma rotalarını devre dışı bırakacağını ve eylem düğmelerinin davranışını değiştireceğini unutmayın. Kaynak API modülünde her zaman tüm eylemler yöntemi mevcuttur. İstenmeyen eylemleri önlemek için arka ucunuzdaki yetkileri buna göre uyarlayın.</p>
+</blockquote>
 <h3>API Uç Noktalarını Yeniden Kullanın</h3>
 <p>Aynı arka uç kaynağı API uç noktasını farklı kaynaklar için mükemmel bir şekilde yeniden kullanabilirsiniz. Yalnızca aktif kaynakları gösteren bir birinci grup crud sayfalarını ve yalnızca arşivlenmiş olanları gösteren ayrı bir ikinci crud sayfaları grubunu hayal edin. Bunun için api özelliğini kullanın. Kaynak deposu modülündeki API varsayılan temel yolunu geçersiz kılacaktır. Daha sonra <b>src/resources/{name-1}</b> ve <b>src/resources/{name-2}</b> içindeki her CRUD sayfası aynı API uç noktasını kullanacaktır.</p>
 <p>Takip eden örneğe gözatın:</p>
@@ -142,12 +144,14 @@
 │
 └── index.js (Yukarıda görüldüğü gibi kaynaklar dosya tanımlayıcısı)</code></pre>
 <h3>Bileşik Adı</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Ad kaynağı bileşik bir formatsa, her kelimenin arasına kısa çizgi veya alt çizgi kullanın (bu, kebap case biçimidir). Örnek: <b>users-children</b>.</div>
+<blockquote>
+<p>Ad kaynağı bileşik bir formatsa, her kelimenin arasına kısa çizgi veya alt çizgi kullanın (bu, kebap case biçimidir). Örnek: <b>users-children</b>.</p>
+</blockquote>
 <h3>Aksiyon Eşleme</h3>
 <p>Devam ettirilecek bazı hızlı tablolar (örnek olarak <b>users-children</b> kaynak adını alıyoruz).</p>
 <h3>Aksiyon Rotası ve API Eşleme</h3>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Aksiyon</th>
@@ -184,11 +188,11 @@
             <td><strong>DELETE</strong> <code>/users-children/{id}</code></td>
         </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>Aksiyon Bileşen Eşleme</h3>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Aksiyon</th>
@@ -218,12 +222,12 @@
             <td><code>/users-children/Edit.vue</code></td>
         </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>Enjekte Edilen Özellikler (Props)</h3>
 <p>Kolay yeniden kullanım için her CRUD sayfasına aşağıdaki aksesuarlar eklenir:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <tr>
             <th>Aksiyon</th>
@@ -258,7 +262,7 @@
             <td>Mevcut kullanıcı izinleri</td>
         </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>Link Yardımcıları</h3>
 <p>Uygulamanıza, özellikle kenar çubuğuna, kaynak sayfalarını listelemeye veya oluşturmaya işaret eden bazı bağlantılar yerleştirmeniz gerekebilir. Bunun için, sizin için bu formatı oluşturacak <b>getResourceLink()</b> ve <b>getResourceLinks()</b> yardımcı metotlarını kullanabilirsiniz. Ayrıca bu yardımcılar, bu kaynağın bu özel eylemi için mevcut kullanıcıların izinlerini test edecek ve başarısız olursa <code>false</code> değerini döndürecektir.</p>

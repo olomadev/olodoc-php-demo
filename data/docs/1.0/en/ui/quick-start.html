@@ -24,7 +24,9 @@
     actions: ["show","list", "edit", "delete", "create"],
   }
 ];</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">In your Olobase Admin application, permissions are defined in the &quot;pernissions&quot; array as seen above. On the frontend, items that the user does not have permission to access are simply hidden or shown by <kbd>show</kbd>/<kbd>hide</kbd>. In the backend, a 403 Forbidden response is sent to the user for each unauthorized transaction.</div>
+<blockquote>
+<p>In your Olobase Admin application, permissions are defined in the &quot;pernissions&quot; array as seen above. On the frontend, items that the user does not have permission to access are simply hidden or shown by <kbd>show</kbd>/<kbd>hide</kbd>. In the backend, a 403 Forbidden response is sent to the user for each unauthorized transaction.</p>
+</blockquote>
 <p>Step 2 is to define CRUD pages for each resource, following this naming convention:</p>
 <pre><code class="language-bash">src/resources/{Resource}/{action}.vue.</code></pre>
 <h2>Actions</h2>

@@ -47,7 +47,9 @@
   "iat": 1516239022
 }</code></pre>
 <p>This part is encoded with Base64 and forms the second part of the token to be created.</p>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">You should not put sensitive data such as user password in the token because JWT tokens are encoded with the base64 function so they can be easily read when captured.</div>
+<blockquote>
+<p>You should not put sensitive data such as user password in the token because JWT tokens are encoded with the base64 function so they can be easily read when captured.</p>
+</blockquote>
 <h3>Signature</h3>
 <p>This part is the last part of the coin. Header, payload and secret key (secret) are required to create this part. Data integrity is guaranteed with the signature section. The secret key we use here is used for the algorithm we specified in the Header section. Header and Payload sections are signed with this secret key.</p>
 <pre><code class="language-string">HMACSHA256(
@@ -82,7 +84,9 @@ $privateKey = base64_encode(sodium_crypto_sign_secretkey($keyPair));
 
 echo $publicKey."\n";  // W9JHddARm1iwrIV+DhlQ1t0vGxWwgwVTHyHpjq6n4L8=
 echo $privateKey."\n"; // KXgCiGnLLkYI/j/uGOgmSn5P9lATSZcd/p86azEgwW1b0kd10BGbWLCshX4OGVDW3S8bFbCDBVMfIemOrqfgvw==</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">You must regenerate keys in each project to avoid causing security risks in your application.</div>
+<blockquote>
+<p>You must regenerate keys in each project to avoid causing security risks in your application.</p>
+</blockquote>
 <p>You must define the key you created in the <b>public_key</b> and <b>private_key</b> fields as follows.</p>
 <h3>Token Configuration</h3>
 <p><kbd>config/autoload/local.php</kbd></p>
@@ -115,7 +119,7 @@ echo $privateKey."\n"; // KXgCiGnLLkYI/j/uGOgmSn5P9lATSZcd/p86azEgwW1b0kd10BGbWL
     ],
 ],</code></pre>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <th>Key</th>
         <th>Description</th>
@@ -158,7 +162,7 @@ echo $privateKey."\n"; // KXgCiGnLLkYI/j/uGOgmSn5P9lATSZcd/p86azEgwW1b0kd10BGbWL
         <td>If the user's agent does not match the agent stored in the token, the user is logged out.</td>
     </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>SQL Query Table</h3>
 <p>During login, <kbd>App\Authentication\AuthenticationAdapter</kbd> performs the SQL query based on the <b>tablename</b>, <b>username</b> and <b>password</b> columns defined in the configuration.</p>
@@ -238,7 +242,7 @@ $app-&gt;route('/api/years/findAll', App\Handler\Common\Years\FindAllHandler::cl
 <h2>Authentication Errors</h2>
 <p>In order to control the events that occur before or after the user login, the <kbd>App\Authentication\JwtAuthentication</kbd> class simply handles the following errors if it occurs for the user without requiring any event class.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <tr>
         <th>Key</th>
         <th>Description</th>
@@ -271,7 +275,7 @@ $app-&gt;route('/api/years/findAll', App\Handler\Common\Years\FindAllHandler::cl
         <td>USER_AGENT_VALIDATION_FAILED</td>
         <td>Your browser could not be verified and has been logged out for security reasons.</td>
     </tr>
-</table>
+</table></div>
 </div>
 <p>If you are thinking of making an improvement after the authentication process, you can take a look at the <b>initAuthentication</b> method.</p>
 <pre data-line="27,43"><code class="language-php line-numbers">public function initAuthentication(ServerRequestInterface $request) : ?UserInterface

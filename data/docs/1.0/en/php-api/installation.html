@@ -16,11 +16,13 @@
 <pre><code class="language-sh">/var/www/example-php$ composer install</code></pre>
 <p>Give 777 permision for <b>/data/tmp</b> cache folder.</p>
 <pre><code class="language-sh">chmod 777 -R /var/www/example-php/data/tmp</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">In general, we'd advise you to try setting the permissions of the <b>cache/</b> directory to <b>755</b> and the files inside it - to <b>644</b>. If you absolutely must use higher permissions, try using <b>777</b> for the <b>cache/</b> directory and <b>666</b> for the files in it. Avoid setting the permissions of regular files to <b>777</b>.</div>
+<blockquote>
+<p>In general, we'd advise you to try setting the permissions of the <b>cache/</b> directory to <b>755</b> and the files inside it - to <b>644</b>. If you absolutely must use higher permissions, try using <b>777</b> for the <b>cache/</b> directory and <b>666</b> for the files in it. Avoid setting the permissions of regular files to <b>777</b>.</p>
+</blockquote>
 <h3>Useful Resources About Mezzio</h3>
 <p>Olobase uses the <a href="https://docs.mezzio.dev/mezzio/" target="_blank">Mezzio Framework</a> in the backend. If you would like to get more detailed information about the Mezzio framework, you can take a look at the resources below.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <tr>
         <th>Source Type</th>
         <th>Url</th>
@@ -36,7 +38,7 @@
         <td><a href="https://matthewsetter.com/how-to-create-a-mezzio-application/" target="_blank">https://matthewsetter.com/how-to-create-a-mezzio-application/</a></td>
         <td>Blog address written by the creator of Mezzio and containing extensive information about Mezzio installation.</td>
     </tr>
-</table>
+</table></div>
 </div>
 <h3>Apache2 Configuration</h3>
 <p>Enable Apache mod_rewrite plugin.</p>

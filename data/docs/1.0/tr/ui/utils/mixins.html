@@ -3,7 +3,7 @@
 <h3>Page</h3>
 <p>Göster, Oluştur ve Düzenle için kullanılan CRUD eylem sayfası işlevlerini içerir.</p>
 <p><b>Özellikler</b></p>
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -18,12 +18,12 @@
          <td>Sayfanın isteğe bağlı h1 başlığını belirler.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 <h3>Resource</h3>
 <p>Kaynakla ilgili tüm bileşenler için kullanılır.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -38,13 +38,13 @@
          <td>Kullanılacak kaynağın adı. Etiket yerelleştirmesi ve bağlam eylemi etkinleştiricileri için gereklidir. Varsayılan davranış  yönlendirici bağlamından getirmektir.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Source</h3>
 <p>Kaynağın belirli özelliğini kullanması gereken bileşenler için kullanılır.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -59,13 +59,13 @@
          <td>Gösterilecek değeri getirmek için kaynağın özelliği. Slotlanmış nesne için nokta gösterimini destekler.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Field</h3>
 <p>Veri gösterisi için kullanılan tüm alanlar için ana alan karışımı. Geçerli kaynaktan özellik kaynağı değerini otomatik olarak getirebilir. Kendi alan bileşeninizi oluşturmak için bu bileşeni kullanın.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -85,13 +85,13 @@
          <td><b>VaShow</b> bileşeni tarafından enjekte edilen varsayılan öğeyi geçersiz kılar.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Input</h3>
 <p>Kaynak özelliğinin düzenlenmesi veya oluşturulması için kullanılan tüm girdiler için ana girdi karışımı. Ana formun modelini otomatik olarak günceller. Kendi giriş bileşeninizi oluşturmak için bu bileşeni kullanın.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -111,13 +111,13 @@
          <td>Varsayılan olarak kaynak, oluşturma/güncelleme için API'ye gönderilecek son ad olacaktır. Bu destek, bu varsayılan davranışı geçersiz kılmanıza olanak tanır.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Button</h3>
 <p>Genel tuş bileşenleri için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -142,13 +142,13 @@
          <td>Metin özellik değerine bağlı olarak özelleştirilebilir arka plan veya metin rengi.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Action Button</h3>
 <p>Her tür eylem tuşu için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -183,13 +183,13 @@
          <td>Arka planı olmayan metin olarak göster.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Redirect Button</h3>
 <p>Yönlendirmeyi destekleyen tuşlar için <b>disableRedirect</b> desteği etkin olmadığı sürece herhangi bir oluşturma eylemi mevcut değilse tuş otomatik olarak gizlenecektir.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -219,13 +219,13 @@
          <td>Uyumlu düğmeler için varsayılan yönlendirme davranışını devre dışı bırakır.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Search</h3>
 <p>Kaynak arama bileşenleri için <b>VaList</b> veya <b>VaAutocompleteInput</b> gibi ortak özellikler sağlar. GetList veri sağlayıcısını kullanır.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -270,13 +270,13 @@
          <td>Sunucu tarafında zorunlu olarak sorgudaki sayfa başına öğeleri devre dışı bırakır. Düzgün istemci tarafı çağrı cihazı hesaplaması için <b>itemsPerPage</b>'in hala gerekli olduğuna dikkat edin.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Chip</h3>
 <p>Tüm çip tabanlı alanlar için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -301,13 +301,13 @@
          <td>Gerekirse çiple ilişkili yönlendirici bağlantısı.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Input Wrapper</h3>
 <p>Tüm girdi alanları için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -392,13 +392,13 @@
          <td>İpucu olarak gösterilecek özel hata doğrulama mesajlarının listesi.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Rating</h3>
 <p>Derecelendirme alanı ve girdi bileşenleri için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -428,13 +428,13 @@
          <td>Yarım artışların seçimine izin verir.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Choices</h3>
 <p>Tüm seçimlere dayalı alanlar veya girdiler için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -459,13 +459,13 @@
          <td>Seçim için seçeneklerin listesi. Varsayılan olarak VueI18n kaynak yerel ayarlarınızdan yerelleştirilmiş numaralandırmaları alır.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Reference</h3>
 <p><b>VaReferenceField</b> veya <b>VaReferenceArrayField</b> olarak kaynak referansını destekleyen tüm alan bileşenleri için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -495,13 +495,13 @@
          <td>Bağlantı oluşturma için kimlik değerinin alındığı yeri belirtin.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Multiple</h3>
 <p>Dizi olarak birden fazla değere izin veren girdi bileşenleri için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -536,13 +536,13 @@
          <td>Küçük çipler kullanılmasını sağlar.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Files</h3>
 <p>Tüm dosya yükleme girişleri için ortak özellikler sağlar.</p>
 <p><b>Özellikler</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Özellik</th>
@@ -597,13 +597,13 @@
          <td>Silinecek dosyaları tanımlamak için kimlik değerinin alındığı yeri (varsayılan: "id") belirtir.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Utils</h3>
 <p>Olobase Admin içerisindeki bazı yardımcı fonksiyonlar utils.js içerisinde varsayılan olarak yer alır.</p>
 <p><b>Metotlar</b></p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Metot</th>
@@ -644,5 +644,5 @@
          <td>Verilen genişlikte rastgele bir güçlü şifre oluşturur.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>

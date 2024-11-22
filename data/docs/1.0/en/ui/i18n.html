@@ -99,7 +99,9 @@ export default {
   numberFormats,
   datetimeFormats,
 });</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">By default, all locales are stored in a JSON file by language in the <kbd>src/18n/locales/</kbd> directory.</div>
+<blockquote>
+<p>By default, all locales are stored in a JSON file by language in the <kbd>src/18n/locales/</kbd> directory.</p>
+</blockquote>
 <pre><code class="language-html">├── src
 │   ├── i18n
 │   │   ├── locales
@@ -160,7 +162,7 @@ export default createVuetify({
 <p>To minimize this code, Olobase Admin will try to guess the target translation key from the source or <b>source</b> name by following a simple naming convention. Olobase Admin, selection, radio button etc. It even supports localized enumerations that can be used for any selection-based field or input components, such as. Any localized resource specific tags need to be added to your own i18n json locale, which is <kbd>src/locales/{locale}.json</kbd> by default, under the main resources key. Each translation key under Resources must match the valid resource names set in the <kbd>src/resources/index.js</kbd> file.</p>
 <p>You can then put the following keys in your language settings:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Key</th>
@@ -185,11 +187,11 @@ export default createVuetify({
          <td>Localized enums for resource property, each enum is an array of key-value pair, where the key must correspond to a valid value of targeted property.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <p>Here is the naming translation keys format you must follow for each type of weld tag:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Key</th>
@@ -219,7 +221,7 @@ export default createVuetify({
          <td><code>resources.users.enums.roles</code></td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <p>Here's an example of a <kbd>users</kbd> module and <kbd>en</kbd> locale:</p>
 <p><kbd>src/locales/en.json</kbd></p>
@@ -256,9 +258,13 @@ export default createVuetify({
   }
 }</code></pre>
 <h3>Singular and Plural</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Your resource name must have both singular and plural forms separated by a dash. Olobase Admin will choose the correct format based on the context.</div>
+<blockquote>
+<p>Your resource name must have both singular and plural forms separated by a dash. Olobase Admin will choose the correct format based on the context.</p>
+</blockquote>
 <h3>Apply by Default</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Birden fazla yerel ayarı destekleme niyetiniz olmasa bile, her zaman bu yöntemi kullanmalısınız.</div>
+<blockquote>
+<p>Birden fazla yerel ayarı destekleme niyetiniz olmasa bile, her zaman bu yöntemi kullanmalısınız.</p>
+</blockquote>
 <h3>Enumeric Values (enums)</h3>
 <p>To have functional localized options for select or radio components, your enumeration key must be named the same as the source support for that component.</p>
 <h3>Page Titles</h3>

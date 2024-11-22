@@ -635,7 +635,9 @@ class CompanySave
 <pre data-user="root" data-host="localhost" data-output="&quot;4&quot;&gt;"><code class="language-bash no-line-numbers command-line">cd /var/www/demo
 composer swagger</code></pre>
 <p>Bu komut çalışıtırıldığında swagger, tüm şemaları <kbd>/example.com/public/swagger/web/swagger.json</kbd> dosyasında birleştirerek dökümentasyonu oluşturur.</p>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Şema dosyaları ve dökümentasyonun güncel kalması içi şema dosyalarınızda herhangi bir değişiklik yaptığınızda bu komutu konsoldan yeniden çalıştırmalısınız.</div>
+<blockquote>
+<p>Şema dosyaları ve dökümentasyonun güncel kalması içi şema dosyalarınızda herhangi bir değişiklik yaptığınızda bu komutu konsoldan yeniden çalıştırmalısınız.</p>
+</blockquote>
 <p>Aslında bu komut composer dosyanızın script bölümünde tanımlanmış aşağıdaki komutu çağırır. </p>
 <pre><code class="language-bash">&gt; vendor/bin/openapi /var/www/demo -e vendor -o public/swagger/web/swagger.json</code></pre>
 <p>Böylece <kbd>composer swagger</kbd> komutu yukarıdaki uzun yazım için bir kısayol görevi görür.</p>

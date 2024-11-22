@@ -1,9 +1,9 @@
 <?php
 $this->layout('layout::default');
-        
-$metaDescription = mb_strimwidth(strip_tags($pageContent), 0, 160, "...");
-// $this->headMeta($metaKeywords, "", "keywords");
-$this->headMeta($metaDescription, "description");
+    
+$this->headTitle($meta['title']);
+$this->headMeta($meta['description'], "description");
+$this->headMeta($meta['keywords'], "keywords");
 
 $this->placeholder('version')->set($version);
 $this->placeholder('pageJavascript')->set($pageJavascript);
@@ -40,7 +40,7 @@ $this->placeholder('documentManager')->set($documentManager);
             <?php echo $pageBreadCrumbs ?>    
         </nav>
 
-        <?php print_r($pageMeta); ?>
+        <?php // print_r($meta); ?>
 
         <!-- Markdown content -->
         <?php echo $pageContent ?>

@@ -47,7 +47,9 @@
   "iat": 1516239022
 }</code></pre>
 <p>Bu kısım Base64 ile encode edilir ve oluşturulacak jetonun ikinci parçasını oluşturur.</p>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Jeton içerisine kullanıcı şifresi gibi hassas verileri koymamalısınız çünkü JWT jetonları base64 fonksiyonu ile kodlandıkları için ele geçirildiklerinde kolayca okunabilirler.</div>
+<blockquote>
+<p>Jeton içerisine kullanıcı şifresi gibi hassas verileri koymamalısınız çünkü JWT jetonları base64 fonksiyonu ile kodlandıkları için ele geçirildiklerinde kolayca okunabilirler.</p>
+</blockquote>
 <h3>Signature (İmza)</h3>
 <p>Bu kısım jetonun son kısmıdır. Bu kısmın oluşturulabilmesi için header, payload ve gizli anahtar(gizli) gereklidir. İmza kısmı ile veri bütünlüğü garanti altına alınır. Burada kullandığımız gizli anahtar Header kısmında belirttiğimiz algoritma için kullanılır. Header ve Payload kısımları bu gizli anahtar ile imzalanır</p>
 <pre><code class="language-string">HMACSHA256(
@@ -82,7 +84,9 @@ $privateKey = base64_encode(sodium_crypto_sign_secretkey($keyPair));
 
 echo $publicKey."\n";  // W9JHddARm1iwrIV+DhlQ1t0vGxWwgwVTHyHpjq6n4L8=
 echo $privateKey."\n"; // KXgCiGnLLkYI/j/uGOgmSn5P9lATSZcd/p86azEgwW1b0kd10BGbWLCshX4OGVDW3S8bFbCDBVMfIemOrqfgvw==</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Uygulamanızda güvenlik risklerine yol açmamak için her projede anahtarları yeniden oluşturmalısınız.</div>
+<blockquote>
+<p>Uygulamanızda güvenlik risklerine yol açmamak için her projede anahtarları yeniden oluşturmalısınız.</p>
+</blockquote>
 <p>Oluşturduğunuz anahtarı aşağıdaki gibi <b>public_key</b> ve <b>private_key</b> alanlarına tanımlamalısınız. </p>
 <h3>Jeton Konfigürasyonu</h3>
 <p><kbd>config/autoload/local.php</kbd></p>
@@ -115,7 +119,7 @@ echo $privateKey."\n"; // KXgCiGnLLkYI/j/uGOgmSn5P9lATSZcd/p86azEgwW1b0kd10BGbWL
     ],
 ],</code></pre>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <thead>
         <th>Anahtar</th>
         <th>Açıklama</th>
@@ -158,7 +162,7 @@ echo $privateKey."\n"; // KXgCiGnLLkYI/j/uGOgmSn5P9lATSZcd/p86azEgwW1b0kd10BGbWL
         <td>Kullanıcının tarayıcı adı, jeton içine kaydedilen değer ile eşleşmiyorsa kullanıcının oturumu kapatılır.</td>
     </tr>
     </tbody>
-</table>
+</table></div>
 </div>
 <h3>SQL Sorgu Tablosu</h3>
 <p><kbd>App\Authentication\AuthenticationAdapter</kbd> yetkilendirme bağdaştırıcısı oturum açma sırasında , yapılandırmada tanımlanan <b>tablename</b>, <b>username</b> ve <b>password</b> sütunlarına göre SQL sorgusunu gerçekleştirir.</p>
@@ -238,7 +242,7 @@ $app-&gt;route('/api/years/findAll', App\Handler\Common\Years\FindAllHandler::cl
 <h2>Kimlik Doğrulama Hataları</h2>
 <p>Kulanıcı girişinin öncesinde veya sonrasında gelişen olayları kontrol etmek için <kbd>App\Authentication\JwtAuthentication</kbd> sınıfı herhangi bir event sınıfını gerektirmeden basitçe kullanıcı için oluşmuşsa aşağıdaki ilgili hataları işler.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <tr>
         <th>Anahtar</th>
         <th>Açıklama</th>
@@ -271,7 +275,7 @@ $app-&gt;route('/api/years/findAll', App\Handler\Common\Years\FindAllHandler::cl
         <td>USER_AGENT_VALIDATION_FAILED</td>
         <td>Tarayıcınız doğrulanamadı ve güvenlik nedeniyle çıkış yapıldı.</td>
     </tr>
-</table>
+</table></div>
 </div>
 <p>Eğer kimlik doğrulama işleminden sonra bir geliştirme yapmayı düşünüyorsanız <b>initAuthentication</b> metodunu gözatabilirsiniz.</p>
 <pre data-line="27,43"><code class="language-php line-numbers">public function initAuthentication(ServerRequestInterface $request) : ?UserInterface

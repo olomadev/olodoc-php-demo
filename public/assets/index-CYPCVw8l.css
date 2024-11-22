@@ -11174,6 +11174,7 @@ body {
 }
 .bs-sidenav {
   --ol-sidenav-link-color: #000;
+  --ol-sidenav-anchor-color: #999b9d;
   --ol-sidenav-link-hover-color: #f2f2f2;
   --ol-sidenav-link-active-color: #fff;
 }
@@ -11206,6 +11207,14 @@ pre {
   --ol-pre-code-border-width: 1px;
   --ol-pre-code-border-color: #e0e0e0;
   --ol-pre-code-border-radius-width: 4px;
+}
+.ghd-alert {
+  --ol-alert-border-color: #e0e0e0;
+  --ol-alert-note-color: #056dd5;
+  --ol-alert-tip-color: #1c7e36;
+  --ol-alert-important-color: #8252e0;
+  --ol-alert-warning-color: #e9a002;
+  --ol-alert-caution-color: #d12329;
 }/*!
  * Olodoc.css v.1.0 (https://olodoc.dev/)
  * Copyright 2025 Oloma.dev
@@ -11222,9 +11231,6 @@ body {
   text-align:var(--bs-body-text-align);
   min-height: 75rem;
   padding-top: 5rem;
-}
-.alert {
-  margin-top: 15px;
 }
 .document-content a {
   font-weight: 600;
@@ -11765,11 +11771,8 @@ a.anchor {
 td a, p a {
   font-weight: 900;   
 }
-th, td {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
+td, th {
+  padding: 15px !important;
 }
 /**
  * Next - previous buttons
@@ -11820,11 +11823,11 @@ th, td {
 }
 .h2,h2 {
   line-height: 1.35;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .h3,h3 {
   line-height: 1.4;
-  margin-top: 30px;
+  margin-top: 8px;
   font-weight: normal !important;
 }
 .h4,h4 {
@@ -11835,7 +11838,7 @@ th, td {
 .h5,h5 {
   color: var(--bs-primary);
   line-height: 1.5;
-    margin-top: 5px;
+  margin-top: 5px;
   font-weight: normal !important;
 }
 .h6,h6 {
@@ -11876,10 +11879,6 @@ code[class*=language-], pre[class*=language-] {
  */
 #markdown-content {
   margin-top: 25px;
-}
-#markdown-content p,
-#markdown-content li {
-  color: var(--bs-gray-700) !important;
 }
 #markdown-content ol li {
   margin-top: 5px;
@@ -11968,7 +11967,7 @@ code[class*=language-], pre[class*=language-] {
   /**
    * Make scrollable ul list
    */
-  max-height: 25em;
+  max-height: 30em;
   /* line-height: 2em; */
   overflow: auto;
   overflow-x: auto;
@@ -11981,6 +11980,7 @@ code[class*=language-], pre[class*=language-] {
   padding-bottom: 0px;
 }
 .bs-sidenav .nav-sub-item a {
+  color: var(--ol-sidenav-anchor-color);
   font-size: 14px;
   border-bottom: none;
 }
@@ -12023,6 +12023,71 @@ code[class*=language-], pre[class*=language-] {
     border-color: var(--ol-btn-secondary-border-color) !important;
 }
 /**
+ * Blockquotes
+ */
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  padding: 1em 10px .1em;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+/**
+ * Alerts
+ */
+.ghd-alert {
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 1px;
+  margin-bottom: 15px;
+  border: 2px solid var(--ol-alert-border-color);
+}
+.ghd-alert svg {
+  margin-right: 6px;
+}
+.ghd-alert-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  font-size: 15px;
+}
+.ghd-alert .ghd-alert-title {
+  margin-bottom: 15px;
+}
+.ghd-alert .ghd-alert-body {
+  margin-bottom: 8px;
+}
+.ghd-alert-note {
+  border-left: 8px solid var(--ol-alert-note-color);
+}
+.ghd-alert-note .ghd-alert-title {
+  color: var(--ol-alert-note-color);
+}
+.ghd-alert-tip {
+  border-left: 8px solid var(--ol-alert-tip-color);
+}
+.ghd-alert-tip .ghd-alert-title {
+  color: var(--ol-alert-tip-color);
+}
+.ghd-alert-important {
+  border-left: 8px solid var(--ol-alert-important-color);
+}
+.ghd-alert-important .ghd-alert-title {
+  color: var(--ol-alert-important-color);
+}
+.ghd-alert-warning {
+  border-left: 8px solid var(--ol-alert-warning-color);
+}
+.ghd-alert-warning .ghd-alert-title {
+  color: var(--ol-alert-warning-color);
+}
+.ghd-alert-caution {
+  border-left: 8px solid var(--ol-alert-caution-color);
+}
+.ghd-alert-caution .ghd-alert-title {
+  color: var(--ol-alert-caution-color);
+}
+/**
  * Tabs
  */
 .tab-pane {
@@ -12037,9 +12102,6 @@ code[class*=language-], pre[class*=language-] {
 }
 .search-result .search-result-title {
   margin-bottom: 10px; 
-}
-.search-result .search-result-item .card-body {
-  padding: 20px;
 }
 .search-result .search-result-item {
   cursor: pointer;
@@ -12061,7 +12123,7 @@ code[class*=language-], pre[class*=language-] {
 .no-search-result .no-search-result-title {
   margin-bottom: 15px;
 }
-.no-search-result .no-search-result-item .card-body {
+.no-search-result .no-search-result-item .blockquote-footer {
   font-size: 15px;
   padding: 25px;
 }

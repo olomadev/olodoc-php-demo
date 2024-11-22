@@ -635,7 +635,9 @@ class CompanySave
 <pre data-user="root" data-host="localhost" data-output="&quot;4&quot;&gt;"><code class="language-bash no-line-numbers command-line">cd /var/www/demo
 composer swagger</code></pre>
 <p>When this command is run, swagger creates the documentation by combining all schemas in the <kbd>/example.com/public/swagger/web/swagger.json</kbd> file.</p>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">To keep the schema files and documentation up to date, you must re-run this command from the console whenever you make any changes to your schema files.</div>
+<blockquote>
+<p>To keep the schema files and documentation up to date, you must re-run this command from the console whenever you make any changes to your schema files.</p>
+</blockquote>
 <p>In fact, this command calls the following command defined in the script section of your composer file.</p>
 <pre><code class="language-bash">&gt; vendor/bin/openapi /var/www/demo -e vendor -o public/swagger/web/swagger.json</code></pre>
 <p>So the <kbd>composer swagger</kbd> command acts as a shortcut for the long post above.</p>

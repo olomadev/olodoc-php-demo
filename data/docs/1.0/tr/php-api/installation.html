@@ -16,11 +16,13 @@
 <pre><code class="language-sh">/var/www/example-php$ composer install</code></pre>
 <p><b>/data/tmp</b> önbellek klasörü için 777 iznini verin.</p>
 <pre><code class="language-sh">chmod 777 -R /var/www/example-php/data/tmp</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Genel olarak, <b>önbellek</b> dizinin izinlerini <b>755</b>'e ve içindeki dosyaların izinlerini <b>644</b>'e ayarlamayı denemenizi öneririz. Kesinlikle daha yüksek izinler kullanmanız gerekiyorsa, önbellek dizini için <b>777</b> ve dosyalar için <b>666</b> kullanmayı deneyin. Normal dosyaların izinlerini <b>777</b> olarak ayarlamaktan kaçının.</div>
+<blockquote>
+<p>Genel olarak, <b>önbellek</b> dizinin izinlerini <b>755</b>'e ve içindeki dosyaların izinlerini <b>644</b>'e ayarlamayı denemenizi öneririz. Kesinlikle daha yüksek izinler kullanmanız gerekiyorsa, önbellek dizini için <b>777</b> ve dosyalar için <b>666</b> kullanmayı deneyin. Normal dosyaların izinlerini <b>777</b> olarak ayarlamaktan kaçının.</p>
+</blockquote>
 <h3>Mezzio Hakkında</h3>
 <p>Olobase, arka uçta <a href="https://docs.mezzio.dev/mezzio/" target="_blank">Mezzio Çerçevesini</a> kullanır. Mezzio framework'ü hakkında daha detaylı bilgi almak isterseniz aşağıdaki kaynaklara göz atabilirsiniz.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <tr>
         <th>Kaynak</th>
         <th>Url</th>
@@ -36,7 +38,7 @@
         <td><a href="https://matthewsetter.com/how-to-create-a-mezzio-application/" target="_blank">https://matthewsetter.com/how-to-create-a-mezzio-application/</a></td>
         <td>Mezzio'nun yaratıcısı tarafından yazılmış ve Mezzio kurulumu hakkında geniş bilgi içeren blog adresi</td>
     </tr>
-</table>
+</table></div>
 </div>
 <h3>Apache2 Konfigürasyonu</h3>
 <p>Apache mod_rewrite eklentisini etkileştirin.</p>

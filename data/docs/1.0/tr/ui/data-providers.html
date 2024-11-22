@@ -47,7 +47,7 @@ await provider.delete("books", { id: book.id });</code></pre></div>
 }</code></pre>
 <h3>Desteklenen API Operasyon Metotları</h3>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <tr>
     <td><b>getList</b></td>
     <td>
@@ -74,7 +74,7 @@ await provider.delete("books", { id: book.id });</code></pre></div>
     <td><b>delete</b></td>
     <td><kbd>VADeleteButton</kbd> ile etkileşim kurulurken çağrılan basit silme eylemidir.</td>
   </tr>
-</table>
+</table></div>
 </div>
 <h3>Bir Veri Sağlayıcının Ayarlanması</h3>
 <p>Veri sağlayıcıların kullanımı oldukça basitdir. İlk <kbd>constructor</kbd> argümanı olarak basit bir API URL'sini veya seçtiğiniz özel bir HTTP istemcisini alabilirler. Bazı başlıkları tüm yönetici uygulamasında paylaşmanız gerekiyorsa tam nesneyi kullanın; özellikle kimlik doğrulamayla ilgili başlıklar için kullanışlıdır.</p>
@@ -135,7 +135,7 @@ Daha önce bahsedildiği gibi her sağlayıcı yöntemi 2 argüman alır:</p>
 <h3>Method Çağrı İmzaları</h3>
 <p>Aşağıdaki tablo, her sağlayıcı yöntemi için ikinci parametrede hangi parametrelerin gönderilebileciğini listeler.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <thead>
     <tr>
       <th>Metot</th>
@@ -208,7 +208,7 @@ Daha önce bahsedildiği gibi her sağlayıcı yöntemi 2 argüman alır:</p>
       <td>{ data: Resource }</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 </div>
 <p>Her kaynak deposu modülündeki Olobase Admin'in bazı geçerli çağrı örnekleri:</p>
 <pre><code class="language-js">dataProvider.getList("books", {
@@ -243,7 +243,7 @@ dataProvider.deleteMany("books", { ids: [1, 2, 3] });</code></pre>
 }</code></pre>
 <p>Beklenen hata nesnesi formatı:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <tr>
     <th>Anahtar</th>
     <th>Tür</th>
@@ -264,7 +264,7 @@ dataProvider.deleteMany("books", { ids: [1, 2, 3] });</code></pre>
     <td>array</td>
     <td>İstemci tarafı doğrulama desteği için sunucu tarafından gönderilen hata nesneleri</td>
   </tr>
-</table>
+</table></div>
 </div>
 <h3>Store</h3>
 <p>Özel <b>CRUD</b> sayfalarınızdaki veya kimliği doğrulanmış herhangi bir özel sayfanızdaki her kaynak için tüm veri sağlayıcı yöntemlerini doğrudan <b>Vuex</b> mağazasından kullanabilirsiniz. Biri mapActions <b>Vuex</b> yardımcısıyla, diğeri ise gönderimi kullanabileceğiniz global <b>$store</b> örneğiyle olmak üzere 2 farklı yönteminiz var. </p>

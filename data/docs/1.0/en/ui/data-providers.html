@@ -47,7 +47,7 @@ await provider.delete("books", { id: book.id });</code></pre></div>
 }</code></pre>
 <h3>Supported API Operation Methods</h3>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <tr>
     <td><b>getList</b></td>
     <td>
@@ -74,7 +74,7 @@ await provider.delete("books", { id: book.id });</code></pre></div>
     <td><b>delete</b></td>
     <td>Simple delete action called when interacting with <kbd>Delete Button</kbd>.</td>
   </tr>
-</table>
+</table></div>
 </div>
 <h3>Setting Up a Data Provider</h3>
 <p>Data providers are very simple to use. They can take a simple API URL or a custom HTTP client of your choice as the first <kbd>constructor</kbd> argument. If you need to share some headers throughout the admin application, use the full object; It's especially useful for authentication-related topics.</p>
@@ -135,7 +135,7 @@ As mentioned before each provider method takes 2 arguments:</p>
 <h3>Method Call Signatures</h3>
 <p>The following table lists which parameters can be sent in the second parameter for each provider method.</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <thead>
     <tr>
       <th>Method</th>
@@ -208,7 +208,7 @@ As mentioned before each provider method takes 2 arguments:</p>
       <td>{ data: Resource }</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 </div>
 <p>Here are some valid examples of calls to Olobase Admin in each resource repository module:</p>
 <pre><code class="language-js">dataProvider.getList("books", {
@@ -243,7 +243,7 @@ dataProvider.deleteMany("books", { ids: [1, 2, 3] });</code></pre>
 }</code></pre>
 <p>Expected error object format:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
   <tr>
     <th>Key</th>
     <th>Type</th>
@@ -264,7 +264,7 @@ dataProvider.deleteMany("books", { ids: [1, 2, 3] });</code></pre>
     <td>array</td>
     <td>Error objects sent by the server for client-side validation support</td>
   </tr>
-</table>
+</table></div>
 </div>
 <h3>Store</h3>
 <p>You can use all data provider methods for each resource in your custom <b>CRUD</b> pages or any authenticated custom page directly from the <b>Vuex</b> store. You have 2 different methods, one with the mapActions <b>Vuex</b> helper and the other with the global <b>$store</b> instance where you can use dispatch.</p>

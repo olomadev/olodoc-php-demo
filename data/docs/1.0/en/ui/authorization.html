@@ -1,7 +1,9 @@
 <h2>Authorization</h2>
 <p>In many admin panel applications, you will need users with different roles or permissions to restrict some areas. Olobase Admin supports this feature at several levels.</p>
 <h3>Backend Priority</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">What is meant here by authorization is; It is only about displaying or hiding links, actions, UI components. You should always consider that any user can fully access the user interface if they are an Admin administrator. The entire user interface can also be unlocked by typing some javascript commands into the browser console. Therefore, you should always prioritize security of permissions on the backend before any UI concerns.</div>
+<blockquote>
+<p>What is meant here by authorization is; It is only about displaying or hiding links, actions, UI components. You should always consider that any user can fully access the user interface if they are an Admin administrator. The entire user interface can also be unlocked by typing some javascript commands into the browser console. Therefore, you should always prioritize security of permissions on the backend before any UI concerns.</p>
+</blockquote>
 <h3>Get User Permissions</h3>
 <p>It is recommended that you review the relevant <a href="/ui/authentication.html">authentication</a> section of this guide before continuing. The said section contains everything you need to know about user authentication and retrieving user information.</p>
 <p>As you see in the authentication guide, each authentication provider must implement a specific <b>getPermissions()</b> method. This role obtains permissions from a valid user object returned by the API via the <b>checkAuth()</b> provider method. These permissions are returned as an <b>array</b> array. Permissions can be anything you want, from a low-level special permission like <kbd>create_book</kbd> to a more general role as <kbd>editor</kbd>. It's up to you to find the appropriate level of detail you need. For example, general role-based <kbd>[&quot;editor&quot;, &quot;author&quot;]</kbd> or more granular permission-based <kbd>[&quot;list_author&quot;, &quot;show_author&quot;, &quot;list_book&quot;, &quot;show_book&quot;, &quot;create_book&quot;]</kbd> we can imagine like.</p>
@@ -28,7 +30,7 @@
 <p>In case the resource permission API above is not enough for you, you can still pass a specific <kbd>canAction</kbd> function to the Olobase Admin options; This gives you more control for permission action filtering. It is executed on every resource link (if you are using admin.getResourceLink or admin.getResourceLinks) or on any resource CRUD action key to know whether it should be active based on user permissions.</p>
 <p>This customizable function takes a <kbd>params</kbd> object with 3 properties:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
     <tr>
         <th>Argument</th>
         <th>Description</th>
@@ -45,7 +47,7 @@
         <td><b>can</b></td>
         <td>A helper function that provides the ability to obtain permission directly from the authenticated user</td>
     </tr>
-</table>
+</table></div>
 </div>
 <p><kbd>src/plugins/admin.js</kbd></p>
 <pre data-line="11"><code class="language-js line-numbers">import OlobaseAdmin from "olobase-admin";

@@ -60,7 +60,7 @@ export default {
 };
 jwtAuthProvider(http, params);</code></pre>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Option</th>
@@ -97,7 +97,7 @@ jwtAuthProvider(http, params);</code></pre>
          <td>The function that returns the roles of the current user is by default: <code>permissions</code>.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>Authentication with JWT (Default)</h3>
 <p>With this provider, a simple bearer token will be added to the Authorization header for each subsequent XHR request. The JWT will be stored within <b>cookies</b> under a configurable key. While the <kbd>/api/auth/token</kbd> route is used when creating the token, the specific <kbd>/api/auth/refresh</kbd> route is used for the auto-refresh token once the token expires, which can be set from the configuration.</p>
@@ -395,10 +395,14 @@ export default {
 &lt;/script&gt;</code></pre></div>
 </div>
 </div>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">When Olobase Admin form elements are used on pages other than CRUD operations, the name of the relevant resource must be entered in the <b>resource</b> attribute for tag translation operations, as seen above, since the resource is unknown, unlike CRUD numbers. Otherwise, the translation process for the element will not occur.</div>
+<blockquote>
+<p>When Olobase Admin form elements are used on pages other than CRUD operations, the name of the relevant resource must be entered in the <b>resource</b> attribute for tag translation operations, as seen above, since the resource is unknown, unlike CRUD numbers. Otherwise, the translation process for the element will not occur.</p>
+</blockquote>
 <h3>Authentication with checkAuth()</h3>
 <p>After successful account update, you can refresh the new user information in the Vuex store by calling <b>checkAuth()</b> from your authentication provider method and obtain the user's information with this function.</p>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">This function is called automatically with every navigation/page change.</div>
+<blockquote>
+<p>This function is called automatically with every navigation/page change.</p>
+</blockquote>
 <pre><code class="language-js">export default {
   methods: {
     ...mapActions({
@@ -446,7 +450,9 @@ export default {
 await this.checkAuth().then(function(response){
   console.error(response);  // { "user" : { "id" : "50767814-6c78-4b9e-b858-9ff18dbd531b", "fullname": "James Brown" } }
 })</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">If you want to show a status message after any action you can use the following code.</div>
+<blockquote>
+<p>If you want to show a status message after any action you can use the following code.</p>
+</blockquote>
 <pre><code class="language-js">this.admin.message('info', "This is an example info message");</code></pre>
 <p>For more detailed information about messages, visit the <a href="/ui/messages.html">messages</a> section.</p>
 <h3>Writing Your Own Authentication Provider</h3>
@@ -465,7 +471,7 @@ await this.checkAuth().then(function(response){
 }</code></pre>
 <p>All of these methods can be explained as follows:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Operation</th>
@@ -502,5 +508,5 @@ await this.checkAuth().then(function(response){
          <td>Return the roles/permissions for the authenticated user. Used for <a href="/ui/authorization.html">Authorization System</a>.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>

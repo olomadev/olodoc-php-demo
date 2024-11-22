@@ -15,10 +15,12 @@ return [
     'Previous' => 'Previous',
     'Next' => 'Next',
 
-    // Auhentication
-    // 
-    'Authentication error: Signature verification failed' => 'Authentication error: Signature verification failed. Please clear your browser cache and login again.',
-    'User not found' => 'No user registered to the system with this username was found. Please first open a new account by clicking the following link. If you are a developer, ask the main account holder to open an account for you. <a href="https://oloma.dev/subscribe">https://oloma.dev/subscribe</a>',
+    // Alerts
+    'Note' => 'Note',
+    'Tip' => 'Tip',
+    'Important' => 'Important',
+    'Warning' => 'Warning',
+    'Caution' => 'Caution',
 
     // Validators
     // 

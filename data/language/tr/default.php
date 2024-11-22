@@ -15,6 +15,13 @@ return [
     'Previous' => 'Önceki',
     'Next' => 'Sonraki',
 
+    // Alerts
+    'Note' => 'Not',
+    'Tip' => 'İpucu',
+    'Important' => 'Önemli',
+    'Warning' => 'Uyarı',
+    'Caution' => 'Dikkat',
+
     // Auhentication
     // 
     'Authentication error: Signature verification failed' => 'Kimlik doğrulama hatası: İmza doğrulaması başarısız oldu. Lütfen tarayıcınızın önbelleğini temizleyin ve tekrar giriş yapın.',

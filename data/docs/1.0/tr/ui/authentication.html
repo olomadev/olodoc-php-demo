@@ -61,7 +61,7 @@ export default {
 };
 jwtAuthProvider(http, params);</code></pre>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Seçenek</th>
@@ -98,7 +98,7 @@ jwtAuthProvider(http, params);</code></pre>
          <td>Geçerli kullanıcının rollerini döndüren işlev, varsayılan olarak şu şekildedir: <code>permissions</code></td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <h3>JWT ile Kimlik Doğrulama (Varsayılan)</h3>
 <p>Bu sağlayıcıyla, sonraki her XHR isteği için Yetkilendirme başlığına basit bir taşıyıcı jeton eklenecektir. JWT, yapılandırılabilir bir anahtar altında <b>çerezler</b> içinde saklanacaktır. Jeton yaratılırken <kbd>/api/auth/token</kbd> rotası kullanılırken, konfigürasyondan ayarlanabilen jeton süresi bittiğinde otomatik yenileme jetonu için belirli <kbd>/api/auth/refresh</kbd> rotası kullanılır.</p>
@@ -396,10 +396,14 @@ export default {
 &lt;/script&gt;</code></pre></div>
 </div>
 </div>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">CRUD işlemlerinin dışında kalan sayfalarda Olobase Admin form elementleri kullanıldığında CRUD saylarından farklı olarak kaynak bilinmediğinden etiket çevirme işlemleri için yukarıda görüldüğü gibi <b>resource</b> niteliğine ilgili kaynağın adı girilmelidir. Aksi durumda elemente ait çeviri işlemi gerçekleşmez.</div>
+<blockquote>
+<p>CRUD işlemlerinin dışında kalan sayfalarda Olobase Admin form elementleri kullanıldığında CRUD saylarından farklı olarak kaynak bilinmediğinden etiket çevirme işlemleri için yukarıda görüldüğü gibi <b>resource</b> niteliğine ilgili kaynağın adı girilmelidir. Aksi durumda elemente ait çeviri işlemi gerçekleşmez.</p>
+</blockquote>
 <h3>checkAuth() ile Kimlik Doğrulama</h3>
 <p>Başarılı hesap güncellemesinden sonra, kimlik doğrulama sağlayıcı yönteminizden <b>checkAuth()</b>'u geri çağırarak yeni kullanıcı bilgilerini Vuex mağazasında yenileyebilir ve kullanıcıya ait bilgileri bu fonksiyon elde edebilirsiniz. </p>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">This function is called automatically with every navigation/page change.</div>
+<blockquote>
+<p>This function is called automatically with every navigation/page change.</p>
+</blockquote>
 <pre><code class="language-js">export default {
   methods: {
     ...mapActions({
@@ -447,7 +451,9 @@ export default {
 await this.checkAuth().then(function(response){
   console.error(response);  // { "user" : { "id" : "50767814-6c78-4b9e-b858-9ff18dbd531b", "fullname": "James Brown" } }
 })</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Herhangi bir işlemden sonra bir durum mesajı göstermek istiyorsanız aşağıdaki kodu kullanabilirsiniz.</div>
+<blockquote>
+<p>Herhangi bir işlemden sonra bir durum mesajı göstermek istiyorsanız aşağıdaki kodu kullanabilirsiniz.</p>
+</blockquote>
 <pre><code class="language-js">this.admin.message('info', "This is an example info message");</code></pre>
 <p>Mesajlar hakkında daha detaylı bilgi için <a href="/ui/messages.html">mesajlar</a> bölümünü ziyaret edin.</p>
 <h3>Kendi Kimlik Doğrulama Sağlayıcınızı Yazmak</h3>
@@ -466,7 +472,7 @@ await this.checkAuth().then(function(response){
 }</code></pre>
 <p>Bu yöntemlerin tümü şu şekilde açıklanabilir:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Operasyon</th>
@@ -503,5 +509,5 @@ await this.checkAuth().then(function(response){
          <td>Kimliği doğrulanmış kullanıcıya  ait izinleri döndürün. <a href="/ui/authorization.html">Yetkilendirme Sistemi</a> için kullanılır.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>

@@ -99,7 +99,9 @@ export default {
   numberFormats,
   datetimeFormats,
 });</code></pre>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Tüm yerel ayarlar, varsayılan olarak <kbd>src/18n/locales/</kbd> dizininde, dile göre bir JSON dosyası içerisinde depolanır.</div>
+<blockquote>
+<p>Tüm yerel ayarlar, varsayılan olarak <kbd>src/18n/locales/</kbd> dizininde, dile göre bir JSON dosyası içerisinde depolanır.</p>
+</blockquote>
 <pre><code class="language-html">├── src
 │   ├── i18n
 │   │   ├── locales
@@ -160,7 +162,7 @@ export default createVuetify({
 <p>Bu kodu en aza indirmek için Olobase Admin, basit bir adlandırma kuralını izleyerek kaynak veya <b>source</b> adından hedef çeviri anahtarını tahmin etmeye çalışacaktır. Olobase Admin, seçim, radyo düğmesi vb. gibi tüm seçim tabanlı alan veya giriş bileşenleri için kullanılabilecek yerelleştirilmiş numaralandırmaları bile destekler. Yerelleştirilmiş kaynağa özel tüm etiketlerin, ana kaynaklar anahtarının altına varsayılan olarak <kbd>src/locales/{locale}.json</kbd> olan kendi i18n json yerel ayarınıza eklenmesi gerekir. Kaynaklar altındaki her çeviri anahtarı, <kbd>src/resources/index.js</kbd> dosyasında ayarlanan geçerli kaynak adlarıyla eşleşmelidir.</p>
 <p>Daha sonra dil ayarlarınıza aşağıdaki desteklenen anahtarları koyabilirsiniz:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Anahtar</th>
@@ -185,11 +187,11 @@ export default createVuetify({
          <td>Kaynak özelliği için yerelleştirilmiş numaralandırmalar; her numaralandırma, anahtarın hedeflenen özelliğin geçerli bir değerine karşılık gelmesi gereken bir anahtar-değer çifti dizisidir.</td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <p>Her kaynak etiketi türü için uymanız gereken adlandırma çeviri anahtarları formatı aşağıda verilmiştir:</p>
 <div class="table-responsive">
-<table class="table">
+<div class="table-responsive"><table  class="table">
    <thead>
       <tr>
          <th>Anahtar</th>
@@ -219,7 +221,7 @@ export default createVuetify({
          <td><code>resources.users.enums.roles</code></td>
       </tr>
    </tbody>
-</table>
+</table></div>
 </div>
 <p>İşte bir <kbd>users</kbd> modülü ve <kbd>en</kbd> yereline ait bir örnek:</p>
 <p><kbd>src/locales/en.json</kbd></p>
@@ -256,9 +258,13 @@ export default createVuetify({
   }
 }</code></pre>
 <h3>Tekil ve Çoğul</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Kaynak adınız bir çizgiyle ayrılmış hem tekil hem de çoğul biçimlere sahip olmalıdır. Olobase Admin bağlama göre doğru formatı seçecektir.</div>
+<blockquote>
+<p>Kaynak adınız bir çizgiyle ayrılmış hem tekil hem de çoğul biçimlere sahip olmalıdır. Olobase Admin bağlama göre doğru formatı seçecektir.</p>
+</blockquote>
 <h3>Varsayılan Olarak Uygulayın</h3>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">Birden fazla yerel ayarı destekleme niyetiniz olmasa bile, her zaman bu yöntemi kullanmalısınız.</div>
+<blockquote>
+<p>Birden fazla yerel ayarı destekleme niyetiniz olmasa bile, her zaman bu yöntemi kullanmalısınız.</p>
+</blockquote>
 <h3>Enumerik Değerler (enums)</h3>
 <p>Seçme veya radyo bileşenleri için işlevsel yerelleştirilmiş seçeneklere sahip olmak amacıyla, numaralandırma anahtarınızın bu bileşenin kaynak desteğiyle aynı şekilde adlandırılması gerekir.</p>
 <h3>Sayfa Başlıkları</h3>
