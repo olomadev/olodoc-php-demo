@@ -44,6 +44,7 @@
         "doctrine/annotations": "^1.13",
         "doctrine/orm": "^2.12",
         "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.8.1",
         "laminas/laminas-component-installer": "^3.3",
         "laminas/laminas-config-aggregator": "^1.7",
         "laminas/laminas-db": "^2.15",

@@ -1,10 +1,11 @@
 <?php
 $this->layout('layout::default');
-    
-$this->headTitle($meta['title']);
-$this->headMeta($meta['description'], "description");
-$this->headMeta($meta['keywords'], "keywords");
 
+if (! empty($meta['title'])) {
+    $this->headTitle($meta['title']);
+    $this->headMeta($meta['description'], "description");
+    $this->headMeta($meta['keywords'], "keywords");    
+}
 $this->placeholder('version')->set($version);
 $this->placeholder('pageJavascript')->set($pageJavascript);
 $this->placeholder('documentManager')->set($documentManager);

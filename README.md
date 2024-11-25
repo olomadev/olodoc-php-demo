@@ -5,21 +5,19 @@ Php demonstration for Olodoc with Mezzio Framework.
 
 ## Features
 
-* Dead Simple
-* Mark Down (.md) Parser
-* Multi Language Support
-* Code Highlighting with Prism Js
-* Unlimited Folder Support
-* Compatible with Bootstrap 5 Templating
-* Compatible with Boostrap 5 Tabs
-* Built in Document Search
-* Built in Anchor Generator
-* Base64 Encoded Image Rendering
-* Page Navigation Bars
-* Coded with PHP Coding Standarts
-* Config Provider for PHP Mezzio Framework
-* Built with Native Javascripts
-* Html Meta Tag Generation Support
-* Auto Sitemap.xml Builder for SEO
+* Easy to use
+* Supports mark down files
+* Multi-language support
+* Prism Js code highlighting
+* Unlimited folder creation
+* Compatible with Bootstrap 5 templating
+* Built-in document search
+* Internal anchor generator
+* Base64 encoded image processing
+* Navigation bars
+* Works with PHP Mezzio Framework
+* Built with native javascript
+* Html meta tag generation support
+* Automatic sitemap.xml generator for SEO
 
 For documentation visit this address <a href="https://olodoc.dev">https://olodoc.dev</a>.

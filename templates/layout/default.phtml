@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <?php echo $this->headLink().PHP_EOL; ?>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script type="module" crossorigin src="/assets/index-D_vYA1nk.js?v=1"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CYPCVw8l.css?v=10">
+  <script type="module" crossorigin src="/assets/index-Cvr9Cg4r.js?v=1"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-MLZPbzUm.css?v=13">
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -170,8 +170,10 @@
 <script src="/assets/js/prism/prism.js?v=4"></script>
 <!-- This fixes the line highlight wrong number hilite bug -->
 <script src="/assets/js/prism/prism-line-highlight.js?v=4"></script>
+<script src="/assets/js/anchor.min.js"></script>
 <script src="/assets/js/app.js?v=21"></script>
 <script type="text/javascript">     
+  anchors.add(); // The default instance.
   <?php
       if (! empty($this->placeholder('pageJavascript')[0])) {
             echo $this->placeholder('pageJavascript')[0];
