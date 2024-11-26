@@ -44,7 +44,11 @@ class DocumentHandler implements RequestHandlerInterface
         try {
             $pageGenerator = new PageGenerator($this->documentManager);
             $data = $pageGenerator->generate();
-        } catch (FileNotFoundException) {
+        } catch (FileNotFoundException $e) {
+            if (getenv("APP_ENV") == "local") {
+                echo $e->getMessage();
+                die;
+            }
             return new HtmlResponse(
                 $this->template->render('error::404'),
                 404

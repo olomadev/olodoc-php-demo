@@ -1,0 +1,44 @@
+<h1>Generating Docs</h1>
+<p>Olodoc creates your documents by converting your existing markdown files to html files. To convert documents to html files, enter the project root directory,</p>
+<pre data-user="root" data-host="local"><code class="language-sh command-line">cd /var/www/myproject</code></pre>
+<p>and run generate command in your command line.</p>
+<pre data-user="root" data-host="local"><code class="language-sh command-line">composer olodoc:generate</code></pre>
+<p>If everything went well you will get this message.</p>
+<p><img class="img-fluid" src="/images/cli-generate-command.png" alt="Cli Generate Command" /></p>
+<p>After that the generation all documentation files will be created in your <kbd>/data/docs/$version/$locale</kbd> folder.</p>
+<pre><code class="language-sh">- myproject
+  + bin
+  + config
+  - data
+    - docs
+        - 1.0
+            - en
+                index.html
+                index.md
+                installation.md
+                installation.html
+            + de
+  + public
+  + src
+  + templates
+  + vendor
+  .gitignore
+  composer.json
+  README.md</code></pre>
+<p>You can change your document generation folder from your olodoc <b>html_path</b> configuration.</p>
+<p><kbd>/config/autoload/local.php</kbd></p>
+<pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+use Laminas\ConfigAggregator\ConfigAggregator;
+
+return [
+    //
+    // olodoc
+    // 
+    'olodoc' =&gt; [
+        /*....*/
+        'html_path' =&gt; '/data/docs/', // save location for your ".html" document files
+        /*....*/
+    ],
+]</code></pre>

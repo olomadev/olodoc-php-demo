@@ -228,6 +228,36 @@ The rendered output looks like this:
 }
 ```
 
+## Line Numbers
+
+To show line numbers use below the format.
+
+> \```lang <b>[line-numbers]</b>
+
+Example:
+
+```sh
+\```php [line-numbers]
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app->route('/api/companies/create', $companies, ['POST']);
+\```
+```
+
+The rendered output looks like this:
+
+```php [line-numbers]
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app->route('/api/companies/create', $companies, ['POST']);
+```
+
 ### Marking Line Numbers
 
 To mark your line number use below the format.
@@ -258,7 +288,33 @@ $companies = [
 $app->route('/api/companies/create', $companies, ['POST']);
 ```
 
-### Command Line
+### Marking Multiple Line Numbers
+
+Example:
+
+```sh
+\```php [line-numbers] data-line="2,4"
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app->route('/api/companies/create', $companies, ['POST']);
+\```
+```
+
+The rendered output looks like this:
+
+```php [line-numbers] data-line="2,4"
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app->route('/api/companies/create', $companies, ['POST']);
+```
+
+## Command Line
 
 To mark your coding example is a command line use below the format.
 
@@ -268,14 +324,14 @@ Example:
 
 ```sh
 \```bash [command-line] data-user="root" data-host="localhost"
-git clone git@github.com:olomadev/olodoc-php-demo.git
+git clone git@github.com:olomadev/olodoc-skeleton.git
 \```
 ```
 
 The rendered output looks like this:
 
 ```bash [command-line] data-user="root" data-host="localhost"
-git clone git@github.com:olomadev/olodoc-php-demo.git
+git clone git@github.com:olomadev/olodoc-skeleton.git
 ```
 
 ## Alerts

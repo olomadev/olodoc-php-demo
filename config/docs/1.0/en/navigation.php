@@ -1,8 +1,7 @@
 <?php
-
+#
 # navigation
 # 
-
 return [
     [
         'label' => 'Introduction',
@@ -13,16 +12,12 @@ return [
         'url' => '/installation.html',
     ],
     [
-        'label' => 'Configuration',
-        'url' => '/configuration.html',
-    ],
-    [
         'label' => 'Generating Docs',
         'url' => '/generating-docs.html',
     ],
     [
-        'label' => 'I18n',
-        'url' => '/i18n.html',
+        'label' => 'Configuration',
+        'url' => '/configuration.html',
     ],
     [
         'label' => 'Markdown Guide',
@@ -56,6 +51,18 @@ return [
                 ]
             ],
         ]
+    ],
+    [
+        'label' => 'I18n',
+        'url' => '/i18n.html',
+    ],
+    [
+        'label' => 'Customizations',
+        'url' => '/customizations.html',
+    ],
+    [
+        'label' => 'Prism Js',
+        'url' => '/prism-js.html',
     ],
 ];
 

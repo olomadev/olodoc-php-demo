@@ -182,6 +182,27 @@ echo "Hello World !"
     },
     "expiresAt": "2022-08-03 11:58:22"
 }</code></pre>
+<h2>Line Numbers</h2>
+<p>To show line numbers use below the format.</p>
+<blockquote>
+<p>```lang <b>[line-numbers]</b></p>
+</blockquote>
+<p>Example:</p>
+<pre><code class="language-sh">```php [line-numbers]
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);
+```</code></pre>
+<p>The rendered output looks like this:</p>
+<pre><code class="language-php line-numbers">$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);</code></pre>
 <h3>Marking Line Numbers</h3>
 <p>To mark your line number use below the format.</p>
 <blockquote>
@@ -203,17 +224,34 @@ $app-&gt;route('/api/companies/create', $companies, ['POST']);
     App\Handler\Api\CompanyHandler::class
 ];
 $app-&gt;route('/api/companies/create', $companies, ['POST']);</code></pre>
-<h3>Command Line</h3>
+<h3>Marking Multiple Line Numbers</h3>
+<p>Example:</p>
+<pre><code class="language-sh">```php [line-numbers] data-line="2,4"
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);
+```</code></pre>
+<p>The rendered output looks like this:</p>
+<pre data-line="2,4"><code class="language-php line-numbers">$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);</code></pre>
+<h2>Command Line</h2>
 <p>To mark your coding example is a command line use below the format.</p>
 <blockquote>
 <p>```lang <b>[command-line] data-user=&quot;root&quot; data-host=&quot;localhost&quot;</b></p>
 </blockquote>
 <p>Example:</p>
 <pre><code class="language-sh">```bash [command-line] data-user="root" data-host="localhost"
-git clone git@github.com:olomadev/olodoc-php-demo.git
+git clone git@github.com:olomadev/olodoc-skeleton.git
 ```</code></pre>
 <p>The rendered output looks like this:</p>
-<pre data-user="root" data-host="localhost"><code class="language-bash command-line">git clone git@github.com:olomadev/olodoc-php-demo.git</code></pre>
+<pre data-user="root" data-host="localhost"><code class="language-bash command-line">git clone git@github.com:olomadev/olodoc-skeleton.git</code></pre>
 <h2>Alerts</h2>
 <p>Alerts are a custom Markdown extension based on the blockquote syntax that you can use to emphasize critical information. To show yours users to alerts use below the format.</p>
 <blockquote>

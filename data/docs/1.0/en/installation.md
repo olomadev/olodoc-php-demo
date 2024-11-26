@@ -5,7 +5,7 @@ To install the olodoc app, the <b>Php</b> and composer package must be installed
 
 ### Requirements
 
-Only <b>Php 7</b> and above are supported.
+Only <b>Php 7.4</b> and above versions are supported.
 
 Follow the steps below to create an Olodoc project.
 
@@ -25,10 +25,12 @@ Install composer packages
 /var/www/myproject$ composer install
 ```
 
-Give 777 permision for <b>/data/tmp</b> cache folder.
+Give 777 permision for <b>/data/tmp</b>, <b>/data/docs</b> folders and <b>sitemap.xml</b> file.
 
 ```sh
 chmod 777 -R /var/www/myproject/data/tmp
+chmod 777 -R /var/www/myproject/data/docs
+chmod 777 /var/www/myproject/public/sitemap.xml
 ```
 
 > [!CAUTION]
@@ -178,10 +180,12 @@ If you works on a Linux Virtual Machine under the Windows OS you must define a h
 
 To work in a local environment, 
 
-Copy the <kbd>local.php.dist</kbd> file in the <kbd>/config/autoload/</kbd> folder in your project and save it with the name <kbd>local.php</kbd>.
+1. Copy your <b>local.php.dist</b> file and save it as <b>local.php</b> to your <b>/config/autoload/</b> folder.
+2. Update your <b>base_url</b> which shown below at line number 32.
+3. Update your <b>root_path</b> which shown below at line number 35.
 
 
-```php
+```php [line-numbers] data-line="32,35"
 <?php
 /**
  * Development-only configuration.

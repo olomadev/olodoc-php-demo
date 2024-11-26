@@ -1,0 +1,126 @@
+<h1>Configuration</h1>
+<p>Olodoc creates your documents by converting your existing markdown files. Before start to read configuration section make sure you have some <b>.md</b> files in your <kbd>/data/docs/$version/$locale</kbd> folder.</p>
+<pre><code class="language-sh">- myproject
+  + bin
+  + config
+  - data
+    - docs
+        - 1.0
+            - en
+                index.md
+                installation.md
+            + de</code></pre>
+<h2>Your First Directory Tree</h2>
+<p>Your directory tree configuration file <b>navigation.php</b> is located in <kbd>/config/docs/$version/$locale/</kbd> folder.</p>
+<pre><code class="language-sh">- myproject
+  + bin
+  - config
+    - docs
+        - 1.0
+            - en
+                navigation.php
+            + de</code></pre>
+<p>Open your <b>navigation.php</b> file and create your first simple navigation.</p>
+<pre><code class="language-php">#
+# navigation
+# 
+return [
+    [
+        'label' =&gt; 'Introduction',
+        'url' =&gt; '/index.html',
+    ],
+    [
+        'label' =&gt; 'Installation',
+        'url' =&gt; '/installation.html',
+    ],
+]</code></pre>
+<p>Run generate command</p>
+<pre data-user="root" data-host="local"><code class="language-sh command-line">composer olodoc:generate</code></pre>
+<p>If everything went well your <b>.html</b> files will look at like below.</p>
+<pre><code class="language-sh">- myproject
+  + bin
+  + config
+  - data
+    - docs
+        - 1.0
+            - en
+                index.md
+                index.html
+                installation.md
+                installation.html
+            + de</code></pre>
+<h2>Creating Folders</h2>
+<p>Olodoc has unlimited subfolder support but you need to physically create the folders first and also define the folders in your navigation.php file.</p>
+<p>To create a new folder:</p>
+<ol>
+<li>Create a folder in your <strong>data/docs/en/</strong> folder. (In this example we created a folder named <strong>markdown-guide</strong>)</li>
+<li>Open your navigation.php file and paste below the configuration.</li>
+</ol>
+<pre data-line="16,17"><code class="language-php line-numbers">#
+# navigation
+# 
+return [
+    [
+        'label' =&gt; 'Introduction',
+        'url' =&gt; '/index.html',
+    ],
+    [
+        'label' =&gt; 'Installation',
+        'url' =&gt; '/installation.html',
+    ],
+    [
+        'label' =&gt; 'Markdown Guide',
+        'url' =&gt; '/markdown-guide/index.html',
+        'folder' =&gt; '/markdown-guide',  // specify folder path
+        'children' =&gt; [                 // put your pages here into the children array
+            [
+                'label' =&gt; 'Markdown Guide',
+                'url' =&gt; '/markdown-guide/index.html',  
+            ],
+        ]
+    ],
+]</code></pre>
+<p>Every folder configuration needs to has <b>folder</b> and <b>children</b> key.The <b>&quot;folder&quot;</b> key points your folder path and <b>&quot;children&quot;</b> key contains of your markdown pages.</p>
+<h2>Creating Sub Folders</h2>
+<p>Every sub folder configuration needs to has <b>folder</b> and <b>children</b> key under the <b>parent</b> folder <b>children</b> key.</p>
+<p>Also, the path and url value of the subfolder must include the parent folder name as follows.</p>
+<pre><code class="language-php">'folder' =&gt; '/markdown-guide/basic-syntax',
+'url' =&gt; '/markdown-guide/basic-syntax/index.html',</code></pre>
+<p>In this example we created a sub folder called <b>basic-syntax</b> under the <b>markdown-guide</b> parent folder.</p>
+<pre data-line="25,26"><code class="language-php line-numbers">&lt;?php
+#
+# navigation
+# 
+return [
+    [
+        'label' =&gt; 'Introduction',
+        'url' =&gt; '/index.html',
+    ],
+    [
+        'label' =&gt; 'Installation',
+        'url' =&gt; '/installation.html',
+    ],
+    [
+        'label' =&gt; 'Markdown Guide',
+        'url' =&gt; '/markdown-guide/index.html',
+        'folder' =&gt; '/markdown-guide',
+        'children' =&gt; [
+            [
+                'label' =&gt; 'Markdown Guide',
+                'url' =&gt; '/markdown-guide/index.html',
+            ],
+            [
+                'label' =&gt; 'Basic Syntax',
+                'folder' =&gt; '/markdown-guide/basic-syntax',
+                'url' =&gt; '/markdown-guide/basic-syntax/index.html',
+                'children' =&gt; [
+                    [
+                        'label' =&gt; 'Basic Syntax',
+                        'url' =&gt; '/markdown-guide/basic-syntax/index.html'
+                    ],
+                ]
+            ],
+        ]
+    ],
+];
+</code></pre>

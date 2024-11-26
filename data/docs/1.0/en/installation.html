@@ -1,15 +1,17 @@
 <h2>Setup</h2>
 <p>To install the olodoc app, the <b>Php</b> and composer package must be installed on your computer.</p>
 <h3>Requirements</h3>
-<p>Only <b>Php 7</b> and above are supported.</p>
+<p>Only <b>Php 7.4</b> and above versions are supported.</p>
 <p>Follow the steps below to create an Olodoc project.</p>
 <pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">git clone git@github.com:olomadev/olodoc-skelethon myproject</code></pre>
 <p>Go to your project root</p>
 <pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">cd /var/www/myproject</code></pre>
 <p>Install composer packages</p>
 <pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">/var/www/myproject$ composer install</code></pre>
-<p>Give 777 permision for <b>/data/tmp</b> cache folder.</p>
-<pre><code class="language-sh">chmod 777 -R /var/www/myproject/data/tmp</code></pre>
+<p>Give 777 permision for <b>/data/tmp</b>, <b>/data/docs</b> folders and <b>sitemap.xml</b> file.</p>
+<pre><code class="language-sh">chmod 777 -R /var/www/myproject/data/tmp
+chmod 777 -R /var/www/myproject/data/docs
+chmod 777 /var/www/myproject/public/sitemap.xml</code></pre>
 <div class="ghd-alert ghd-alert-caution"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M214-384q0 46 19.5 87.5T288-223q-1-5-1.5-10t-.5-10q0-27 10-50.5t27-42.5l107-120 107 120q17 20 27 43.5t10 49.5q0 5-.5 10.5T572-222q35-29 54.5-71.5T646-384q0-51-17.5-100.5T578-576q-17 11-35.5 17t-40.5 6q-52 0-91.5-32T361-668q-36 33-63 67.5T252-530q-19 36-28.5 73t-9.5 73Zm216 36-53 60q-9 11-14 22.5t-5 25.5q0 30 21 51t51 21q30 0 51-21t21-51q0-14-5-26t-14-22l-53-60Zm0-468v119q0 30 21 51t51 21q17 0 31.5-7t24.5-20l16-20q64 38 104 118.5T718-384q0 120-84 204T430-96q-120 0-204-84t-84-204q0-112 76-226.5T430-816Zm398 312q-15 0-25.5-10.5T792-540q0-15 10.5-25.5T828-576q15 0 25.5 10.5T864-540q0 15-10.5 25.5T828-504Zm-36-120v-192h72v192h-72Z"/></svg>Caution</p><p class="ghd-alert-body">
 In general, we'd advise you to try setting the permissions of the <b>cache/</b> directory to <b>755</b> and the files inside it - to <b>644</b>. If you absolutely must use higher permissions, try using <b>777</b> for the <b>cache/</b> directory and <b>666</b> for the files in it. Avoid setting the permissions of regular files to <b>777</b>.</p>
 </div>
@@ -111,8 +113,12 @@ RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]</code></pre>
   192.168.231.130 en.example.local</code></pre>
 <h3>Local Environment Configuration</h3>
 <p>To work in a local environment, </p>
-<p>Copy the <kbd>local.php.dist</kbd> file in the <kbd>/config/autoload/</kbd> folder in your project and save it with the name <kbd>local.php</kbd>.</p>
-<pre><code class="language-php">&lt;?php
+<ol>
+<li>Copy your <b>local.php.dist</b> file and save it as <b>local.php</b> to your <b>/config/autoload/</b> folder.</li>
+<li>Update your <b>base_url</b> which shown below at line number 32.</li>
+<li>Update your <b>root_path</b> which shown below at line number 35.</li>
+</ol>
+<pre data-line="32,35"><code class="language-php line-numbers">&lt;?php
 /**
  * Development-only configuration.
  *
