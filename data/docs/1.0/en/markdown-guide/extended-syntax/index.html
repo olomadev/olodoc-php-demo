@@ -1,0 +1,331 @@
+<h1>Extended Syntax</h1>
+<p>The basic syntax outlined in the original Markdown design document includes many elements needed in everyday life, but for some people it was not enough. This is where the extended syntax comes in.</p>
+<p>Many people and organizations have undertaken to extend the basic syntax by adding additional elements such as tables, alerts, code blocks, syntax highlighting, tabs etc.</p>
+<h2>Tables</h2>
+<p>To create stylish html tables you should use <b>boostrap</b> css names in the html table code class attribute.</p>
+<h3>Basic Table</h3>
+<p>Basic table example:</p>
+<pre><code class="language-html">&lt;table class="table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Syntax&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Header&lt;/td&gt;
+      &lt;td&gt;Title&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Paragraph&lt;/td&gt;
+      &lt;td&gt;Text&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="table-responsive"><table  class="table">
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Header</td>
+      <td>Title</td>
+    </tr>
+    <tr>
+      <td>Paragraph</td>
+      <td>Text</td>
+    </tr>
+  </tbody>
+</table></div>
+<h3>Bordered Table</h3>
+<p>Bordered table example:</p>
+<pre><code class="language-html">&lt;table class="table table-bordered"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Syntax&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Header&lt;/td&gt;
+      &lt;td&gt;Title&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Paragraph&lt;/td&gt;
+      &lt;td&gt;Text&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="table-responsive"><table  class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Header</td>
+      <td>Title</td>
+    </tr>
+    <tr>
+      <td>Paragraph</td>
+      <td>Text</td>
+    </tr>
+  </tbody>
+</table></div>
+<h3>Highlighted Table</h3>
+<pre><code class="language-html">&lt;table class="table table-bordered"&gt;
+  &lt;thead class="table-light"&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Syntax&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Header&lt;/td&gt;
+      &lt;td&gt;Title&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Paragraph&lt;/td&gt;
+      &lt;td&gt;Text&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="table-responsive"><table  class="table table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th>Syntax</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Header</td>
+      <td>Title</td>
+    </tr>
+    <tr>
+      <td>Paragraph</td>
+      <td>Text</td>
+    </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>You can find more examples at <a href="https://getbootstrap.com/docs/5.3/content/tables/"><a href="https://getbootstrap.com/docs/5.3/content/tables/">https://getbootstrap.com/docs/5.3/content/tables/</a></a>.</p>
+</blockquote>
+<h2>Code Higlighting</h2>
+<p>To denote a word or phrase as code, enclose it in 3 backticks (<kbd>```</kbd>).</p>
+<pre><code class="language-sh">```php
+echo "Hello World !"
+```</code></pre>
+<p>The rendered output looks like this:</p>
+<pre><code class="language-php">echo "Hello World !"</code></pre>
+<h3>Escaping Backticks</h3>
+<p>If the word or phrase you want to denote as code includes one or more backticks, you can escape it by enclosing the word or phrase in double backticks (``).</p>
+<div class="table-responsive"><table  class="table table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th>Markdown</th>
+      <th>HTML</th>
+      <th>Rendered Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>``Use `code` in your Markdown file.``</code></td>
+      <td><code>&lt;code&gt;Use `code` in your Markdown file.&lt;/code&gt;</code></td>
+      <td><code>Use `code` in your Markdown file.</code></td>
+    </tr>
+  </tbody>
+</table></div>
+<h3>Language Coloring</h3>
+<p>If you want the code you wrote to be colored in any language, specify the code in lower case letters immediately after the back tick like below the format.</p>
+<blockquote>
+<p>```<b>lang</b></p>
+</blockquote>
+<p>Example:</p>
+<pre><code class="language-sh">```json
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9........",
+    "user": {
+        "id": "21615870-4f89-4ab8-b91e-af6370a3089e",
+        "firstname": "Demo",
+        "lastname": "Admin",
+        "email": "demo@example.com",
+        "roles": [
+            "admin"
+        ]
+    },
+    "expiresAt": "2022-08-03 11:58:22"
+}
+```</code></pre>
+<p>The rendered output looks like this:</p>
+<pre><code class="language-json">{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9........",
+    "user": {
+        "id": "21615870-4f89-4ab8-b91e-af6370a3089e",
+        "firstname": "Demo",
+        "lastname": "Admin",
+        "email": "demo@example.com",
+        "roles": [
+            "admin"
+        ]
+    },
+    "expiresAt": "2022-08-03 11:58:22"
+}</code></pre>
+<h3>Marking Line Numbers</h3>
+<p>To mark your line number use below the format.</p>
+<blockquote>
+<p>```lang <b>[line-numbers] data-line=&quot;n&quot;</b></p>
+</blockquote>
+<p>Example:</p>
+<pre><code class="language-sh">```php [line-numbers] data-line="3"
+$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);
+```</code></pre>
+<p>The rendered output looks like this:</p>
+<pre data-line="3"><code class="language-php line-numbers">$companies = [
+    JwtAuthenticationMiddleware::class,
+    Mezzio\Authorization\AuthorizationMiddleware::class,
+    App\Handler\Api\CompanyHandler::class
+];
+$app-&gt;route('/api/companies/create', $companies, ['POST']);</code></pre>
+<h3>Command Line</h3>
+<p>To mark your coding example is a command line use below the format.</p>
+<blockquote>
+<p>```lang <b>[command-line] data-user=&quot;root&quot; data-host=&quot;localhost&quot;</b></p>
+</blockquote>
+<p>Example:</p>
+<pre><code class="language-sh">```bash [command-line] data-user="root" data-host="localhost"
+git clone git@github.com:olomadev/olodoc-php-demo.git
+```</code></pre>
+<p>The rendered output looks like this:</p>
+<pre data-user="root" data-host="localhost"><code class="language-bash command-line">git clone git@github.com:olomadev/olodoc-php-demo.git</code></pre>
+<h2>Alerts</h2>
+<p>Alerts are a custom Markdown extension based on the blockquote syntax that you can use to emphasize critical information. To show yours users to alerts use below the format.</p>
+<blockquote>
+<p>> [!TYPE]<br>
+> Message here !</p>
+</blockquote>
+<h3>Note</h3>
+<p>Example:</p>
+<pre><code>&gt; [!NOTE]
+&gt; Useful information that users should know, even when skimming content.</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="ghd-alert ghd-alert-note"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M479.79-288q15.21 0 25.71-10.29t10.5-25.5q0-15.21-10.29-25.71t-25.5-10.5q-15.21 0-25.71 10.29t-10.5 25.5q0 15.21 10.29 25.71t25.5 10.5ZM444-432h72v-240h-72v240Zm36.28 336Q401-96 331-126t-122.5-82.5Q156-261 126-330.96t-30-149.5Q96-560 126-629.5q30-69.5 82.5-122T330.96-834q69.96-30 149.5-30t149.04 30q69.5 30 122 82.5T834-629.28q30 69.73 30 149Q864-401 834-331t-82.5 122.5Q699-156 629.28-126q-69.73 30-149 30Zm-.28-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg>Note</p><p class="ghd-alert-body">
+Useful information that users should know, even when skimming content.</p>
+</div>
+<h3>Tip</h3>
+<p>Example:</p>
+<pre><code>&gt; [!TIP]
+&gt; Helpful advice for doing things better or more easily.</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="ghd-alert ghd-alert-tip"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M479.79-96Q450-96 429-117.15T408-168h144q0 30-21.21 51t-51 21ZM336-216v-72h288v72H336Zm-15-120q-62-38-95.5-102.5T192-576q0-120 84-204t204-84q120 0 204 84t84 204q0 73-33.5 137.5T639-336H321Zm23-72h272q38-31 59-75t21-93q0-90.33-62.77-153.16-62.77-62.84-153-62.84Q390-792 327-729.16 264-666.33 264-576q0 49 21 93t59 75Zm136 0Z"/></svg>Tip</p><p class="ghd-alert-body">
+Helpful advice for doing things better or more easily.</p>
+</div>
+<h3>Important</h3>
+<p>Example:</p>
+<pre><code>&gt; [!IMPORTANT]
+&gt; Key information users need to know to achieve their goal.</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="ghd-alert ghd-alert-important"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M479.79-360q15.21 0 25.71-10.29t10.5-25.5q0-15.21-10.29-25.71t-25.5-10.5q-15.21 0-25.71 10.29t-10.5 25.5q0 15.21 10.29 25.71t25.5 10.5ZM444-480h72v-264h-72v264ZM96-96v-696q0-29.7 21.15-50.85Q138.3-864 168-864h624q29.7 0 50.85 21.15Q864-821.7 864-792v480q0 29.7-21.15 50.85Q821.7-240 792-240H240L96-96Zm114-216h582v-480H168v522l42-42Zm-42 0v-480 480Z"/></svg>Important</p><p class="ghd-alert-body">
+Key information users need to know to achieve their goal.</p>
+</div>
+<h3>Warning</h3>
+<p>Example:</p>
+<pre><code>&gt; [!WARNING]
+&gt; Urgent info that needs immediate user attention to avoid problems.</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="ghd-alert ghd-alert-warning"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="m48-144 432-720 432 720H48Zm127-72h610L480-724 175-216Zm304.79-48q15.21 0 25.71-10.29t10.5-25.5q0-15.21-10.29-25.71t-25.5-10.5q-15.21 0-25.71 10.29t-10.5 25.5q0 15.21 10.29 25.71t25.5 10.5ZM444-384h72v-192h-72v192Zm36-86Z"/></svg>Warning</p><p class="ghd-alert-body">
+Urgent info that needs immediate user attention to avoid problems.</p>
+</div>
+<h3>Caution</h3>
+<p>Example:</p>
+<pre><code>&gt; [!CAUTION]
+&gt; Advises about risks or negative outcomes of certain actions.</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="ghd-alert ghd-alert-caution"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M214-384q0 46 19.5 87.5T288-223q-1-5-1.5-10t-.5-10q0-27 10-50.5t27-42.5l107-120 107 120q17 20 27 43.5t10 49.5q0 5-.5 10.5T572-222q35-29 54.5-71.5T646-384q0-51-17.5-100.5T578-576q-17 11-35.5 17t-40.5 6q-52 0-91.5-32T361-668q-36 33-63 67.5T252-530q-19 36-28.5 73t-9.5 73Zm216 36-53 60q-9 11-14 22.5t-5 25.5q0 30 21 51t51 21q30 0 51-21t21-51q0-14-5-26t-14-22l-53-60Zm0-468v119q0 30 21 51t51 21q17 0 31.5-7t24.5-20l16-20q64 38 104 118.5T718-384q0 120-84 204T430-96q-120 0-204-84t-84-204q0-112 76-226.5T430-816Zm398 312q-15 0-25.5-10.5T792-540q0-15 10.5-25.5T828-576q15 0 25.5 10.5T864-540q0 15-10.5 25.5T828-504Zm-36-120v-192h72v192h-72Z"/></svg>Caution</p><p class="ghd-alert-body">
+Advises about risks or negative outcomes of certain actions.</p>
+</div>
+<h2>Tabs</h2>
+<p>You can create bootstrap tabs using the following <b>Olodoc-specific</b> tab tags.</p>
+<h3>Basic Tabs</h3>
+<p>Basic tab example:</p>
+<pre><code class="language-sh">&lt;tab&gt;
+    &lt;tab-title&gt;Tab Title 1|Tab Title 2|Tab Title 3&lt;/tab-title&gt;
+    &lt;tab-content&gt;
+        &lt;tab-column&gt;Tab content 1&lt;/tab-column&gt;
+        &lt;tab-column&gt;Tab content 2&lt;/tab-column&gt;
+        &lt;tab-column&gt;Tab content 3&lt;/tab-column&gt;
+    &lt;/tab-content&gt;
+&lt;/tab&gt;</code></pre>
+<div class="ghd-alert ghd-alert-warning"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="m48-144 432-720 432 720H48Zm127-72h610L480-724 175-216Zm304.79-48q15.21 0 25.71-10.29t10.5-25.5q0-15.21-10.29-25.71t-25.5-10.5q-15.21 0-25.71 10.29t-10.5 25.5q0 15.21 10.29 25.71t25.5 10.5ZM444-384h72v-192h-72v192Zm36-86Z"/></svg>Warning</p><p class="ghd-alert-body">
+These tags are not supported by markdown language, only compatible with Olodoc.</p>
+</div>
+<p>The rendered output looks like this:</p>
+<div class="tab-wrapper">
+<div class="nav nav-tabs" role="tablist">
+<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabs-00" type="button" role="tab" aria-controls="tabs-00" aria-selected="true">Tab Title 1</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-01" type="button" role="tab" aria-controls="tabs-01" aria-selected="false">Tab Title 2</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-02" type="button" role="tab" aria-controls="tabs-02" aria-selected="false">Tab Title 3</button>
+</div>
+<div class="tab-content">
+<div class="tab-pane fade show active p-3" id="tabs-00" role="tabpanel" aria-labelledby="tabs-tab00"><p>Tab content 1</p></div>
+<div class="tab-pane fade  p-3" id="tabs-01" role="tabpanel" aria-labelledby="tabs-tab01"><p>Tab content 2</p></div>
+<div class="tab-pane fade  p-3" id="tabs-02" role="tabpanel" aria-labelledby="tabs-tab02"><p>Tab content 3</p></div>
+</div>
+</div>
+<h3>Tabs with Code Blocks</h3>
+<p>You can use <b>code blocks</b> within tab tags as follows.</p>
+<p>Advanced tab example:</p>
+<pre><code class="language-sh">&lt;tab&gt;
+&lt;tab-title&gt;Json|Php&lt;/tab-title&gt;
+&lt;tab-content&gt;
+&lt;tab-column&gt;
+```json
+{
+    "name":"John", 
+    "age":30
+}
+```
+&lt;/tab-column&gt;
+&lt;tab-column&gt;
+```php [line-numbers] data-line="2"
+[
+    "name" =&gt; "John",
+    "age" =&gt;  "30",
+]
+```
+&lt;/tab-column&gt;
+&lt;/tab-content&gt;
+&lt;/tab&gt;</code></pre>
+<p>The rendered output looks like this:</p>
+<div class="tab-wrapper">
+<div class="nav nav-tabs" role="tablist">
+<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabs-10" type="button" role="tab" aria-controls="tabs-10" aria-selected="true">Json</button>
+<button class="nav-link " data-bs-toggle="tab" data-bs-target="#tabs-11" type="button" role="tab" aria-controls="tabs-11" aria-selected="false">Php</button>
+</div>
+<div class="tab-content">
+<div class="tab-pane fade show active p-3" id="tabs-10" role="tabpanel" aria-labelledby="tabs-tab10"><pre><code class="language-json">{
+    "name":"John", 
+    "age":30
+}</code></pre></div>
+<div class="tab-pane fade  p-3" id="tabs-11" role="tabpanel" aria-labelledby="tabs-tab11"><pre data-line="2"><code class="language-php line-numbers">[
+    "name" =&gt; "John",
+    "age" =&gt;  "30",
+]</code></pre></div>
+</div>
+</div>

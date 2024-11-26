@@ -1,0 +1,193 @@
+<h2>Setup</h2>
+<p>To install the olodoc app, the <b>Php</b> and composer package must be installed on your computer.</p>
+<h3>Requirements</h3>
+<p>Only <b>Php 7</b> and above are supported.</p>
+<p>Follow the steps below to create an Olodoc project.</p>
+<pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">git clone git@github.com:olomadev/olodoc-skelethon myproject</code></pre>
+<p>Go to your project root</p>
+<pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">cd /var/www/myproject</code></pre>
+<p>Install composer packages</p>
+<pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">/var/www/myproject$ composer install</code></pre>
+<p>Give 777 permision for <b>/data/tmp</b> cache folder.</p>
+<pre><code class="language-sh">chmod 777 -R /var/www/myproject/data/tmp</code></pre>
+<div class="ghd-alert ghd-alert-caution"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M214-384q0 46 19.5 87.5T288-223q-1-5-1.5-10t-.5-10q0-27 10-50.5t27-42.5l107-120 107 120q17 20 27 43.5t10 49.5q0 5-.5 10.5T572-222q35-29 54.5-71.5T646-384q0-51-17.5-100.5T578-576q-17 11-35.5 17t-40.5 6q-52 0-91.5-32T361-668q-36 33-63 67.5T252-530q-19 36-28.5 73t-9.5 73Zm216 36-53 60q-9 11-14 22.5t-5 25.5q0 30 21 51t51 21q30 0 51-21t21-51q0-14-5-26t-14-22l-53-60Zm0-468v119q0 30 21 51t51 21q17 0 31.5-7t24.5-20l16-20q64 38 104 118.5T718-384q0 120-84 204T430-96q-120 0-204-84t-84-204q0-112 76-226.5T430-816Zm398 312q-15 0-25.5-10.5T792-540q0-15 10.5-25.5T828-576q15 0 25.5 10.5T864-540q0 15-10.5 25.5T828-504Zm-36-120v-192h72v192h-72Z"/></svg>Caution</p><p class="ghd-alert-body">
+In general, we'd advise you to try setting the permissions of the <b>cache/</b> directory to <b>755</b> and the files inside it - to <b>644</b>. If you absolutely must use higher permissions, try using <b>777</b> for the <b>cache/</b> directory and <b>666</b> for the files in it. Avoid setting the permissions of regular files to <b>777</b>.</p>
+</div>
+<h3>Apache2 Configuration</h3>
+<p>Enable Apache mod_rewrite plugin.</p>
+<pre><code class="language-bash no-line-numbers">sudo a2enmod rewrite</code></pre>
+<p>The <kbd>AllowOverride</kbd> option for directories in the <b>apache2.conf</b> file must be <b>All</b>.</p>
+<pre><code class="language-bash no-line-numbers">vim /etc/apache2/apache2.conf</code></pre>
+<p>Change this option from the default <b>None</b> to <b>All</b>.</p>
+<pre data-line="3"><code class="language-apacheconf line-numbers">&lt;Directory /var/www/&gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+&lt;/Directory&gt;</code></pre>
+<p>Create a hosts file.</p>
+<pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">cd /etc/apache2/sites-available
+cp 00-default.conf example.local.conf
+vim example.local.conf</code></pre>
+<p>In your Apache host file, the <b>DocumentRoot</b> configuration must be set to the <b>yourproject/public/</b> folder. It is recommended to set <b>DirectoryIndex</b> to <b>index.php</b>. ServerName is set to <b>example.local</b> in this example.</p>
+<pre><code class="language-apacheconf">&lt;VirtualHost *:80&gt;
+
+    SetEnv "APP_ENV" "local"
+    ServerName example.local
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/myproject/public/
+    DirectoryIndex index.php
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+&lt;/VirtualHost&gt;</code></pre>
+<p>Save your vhost file and restart the apache server.</p>
+<pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">a2ensite example.local.conf
+sudo service apache2 restart</code></pre>
+<h3>.htaccess</h3>
+<p>Configuration requires the <kbd>.htaccess</kbd> file as follows. This file is located in the <kbd>/public</kbd> folder.</p>
+<pre><code class="language-bash"># Disable directory indexing
+# Options -Indexes
+# Options +FollowSymLinks
+# Options -MultiViews
+
+php_value post_max_size 10M
+php_value upload_max_filesize 10M
+
+RewriteEngine On
+#
+# Redirect www to non-www
+#
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# The following rule allows authentication to work with fast-cgi
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# The following rule tells Apache that if the requested filename
+# exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+# The following rewrites all other queries to index.php. The
+# condition ensures that if you are using Apache aliases to do
+# mass virtual hosting, the base path will be prepended to
+# allow proper resolution of the index.php file; it will work
+# in non-aliased environments as well, providing a safe, one-size
+# fits all solution.
+
+RewriteCond %{REQUEST_URI} !/api/
+RewriteRule ^(.*)$ %{ENV:BASE}index.html [NC,L]
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]</code></pre>
+<h3>Linux Host File</h3>
+<p>In this example, the project is defined as <kbd>example.local</kbd> in the <kbd>/etc/hosts</kbd> file.</p>
+<pre><code class="language-bash no-line-numbers">127.0.1.1       example.local</code></pre>
+<p>If you are setting up a <b>multilingual project via a subdomain</b>, add the languages you plan to support as follows.</p>
+<pre><code class="language-bash no-line-numbers">127.0.1.1       example.local
+127.0.1.1       en.example.local
+127.0.1.1       tr.example.local</code></pre>
+<h3>Windows Host File</h3>
+<p>If you works on a Linux Virtual Machine under the Windows OS you must define a host name in <kbd>C:\Windows\System32\drivers\etc\hosts</kbd> file like below.</p>
+<pre><code class="language-sh"># Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# ...
+# ...
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+# localhost name resolution is handled within DNS itself.
+# 127.0.0.1       localhost
+# ::1             localhost
+  192.168.231.130 example.local       # Your Linux virtual machine ip address
+  192.168.231.130 tr.example.local
+  192.168.231.130 en.example.local</code></pre>
+<h3>Local Environment Configuration</h3>
+<p>To work in a local environment, </p>
+<p>Copy the <kbd>local.php.dist</kbd> file in the <kbd>/config/autoload/</kbd> folder in your project and save it with the name <kbd>local.php</kbd>.</p>
+<pre><code class="language-php">&lt;?php
+/**
+ * Development-only configuration.
+ *
+ * Put settings you want enabled when under development mode in this file, and
+ * check it into your repository.
+ *
+ * Developers on your team will then automatically enable them by calling on
+ * `composer development-enable`.
+ */
+
+declare(strict_types=1);
+
+use Laminas\ConfigAggregator\ConfigAggregator;
+
+return [
+    //
+    // olodoc
+    // 
+    'olodoc' =&gt; [
+        'default_version' =&gt; '1.0',
+        'available_versions' =&gt; [
+            '1.0',
+            '2.0'
+        ],
+        'default_locale' =&gt; 'en',
+        'available_locales' =&gt; [
+            'en',
+            'tr'
+        ],
+        'http_prefix' =&gt; 'http://', // http(s) prefix
+        'base_url' =&gt; '{locale}.example.local/', // or "example.local/{locale}"
+        'images_folder' =&gt; '/public/', // location of your "/images" folder
+        'remove_default_locale' =&gt; true, // removes default locale from base url: "en.example.local" =&gt; "example.local"
+        'root_path' =&gt; '/var/www/myproject', // your project root 
+        'html_path' =&gt; '/data/docs/', // save location for your ".html" document files
+        'xml_path' =&gt; '/public/sitemap.xml',
+        'build_sitemapxml' =&gt; true,
+        'base64_convert' =&gt; false, // if true all images are converted to base64 encoded strings
+        'anchor_generations' =&gt; true, // it will enable anchor generations for all routes
+        'anchor_parse_query' =&gt; '//h2|//h3|//h4|//h5|//h6',
+        'anchors_for_index_pages' =&gt; true, // if false anchors will not be created in index.html routes
+    ],
+
+    // Toggle the configuration cache. Set this to boolean false, or remove the
+    // directive, to disable configuration caching. Toggling development mode
+    // will also disable it by default; clear the configuration cache using
+    // `composer clear-config-cache`.
+    ConfigAggregator::ENABLE_CACHE =&gt; false,
+
+    // Enable debugging; typically used to provide debugging information within templates.
+    'debug' =&gt; true,
+];</code></pre>
+<h3>Run Your Application</h3>
+<p>If everything went well, you can run your first application by typing your project address into your browser as follows:</p>
+<p><img class="img-fluid" src="/images/example.local.png" alt="Example Local Project" /></p>
+<h3>About Php Mezzio Framework</h3>
+<p>Olodoc uses the super fast micro framework called <a href="https://docs.mezzio.dev/mezzio/" target="_blank">Mezzio</a>. If you would like to get more detailed information about the Mezzio framework, you can take a look at the resources below.</p>
+<div class="table-responsive"><table  class="table table-bordered">
+  <thead class="table-light">
+    <tr>
+        <th>Source</th>
+        <th>Url</th>
+        <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>Documents</td>
+        <td><a href="https://docs.mezzio.dev/" target="_blank">https://docs.mezzio.dev/</a></td>
+        <td>Mezzio official documentation web address.</td>
+    </tr>
+    <tr>
+        <td>Installation</td>
+        <td><a href="https://matthewsetter.com/how-to-create-a-mezzio-application/" target="_blank">https://matthewsetter.com/how-to-create-a-mezzio-application/</a></td>
+        <td>Blog address written by the creator of Mezzio and containing extensive information about Mezzio installation.</td>
+    </tr>
+  </tbody>
+</table></div>

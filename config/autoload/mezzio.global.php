@@ -37,28 +37,16 @@ return [
         ],
     ],
     'translator' => [
-        'available_languages' => ['tr', 'en'],
+        'available_languages' => ['en', 'tr'],
         'locale' => [
-            'tr', // default locale
-            'en'  // fallback locale
+            'en', // default locale
+            'tr'  // fallback locale
         ],
         'translation_file_patterns' => [
             [
                 'type' => 'PhpArray',
                 'base_dir' => PROJECT_ROOT . '/data/language',
                 'pattern' => '%s/default.php'
-            ],
-            [
-                'type' => 'PhpArray',
-                'base_dir' => PROJECT_ROOT . '/data/language',
-                'pattern' => '%s/labels.php',
-                'text_domain' => 'labels',
-            ],
-            [
-                'type' => 'PhpArray',
-                'base_dir' => PROJECT_ROOT . '/data/language',
-                'pattern' => '%s/templates.php',
-                'text_domain' => 'templates',
             ],
         ],
     ],
