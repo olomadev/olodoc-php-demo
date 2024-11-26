@@ -1,7 +1,7 @@
 
-# Olodoc Documentation Generator Php Demo
+# Project skeleton for creating new Olodoc projects
 
-Php demonstration for Olodoc with Mezzio Framework.
+Olodoc starter application with Mezzio Framework.
 
 ## Features
 
