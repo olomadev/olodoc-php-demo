@@ -20,4 +20,4 @@ Olodoc starter application with Mezzio Framework.
 * Html meta tag generation support
 * Automatic sitemap.xml generator for SEO
 
-For documentation visit this address <a href="https://olodoc.dev">https://olodoc.dev</a>.
+For documentation visit this address <a href="https://olodoc.oloma.dev">https://olodoc.oloma.dev</a>.
