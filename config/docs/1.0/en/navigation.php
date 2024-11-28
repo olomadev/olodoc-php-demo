@@ -1,71 +1,8 @@
 <?php
+
 #
 # navigation
 # 
-return [
-    [
-        'label' => 'Introduction',
-        'url' => '/index.html',
-    ],
-    [
-        'label' => 'Installation',
-        'url' => '/installation.html',
-    ],
-    [
-        'label' => 'Generating Docs',
-        'url' => '/generating-docs.html',
-    ],
-    [
-        'label' => 'Configuration',
-        'url' => '/configuration.html',
-    ],
-    [
-        'label' => 'Markdown Guide',
-        'url' => '/markdown-guide/index.html',
-        'folder' => '/markdown-guide',
-        'children' => [
-            [
-                'label' => 'Markdown Guide',
-                'url' => '/markdown-guide/index.html',
-            ],
-            [
-                'label' => 'Basic Syntax',
-                'folder' => '/markdown-guide/basic-syntax',
-                'url' => '/markdown-guide/basic-syntax/index.html',
-                'children' => [
-                    [
-                        'label' => 'Basic Syntax',
-                        'url' => '/markdown-guide/basic-syntax/index.html'
-                    ],
-                ]
-            ],
-            [
-                'label' => 'Extended Syntax',
-                'folder' => '/markdown-guide/extended-syntax',
-                'url' => '/markdown-guide/extended-syntax/index.html',
-                'children' => [
-                    [
-                        'label' => 'Extended Syntax',
-                        'url' => '/markdown-guide/extended-syntax/index.html'
-                    ],
-                ]
-            ],
-        ]
-    ],
-    [
-        'label' => 'I18n',
-        'url' => '/i18n.html',
-    ],
-    [
-        'label' => 'Customizations',
-        'url' => '/customizations.html',
-    ],
-    [
-        'label' => 'Prism Js',
-        'url' => '/prism-js.html',
-    ],
-];
-
 // return [
 //     [
 //         'label' => 'Olobase UI', 

@@ -18,7 +18,7 @@ Olodoc creates your documents by converting your existing markdown files. Before
 
 ## Your First Directory Tree
 
-Your directory tree configuration file <b>navigation.php</b> is located in <kbd>/config/docs/$version/$locale/</kbd> folder.
+Your directory tree configuration file <b>navigation.php</b> is located in <kbd>/config/docs/$version/</kbd> folder.
 
 ```sh
 - myproject
@@ -26,17 +26,15 @@ Your directory tree configuration file <b>navigation.php</b> is located in <kbd>
   - config
   	- docs
   		- 1.0
-  			- en
-  				navigation.php
-  			+ de
+  			navigation.php
 ```
 
 Open your <b>navigation.php</b> file and create your first simple navigation.
 
 ```php
-#
-# navigation
-# 
+/**
+* Navigation index
+*/
 return [
     [
         'label' => 'Introduction',
@@ -82,9 +80,9 @@ To create a new folder:
 2. Open your navigation.php file and paste below the configuration.
 
 ```php [line-numbers] data-line="16,17"
-#
-# navigation
-# 
+/**
+* Navigation index
+*/
 return [
     [
         'label' => 'Introduction',
@@ -108,13 +106,11 @@ return [
 ]
 ```
 
-Every folder configuration needs to has <b>folder</b> and <b>children</b> key.The <b>"folder"</b> key points your folder path and <b>"children"</b> key contains of your markdown pages.
+Each folder configuration needs to has <b>folder</b> and <b>children</b> key.The <b>"folder"</b> key points your folder path and <b>"children"</b> key contains of your markdown pages.
 
 ## Creating Sub Folders
 
-Every sub folder configuration needs to has <b>folder</b> and <b>children</b> key under the <b>parent</b> folder <b>children</b> key.
-
-Also, the path and url value of the subfolder must include the parent folder name as follows.
+Each sub folder configuration needs to has <b>folder</b> and <b>children</b> key under the <b>parent</b> folder <b>children</b> key. Also, the path and url value of the subfolder must include the parent folder name as follows.
 
 ```php
 'folder' => '/markdown-guide/basic-syntax',
@@ -125,9 +121,9 @@ In this example we created a sub folder called <b>basic-syntax</b> under the <b>
 
 ```php [line-numbers] data-line="25,26"
 <?php
-#
-# navigation
-# 
+/**
+* Navigation index
+*/
 return [
     [
         'label' => 'Introduction',
@@ -160,5 +156,26 @@ return [
         ]
     ],
 ];
+```
 
+## Meta Tags and Titles
+
+You can assign html meta tags to any configuration that includes a url key as shown in the following example.
+
+```php [line-numbers] data-line="9"
+<?php
+/**
+* Navigation index
+*/
+return [
+    [
+        'label' => 'Introduction',
+        'url' => '/index.html',
+        'meta' => [
+            'title' => 'Introduction',
+            'keywords' => 'intro, introduction, open source, document, generation, php',
+            'description' => 'Olodoc is an open source documentation creation tool developed in PHP to create documentation from your foldered markdown files. It allows you to create and customize unique templates for your applications with the Bootstrap 5 CSS framework.',
+        ]
+    ],
+];
 ```

@@ -14,7 +14,6 @@ use Laminas\Diactoros\Response\RedirectResponse;
 class SetLocaleMiddleware implements MiddlewareInterface
 {
     protected $translator;
-    protected $cookieKey;
     protected $allowedLanguages;
 
     /**
@@ -29,7 +28,6 @@ class SetLocaleMiddleware implements MiddlewareInterface
     )
     {
         $this->translator = $translator;
-        $this->cookieKey = $config['cookie'];
         $this->allowedLanguages = $config['translator']['available_languages'];
     }
 
