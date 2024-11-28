@@ -17,11 +17,15 @@ use Laminas\I18n\Translator\TranslatorInterface as Translator;
 
 class DocumentHandler implements RequestHandlerInterface
 {
+    private $config;
+
     public function __construct(
+        array $config,
         private DocumentManagerInterface $documentManager,
         private Translator $translator,
         private TemplateRendererInterface $template
     ) {
+        $this->config = $config['olodoc'];
         $this->documentManager = $documentManager;
         $this->template = $template;
         $this->translator = $translator;
@@ -68,6 +72,7 @@ class DocumentHandler implements RequestHandlerInterface
         $data['pageVersionCombobox'] = $pageGenerator->getVersionCombobox(
             $this->translator->translate('Version')
         );
+        $data['config'] = $this->config;
         $data['version'] = $this->documentManager->getVersion();
         $data['routeName'] = $routeName;
         $data['pageContent'] = $data['html'];

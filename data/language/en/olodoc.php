@@ -1,11 +1,6 @@
 <?php
 
 return [
-    // Home
-    // 
-    // 'Welcome to Olodoc' => 'Welcome to Olodoc',
-    // 'This page is a sample landing page that will take you to the documentation' => 'This page is a sample landing page that will take you to the documentation',
-
     // Docs
     // 
     'Go to Back' => 'Go to Back',
@@ -30,14 +25,14 @@ return [
     // 
     'Languages' => 'Languages',
     'Navigate in English' => 'Navigate in English',
-    'Navigate in Turkish' => 'Navigate in Turkish',
+    'Navigate in Türkçe' => 'Navigate in Türkçe',
+    'Navigate in German' => 'Navigate in German',
     'Support' => 'Support',
     'Classic Login' => 'Classic Sign In',
     'Sign in with Github' => 'Sign in with Github',
     'Sign in with Google' => 'Sign in with Google',
 
     // 404 and Errors
-    //
     //
     '404 Page Not Found' => '404 Page Not Found',
     'You\'re looking for a page that doesn\'t exist or may have been moved' => 'You\'re looking for a page that doesn\'t exist or may have been moved',

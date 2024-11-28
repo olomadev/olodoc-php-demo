@@ -26,14 +26,17 @@ class ClientMiddleware implements MiddlewareInterface
         $method = $request->getMethod();
         $headers = $request->getHeaders();
         $server = $request->getServerParams();
-        $currentOrigin = getOrigin($server['SERVER_NAME']);
+        $path = $request->getUri()->getPath();
+        $origin = getOrigin($server['SERVER_NAME']);
         $sslOn = empty($server['HTTPS']) ? false : true;
         $httpPrefix = empty($server['HTTPS']) ? 'http://' : 'https://';
 
         define('SSL_ON', $sslOn);
         define('HTTP_METHOD', $method);
         define('HTTP_PREFIX', $httpPrefix);
-        define('CURRENT_ORIGIN', $currentOrigin);
+        define('HOSTNAME', $server['SERVER_NAME']);
+        define('REQUEST_PATH', $path);
+        define('REQUEST_ORIGIN', $origin);
         //
         // Inject parsed body
         //

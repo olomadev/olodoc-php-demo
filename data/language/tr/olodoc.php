@@ -1,11 +1,6 @@
 <?php
 
 return [
-    // Home
-    // 
-    // 'Welcome to Olodoc' => 'Welcome to Olodoc',
-    // 'This page is a sample landing page that will take you to the documentation' => 'This page is a sample landing page that will take you to the documentation',
-
     // Docs
     // 
     'Go to Back' => 'Geri Dön',
@@ -30,7 +25,8 @@ return [
     // 
     'Languages' => 'Diller',
     'Navigate in English' => 'İngilizce\'de gezinin',
-    'Navigate in Turkish' => 'Türkçe\'de gezinin',
+    'Navigate in Türkçe' => 'Türkçe\'de gezinin',
+    'Navigate in German' => 'Almanca\'da gezinin',
     'Support' => 'Destek',
     'Classic Login' => 'Klasik Giriş',
     'Sign in with Github' => 'Github ile oturum açın',

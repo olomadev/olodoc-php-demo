@@ -13,18 +13,18 @@ Olodoc creates your documents by converting your existing markdown files. Before
   			- en
   				index.md
   				installation.md
-  			+ de
+  			+ tr
 ```
 
 ## Your First Directory Tree
 
-Your directory tree configuration file <b>navigation.php</b> is located in <kbd>/config/docs/$version/</kbd> folder.
+Your directory tree configuration file <b>navigation.php</b> is located in <kbd>/config/olodoc/$version/</kbd> folder.
 
 ```sh
 - myproject
   + bin
   - config
-  	- docs
+  	- olodoc
   		- 1.0
   			navigation.php
 ```

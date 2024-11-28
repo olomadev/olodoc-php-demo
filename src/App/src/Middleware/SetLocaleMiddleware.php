@@ -13,8 +13,8 @@ use Laminas\Diactoros\Response\RedirectResponse;
 
 class SetLocaleMiddleware implements MiddlewareInterface
 {
+    protected $config;
     protected $translator;
-    protected $allowedLanguages;
 
     /**
      * Constructor
@@ -28,7 +28,7 @@ class SetLocaleMiddleware implements MiddlewareInterface
     )
     {
         $this->translator = $translator;
-        $this->allowedLanguages = $config['translator']['available_languages'];
+        $this->config = $config['olodoc'];
     }
 
     /**
@@ -47,70 +47,20 @@ class SetLocaleMiddleware implements MiddlewareInterface
         $params = $request->getQueryParams();
         $path = $request->getUri()->getPath();
         $hostname = $server['SERVER_NAME'];
+
         $locale = substr($hostname, 0, 2);
-
-        if (! in_array($locale, $this->allowedLanguages)) {
-            $locale = null;
-            if ($method == 'GET' && empty($params['provider'])) {  // do not action for socialite requests
-                if (! empty($_COOKIE['lang'])  // if we have cookie set request
-                    && $_COOKIE['lang'] !== "en" // if no default language
-                    && in_array($_COOKIE['lang'], $this->allowedLanguages)
-                ) {
-                    //
-                    // redirect to $lang.example.com
-                    // 
-                    return new RedirectResponse(HTTP_PREFIX.$_COOKIE['lang'].".".$hostname.$path);
-                }
-                if  (empty($server['HTTP_ACCEPT_LANGUAGE'])) {
-                    $httpAcceptLang = "en";
-                } else {
-                    $httpAcceptLang = locale_accept_from_http($server['HTTP_ACCEPT_LANGUAGE']);
-                }
-                if ($httpAcceptLang == "tr" && empty($_COOKIE['lang'])) {
-                    //
-                    // redirect to tr.example.com
-                    // 
-                    return new RedirectResponse(HTTP_PREFIX."tr.".$hostname.$path);
-                }
-            }
-
-        } else { // if we have correct locale
-
-            $this->translator->setLocale($locale);
-            //
-            // set lang to cookie and redirect
-            // 
-            if ($method == 'GET' && ! empty($params['set']) &&  null != $locale) {
-                if (! empty($_COOKIE['lang'])) {
-                    unset($_COOKIE['lang']);
-                    setcookie("lang", "", -1, "/", CURRENT_ORIGIN, SSL_ON, false);    
-                }
-                $options = [
-                    'expires' => time() +  strtotime("+1 year"),
-                    'path' => '/',
-                    'domain' => CURRENT_ORIGIN,
-                    'secure' => SSL_ON,
-                    'httponly' => false,
-                ];
-                if (SSL_ON) {
-                    $options['samesite'] = 'None';
-                }
-                setcookie(
-                    "lang",
-                    $locale,
-                    $options
-                );
-                return new RedirectResponse(HTTP_PREFIX.$locale.".".CURRENT_ORIGIN.$path);
+        if (! in_array($locale, array_keys($this->config['available_locales']))) {
+            $locale = locale_accept_from_http($server['HTTP_ACCEPT_LANGUAGE']);
+            if (! in_array($locale, $this->config['available_locales'])) {
+                $locale = $this->config['default_locale'];
             }
         }
-
-        if (empty($locale)) { // set default language
-            $this->translator->setLocale("en");
+        if (! empty($locale)) { // set default language
+            $this->translator->setLocale($locale);
         }
         $locale = $this->translator->getLocale();
         define('LANG_ID', $locale);
-        define('AVAILABLE_LANGUAGES', getAvailableLanguageLinks($request, $this->translator));
-        define('BASE_URL', ($locale == "en") ? HTTP_PREFIX.CURRENT_ORIGIN : HTTP_PREFIX.$locale.".".CURRENT_ORIGIN);
+        define('BASE_URL', ($locale == "en") ? HTTP_PREFIX.REQUEST_ORIGIN : HTTP_PREFIX.$locale.".".REQUEST_ORIGIN);
         
         return $handler->handle($request);
     }

@@ -35,6 +35,7 @@ vim example.local.conf</code></pre>
 
     SetEnv "APP_ENV" "local"
     ServerName example.local
+    ServerAlias *.example.local   # subdomain support
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/myproject/public/
     DirectoryIndex index.php
@@ -114,11 +115,11 @@ RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]</code></pre>
 <h3>Local Environment Configuration</h3>
 <p>To work in a local environment, </p>
 <ol>
-<li>Copy your <b>local.php.dist</b> file and save it as <b>local.php</b> to your <b>/config/autoload/</b> folder.</li>
+<li>Copy your <b>local.php.dist</b> file in your project root directory and save it as <b>local.php</b> into your <b>/config/autoload/</b> folder.</li>
 <li>Update your <b>base_url</b> which shown below at line number 32.</li>
 <li>Update your <b>root_path</b> which shown below at line number 35.</li>
 </ol>
-<pre data-line="32,35"><code class="language-php line-numbers">&lt;?php
+<pre data-line="32,36"><code class="language-php line-numbers">&lt;?php
 /**
  * Development-only configuration.
  *
@@ -152,6 +153,7 @@ return [
         'base_url' =&gt; '{locale}.example.local/', // or "example.local/{locale}"
         'images_folder' =&gt; '/public/', // location of your "/images" folder
         'remove_default_locale' =&gt; true, // removes default locale from base url: "en.example.local" =&gt; "example.local"
+        'config_path' =&gt; '/config/olodoc/', // your config file path 
         'root_path' =&gt; '/var/www/myproject', // your project root 
         'html_path' =&gt; '/data/docs/', // save location for your ".html" document files
         'xml_path' =&gt; '/public/sitemap.xml',

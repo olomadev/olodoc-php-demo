@@ -16,6 +16,7 @@ class DocumentHandlerFactory
     public function __invoke(ContainerInterface $container): RequestHandlerInterface
     {
         return new DocumentHandler(
+            $container->get('config'),
             $container->get(DocumentManagerInterface::Class),
             $container->get(Translator::class),
             $container->get(TemplateRendererInterface::class)

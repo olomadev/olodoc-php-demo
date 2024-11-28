@@ -6,6 +6,7 @@ if (! empty($meta['title'])) {
     $this->headMeta($meta['description'], "description");
     $this->headMeta($meta['keywords'], "keywords");    
 }
+$this->placeholder('config')->set($config);
 $this->placeholder('version')->set($version);
 $this->placeholder('pageJavascript')->set($pageJavascript);
 $this->placeholder('documentManager')->set($documentManager);

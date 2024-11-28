@@ -15,11 +15,6 @@ return [
         ],
     ],
     'translator' => [
-        'available_languages' => ['en', 'tr'],
-        'locale' => [
-            'en', // default locale
-            'tr'  // fallback locale
-        ],
         'translation_file_patterns' => [
             [
                 'type' => 'PhpArray',

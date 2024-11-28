@@ -11232,6 +11232,9 @@ body {
   min-height: 75rem;
   padding-top: 5rem;
 }
+.ol-flag {
+  border-radius: 50%;
+}
 .document-content a {
   font-weight: 600;
   text-decoration: none;

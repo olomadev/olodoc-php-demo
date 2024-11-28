@@ -9,7 +9,7 @@
   <?php echo $this->headLink().PHP_EOL; ?>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script type="module" crossorigin src="/assets/index-Cvr9Cg4r.js?v=1"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-MLZPbzUm.css?v=13">
+  <link rel="stylesheet" crossorigin href="/assets/index-MLZPbzUm.css?v=14">
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -61,7 +61,36 @@
             <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarLanguages" data-bs-popper="none">
               <div class="list-group list-group-flush">
                   <!-- Link -->
-                  <?php echo AVAILABLE_LANGUAGES ?> 
+                <?php
+                $config = $this->placeholder('config')[0];
+                $host = preg_replace('#^('.implode('|', array_keys($config['available_locales'])).')\.#', '', HOSTNAME);
+                foreach ($config['available_locales'] as $key => $label) {
+                    if ($key == $config['default_locale']) {
+                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH."?set=1";
+                    } else {
+                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH."?set=1";
+                    }
+                    $onmouseover = "onMouseOverFlag('".$key."')";
+                    $onmouseout  = "onMouseOutFlag('".$key."')";
+                ?>
+                   <a class="list-group-item" href="<?php echo $url ?>" onmouseover="<?php echo $onmouseover ?>" onmouseout="<?php echo $onmouseout ?>">
+                        <!-- Icon -->
+                        <div class="icon icon-sm">
+                          <?php echo $config['flags'][$key] ?>
+                        </div>
+                        <!-- Content -->
+                        <div class="ms-4">
+                          <!-- Heading -->
+                          <p class="fs-sm text-primary mb-0 fw-bold display-9">
+                            <?php echo $label ?>
+                          </p>
+                          <!-- Text -->
+                          <p class="fs-sm mb-0">
+                            <?php echo $this->translate("Navigate in ".$label) ?>
+                          </p>
+                        </div>
+                    </a>
+                <?php } ?>
               </div>
             </div>
           </li>
@@ -168,8 +197,7 @@
 <!-- JAVASCRIPT -->
 <script src="/assets/js/axios.min.js"></script>
 <script src="/assets/js/prism/prism.js?v=4"></script>
-<!-- This fixes the line highlight wrong number hilite bug -->
-<script src="/assets/js/prism/prism-line-highlight.js?v=4"></script>
+<script src="/assets/js/prism/prism-line-highlight.js?v=4"></script> <!-- This fixes the line highlight wrong number hilite bug -->
 <script src="/assets/js/anchor.min.js"></script>
 <script src="/assets/js/app.js?v=21"></script>
 <script type="text/javascript">     

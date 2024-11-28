@@ -75,6 +75,7 @@ In your Apache host file, the <b>DocumentRoot</b> configuration must be set to t
 
     SetEnv "APP_ENV" "local"
     ServerName example.local
+    ServerAlias *.example.local   # subdomain support
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/myproject/public/
     DirectoryIndex index.php
@@ -180,12 +181,12 @@ If you works on a Linux Virtual Machine under the Windows OS you must define a h
 
 To work in a local environment, 
 
-1. Copy your <b>local.php.dist</b> file and save it as <b>local.php</b> to your <b>/config/autoload/</b> folder.
+1. Copy your <b>local.php.dist</b> file in your project root directory and save it as <b>local.php</b> into your <b>/config/autoload/</b> folder.
 2. Update your <b>base_url</b> which shown below at line number 32.
 3. Update your <b>root_path</b> which shown below at line number 35.
 
 
-```php [line-numbers] data-line="32,35"
+```php [line-numbers] data-line="32,36"
 <?php
 /**
  * Development-only configuration.
@@ -220,6 +221,7 @@ return [
         'base_url' => '{locale}.example.local/', // or "example.local/{locale}"
         'images_folder' => '/public/', // location of your "/images" folder
         'remove_default_locale' => true, // removes default locale from base url: "en.example.local" => "example.local"
+        'config_path' => '/config/olodoc/', // your config file path 
         'root_path' => '/var/www/myproject', // your project root 
         'html_path' => '/data/docs/', // save location for your ".html" document files
         'xml_path' => '/public/sitemap.xml',
