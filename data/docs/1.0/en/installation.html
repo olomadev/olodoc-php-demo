@@ -49,42 +49,6 @@ vim example.local.conf</code></pre>
 sudo service apache2 restart</code></pre>
 <h3>.htaccess</h3>
 <p>Configuration requires the <kbd>.htaccess</kbd> file as follows. This file is located in the <kbd>/public</kbd> folder.</p>
-<pre><code class="language-bash"># Disable directory indexing
-# Options -Indexes
-# Options +FollowSymLinks
-# Options -MultiViews
-
-php_value post_max_size 10M
-php_value upload_max_filesize 10M
-
-RewriteEngine On
-#
-# Redirect www to non-www
-#
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-
-# The following rule allows authentication to work with fast-cgi
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-# The following rule tells Apache that if the requested filename
-# exists, simply serve it.
-RewriteCond %{REQUEST_FILENAME} -s [OR]
-RewriteCond %{REQUEST_FILENAME} -l [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^.*$ - [NC,L]
-
-# The following rewrites all other queries to index.php. The
-# condition ensures that if you are using Apache aliases to do
-# mass virtual hosting, the base path will be prepended to
-# allow proper resolution of the index.php file; it will work
-# in non-aliased environments as well, providing a safe, one-size
-# fits all solution.
-
-RewriteCond %{REQUEST_URI} !/api/
-RewriteRule ^(.*)$ %{ENV:BASE}index.html [NC,L]
-RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
-RewriteRule ^(.*) - [E=BASE:%1]
-RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]</code></pre>
 <h3>Linux Host File</h3>
 <p>In this example, the project is defined as <kbd>example.local</kbd> in the <kbd>/etc/hosts</kbd> file.</p>
 <pre><code class="language-bash no-line-numbers">127.0.1.1       example.local</code></pre>
@@ -175,7 +139,7 @@ return [
 ];</code></pre>
 <h3>Run Your Application</h3>
 <p>If everything went well, you can run your first application by typing your project address into your browser as follows:</p>
-<p><img class="img-fluid" src="/images/example.local.png" alt="Example Local Project" /></p>
+<p><img class="img-fluid" src="/images/example-local.png" alt="Example Local Project" /></p>
 <h3>About Php Mezzio Framework</h3>
 <p>Olodoc uses the super fast micro framework called <a href="https://docs.mezzio.dev/mezzio/" target="_blank">Mezzio</a>. If you would like to get more detailed information about the Mezzio framework, you can take a look at the resources below.</p>
 <div class="table-responsive"><table  class="table table-bordered">

@@ -1,1 +1,119 @@
-<h2>Boostrap Templating</h2>
+<h1>Boostrap Templating</h1>
+<p>Olodoc is written with <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Boostrap 5</a> css framework and supports extensive customizations. Before creating a new documentation project, you may want to customize the colors or components of your project. Customization operations can be easily done with the <a href="https://github.com/olomadev/olodoc-bootstrap" target="_blank">Olodoc Boostrap + Vite Skelethon</a> template generation tool, follow the steps below.</p>
+<h2>Template Generator Installation</h2>
+<p>Run the template generator by following the steps below. First clone the olodoc-bootstrap repository.</p>
+<pre><code class="language-sh">git cloone git@github.com:olomadev/olodoc-bootstrap.git</code></pre>
+<p>Enter your project root.</p>
+<pre><code class="language-sh">cd /var/www/olodoc-bootstrap</code></pre>
+<p>Install node modules.</p>
+<pre><code class="language-sh">npm i</code></pre>
+<p>Run the application</p>
+<pre><code class="language-sh">npm run dev</code></pre>
+<p>Visit your local address from your browser.</p>
+<p><img class="img-fluid" src="/images/localhost.png" alt="Localhost" /></p>
+<h2>Customize Your Template</h2>
+<p>The template generator allows you to create your documentation using the colors and fonts you want by changing the values of the <b>.scss</b> variables.</p>
+<pre><code class="language-sh">- olodoc-bootstrap
+  + node_modules
+  - src
+    - css
+        _variables.scss
+        fonts.scss
+        olodoc.css
+        prism.css
+        styles.scss
+    + dist
+    + images
+    + js
+  + views
+  .gitignore
+  package.json
+  server.js
+  vite.config.js</code></pre>
+<p>Open your <b>_variables.scss</b> file and change the <b>$primary:  #0a7248;</b> variable's value as <b>#f75b00</b>.</p>
+<pre data-line="5"><code class="language-scss line-numbers">//
+// All Boostrap Variables: 
+// Here --&gt;  https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
+//
+$primary: #f75b00; //  #0a7248;
+$secondary: #636363;
+$success: #42ba96;
+$info: #7c69ef;
+$warning: #fad776;
+$danger: #df4759;
+// ...</code></pre>
+<p>Run the application again</p>
+<pre><code class="language-sh">npm run dev</code></pre>
+<p><img class="img-fluid" src="/images/localhost.png" alt="Localhost" /></p>
+<p>Visit your local address from your browser, if everything went well you will see that the template main colors have changed as below.</p>
+<p><img class="img-fluid" src="/images/bootstrap-sass-customization.png" alt="Boostrap Sass Customization" /></p>
+<h2>Exporting Production Ready Css Files</h2>
+<ol>
+<li>Go to your command line type build command.</li>
+</ol>
+<pre><code class="language-sh">npm run build</code></pre>
+<p>if everything went well you will see the built message like below.</p>
+<pre><code class="language-sh">✓ 92 modules transformed.
+dist/index.html                  14.69 kB │ gzip:  4.21 kB
+dist/assets/index-BJBYL9CF.css  313.94 kB │ gzip: 41.29 kB
+dist/assets/index-C1TT0zOb.js   121.41 kB │ gzip: 25.79 kB
+✓ built in 4.17s
+root@localhost:/var/www/olodoc-bootstrap# </code></pre>
+<ol start="2">
+<li>Copy your generated <b>index-*<em>.css</b> and <b>index-*</em>.js</b> files.</li>
+</ol>
+<pre><code class="language-sh">- olodoc-bootstrap
+  - dist
+    - assets
+        index-BJBYL9CF.css
+        index-C1TT0zOb.js
+    index.html
+  + node_modules
+  + views
+  .gitignore
+  package.json
+  server.js
+  vite.config.js</code></pre>
+<ol start="3">
+<li>Then paste them into your php project <kbd>/public/assets/</kbd> directory.</li>
+</ol>
+<pre><code class="language-sh">- olodoc-skeleton
+  + bin
+  + config
+  + data
+  - public
+    - assets
+        + css
+        + img
+        + js
+        index-BJBYL9CF.css
+        index-C1TT0zOb.js
+      + images
+      .htaccess
+      index.php
+      robots.txt
+      sitemap.xml
+  + src
+  + templates
+  + vendor
+  .gitignore
+  composer.json</code></pre>
+<ol start="4">
+<li>Finally you need update new filenames which they located in <kbd>/templates/layouts/default.phtml</kbd> file.</li>
+</ol>
+<pre data-line="11,12"><code class="language-html line-numbers">&lt;!DOCTYPE html&gt;
+&lt;html lang="&lt;?php echo LANG_ID?&gt;"&gt;
+&lt;head&gt;
+  &lt;?php echo $this-&gt;headTitle().PHP_EOL; ?&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="author" content="Oloma Software"&gt;
+  &lt;?php echo $this-&gt;headMeta().PHP_EOL; ?&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+  &lt;?php echo $this-&gt;headLink().PHP_EOL; ?&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;script type="module" crossorigin src="/assets/index-C1TT0zOb.js"&gt;&lt;/script&gt;
+  &lt;link rel="stylesheet" crossorigin href="/assets/index.BJBYL9CF.css"&gt;
+  &lt;!-- Favicon --&gt;
+  &lt;link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-touch-icon.png"&gt;</code></pre>
+<p>Visit your php application from your browser.</p>
+<p><img class="img-fluid" src="/images/example-local.png" alt="Skeleton Php Application Localhost" /></p>

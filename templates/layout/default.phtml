@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <?php echo $this->headLink().PHP_EOL; ?>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script type="module" crossorigin src="/assets/index-Cvr9Cg4r.js?v=1"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-MLZPbzUm.css?v=14">
+  <script type="module" crossorigin src="/assets/index-YnK90wyZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DsqoJS86.css">
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -19,7 +19,6 @@
   <meta name="msapplication-TileColor" content="#0a7248">
   <meta name="theme-color" content="#ffffff">
   <link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" type="text/css" href="/assets/css/prism/prism.css?v=4" />
   <?php echo $this->headScript().PHP_EOL; ?>
 </head>
 
@@ -66,9 +65,9 @@
                 $host = preg_replace('#^('.implode('|', array_keys($config['available_locales'])).')\.#', '', HOSTNAME);
                 foreach ($config['available_locales'] as $key => $label) {
                     if ($key == $config['default_locale']) {
-                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH."?set=1";
+                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH;
                     } else {
-                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH."?set=1";
+                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH;
                     }
                     $onmouseover = "onMouseOverFlag('".$key."')";
                     $onmouseout  = "onMouseOutFlag('".$key."')";
@@ -114,7 +113,7 @@
                     </div>
                     <!-- Text -->
                     <p class="fs-sm mb-0 text-muted">
-                      <?php echo $this->translate("Create bug report, Feature request or  Support question")?>
+                      <?php echo $this->translate("Create bug report, feature request or support question")?>
                     </p>
                   </div>
                 </a>
@@ -172,13 +171,12 @@
     </div>
   </nav>
 
-  <!-- BREADCRUMB -->
+  <!-- BREADCRUMB MOBILE -->
   <nav class="sub-navbar mt-lg-5 d-lg-none">
     <div class="container-fluid document-content">
       <div class="row align-items-center pt-2">
         <div class="col">
           <!-- Breadcrumb -->
-          <?php echo $this->placeholder('breadCrumbsMobile') ?>
         </div>
         <div class="col-auto">
 
@@ -191,15 +189,14 @@
       </div> <!-- / .row -->
     </div> <!-- / .container -->
   </nav>
+  <!-- BREADCRUMB MOBILE -->
 
 <?php echo $this->content ?>
 
 <!-- JAVASCRIPT -->
-<script src="/assets/js/axios.min.js"></script>
-<script src="/assets/js/prism/prism.js?v=4"></script>
-<script src="/assets/js/prism/prism-line-highlight.js?v=4"></script> <!-- This fixes the line highlight wrong number hilite bug -->
+<script src="/assets/js/prism/prism.js"></script>
+<script src="/assets/js/prism/prism-line-highlight.js"></script>
 <script src="/assets/js/anchor.min.js"></script>
-<script src="/assets/js/app.js?v=21"></script>
 <script type="text/javascript">     
   anchors.add(); // The default instance.
   <?php
