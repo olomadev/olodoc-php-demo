@@ -59,9 +59,10 @@ class SetLocaleMiddleware implements MiddlewareInterface
             $this->translator->setLocale($locale);
         }
         $locale = $this->translator->getLocale();
+
         define('LANG_ID', $locale);
         define('BASE_URL', ($locale == "en") ? HTTP_PREFIX.REQUEST_ORIGIN : HTTP_PREFIX.$locale.".".REQUEST_ORIGIN);
-        
+
         return $handler->handle($request);
     }
 

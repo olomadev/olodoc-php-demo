@@ -10,7 +10,7 @@ Only <b>Php 7.4</b> and above versions are supported.
 Follow the steps below to create an Olodoc project.
 
 ```bash [no-line-numbers] [command-line] data-user="root" data-host="localhost"
-git clone git@github.com:olomadev/olodoc-skelethon myproject
+git clone git@github.com:olomadev/olodoc-skeleton.git myproject
 ```
 
 Go to your project root

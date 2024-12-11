@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Laminas\I18n\Translator\TranslatorInterface;
-use Laminas\EventManager\EventManagerInterface;
+// use Laminas\EventManager\EventManagerInterface;
 
 /**
  * The configuration provider for the App module
@@ -56,10 +56,9 @@ class ConfigProvider
 
                 // General
                 // 
-                EventManagerInterface::class => Container\EventManagerFactory::class,
+                // EventManagerInterface::class => Container\EventManagerFactory::class,
                 Middleware\ClientMiddleware::class => Middleware\ClientMiddlewareFactory::class,
                 Middleware\SetLocaleMiddleware::class => Middleware\SetLocaleMiddlewareFactory::class,
-                Middleware\VersionValidateMiddleware::class => Middleware\VersionValidateMiddlewareFactory::class,
 
                 // Handlers
                 //------------------------------------------

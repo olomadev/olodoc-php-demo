@@ -15,6 +15,7 @@ return [
     'Documentation version could not be found' => 'Documentation version could not be found',
 
     // Alerts
+    // 
     'Note' => 'Note',
     'Tip' => 'Tip',
     'Important' => 'Important',
@@ -30,7 +31,7 @@ return [
     'Support' => 'Support',
     'Create a New Entry' => 'Create a New Entry',
     'Create bug report, feature request or support question' => 'Create bug report, feature request or support question',
-    'Login to My Account' => 'Login to My Account',
+    'User Login' => 'User Login',
     'Classic Login' => 'Classic Sign In',
     'Sign in with Github' => 'Sign in with Github',
     'Sign in with Google' => 'Sign in with Google',
@@ -39,4 +40,9 @@ return [
     //
     '404 Page Not Found' => '404 Page Not Found',
     'You\'re looking for a page that doesn\'t exist or may have been moved' => 'You\'re looking for a page that doesn\'t exist or may have been moved',
+
+    // Footer
+    //
+    'Your company logo can be here. Contact Us.' => 'Your company logo can be here. Contact Us.',
+
 ];

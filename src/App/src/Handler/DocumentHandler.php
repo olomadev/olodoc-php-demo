@@ -37,11 +37,13 @@ class DocumentHandler implements RequestHandlerInterface
         //
         $data = array();
         $path = $request->getUri()->getPath();
+        $locale = $this->translator->getLocale();
 
         $routeResult = $request->getAttribute(RouteResult::class);
         $routeName = $routeResult->getMatchedRouteName();
         $routeParams = $routeResult->getMatchedParams();
 
+        $this->documentManager->setLocale($locale);
         $this->documentManager->setRequest($request);
         $this->documentManager->setRouteName($routeName);
         $this->documentManager->setRouteParams($routeParams);

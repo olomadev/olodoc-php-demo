@@ -11919,7 +11919,7 @@ code[class*=language-], pre[class*=language-] {
   .sidenav {
     height: 0;
     position: sticky;
-    top: 0;
+    top: -200px;
     z-index: 1020;
   }
 }
@@ -11994,9 +11994,6 @@ code[class*=language-], pre[class*=language-] {
 .bs-sidenav .nav-sub-item-h0 {}
 .bs-sidenav .nav-sub-item-h2 {
   font-weight:500;
-}
-.bs-sidenav .nav-sub-item-h2 a {
-  color: #000;
 }
 .bs-sidenav .nav-sub-item-h3 a {
   font-size: 13px;

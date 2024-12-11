@@ -7,7 +7,6 @@
         "Olodoc Php Documentation Generator", 
         "description"
     );
-    $this->placeholder('user')->set($user);
 ?>
 <!-- WELCOME -->
 <section class="pt-lg-12 pt-md-10 pt-8">
@@ -26,7 +25,7 @@
           </p>
           <!-- Buttons -->
           <div class="text-center text-md-start pt-4">
-            <a href="<?php echo OLODOC_URL ?>/<?php echo DOCS ?>/index.html" class="btn btn-primary-soft">
+            <a href="/docs/latest/index.html" class="btn btn-primary-soft">
               <?php echo $this->translate("Go to Documentation")?>
             </a>
           </div>
