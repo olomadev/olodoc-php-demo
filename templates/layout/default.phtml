@@ -63,11 +63,12 @@
                 <?php
                 $config = $this->placeholder('config')[0];
                 $host = preg_replace('#^('.implode('|', array_keys($config['available_locales'])).')\.#', '', HOSTNAME);
+                $tailUrl = ltrim($host, LANG_ID.".").REQUEST_PATH;
                 foreach ($config['available_locales'] as $key => $label) {
                     if ($key == $config['default_locale']) {
-                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH;
+                        $url = ($config['remove_default_locale']) ? HTTP_PREFIX.$tailUrl : HTTP_PREFIX.$key.'.'.$tailUrl;
                     } else {
-                        $url = HTTP_PREFIX.$key.'.'.ltrim($host, LANG_ID.".").REQUEST_PATH;
+                        $url = HTTP_PREFIX.$key.'.'.$tailUrl;
                     }
                     $onmouseover = "onMouseOverFlag('".$key."')";
                     $onmouseout  = "onMouseOutFlag('".$key."')";
