@@ -1,6 +1,6 @@
-<h2>Setup</h2>
+<h1>Setup</h1>
 <p>To install the olodoc app, the <b>Php</b> and composer package must be installed on your computer.</p>
-<h3>Requirements</h3>
+<h2>Requirements</h2>
 <p>Only <b>Php 7.4</b> and above versions are supported.</p>
 <p>Follow the steps below to create an Olodoc project.</p>
 <pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">git clone git@github.com:olomadev/olodoc-skeleton.git myproject</code></pre>
@@ -15,7 +15,7 @@ chmod 777 /var/www/myproject/public/sitemap.xml</code></pre>
 <div class="ghd-alert ghd-alert-caution"><p class="ghd-alert-title"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M214-384q0 46 19.5 87.5T288-223q-1-5-1.5-10t-.5-10q0-27 10-50.5t27-42.5l107-120 107 120q17 20 27 43.5t10 49.5q0 5-.5 10.5T572-222q35-29 54.5-71.5T646-384q0-51-17.5-100.5T578-576q-17 11-35.5 17t-40.5 6q-52 0-91.5-32T361-668q-36 33-63 67.5T252-530q-19 36-28.5 73t-9.5 73Zm216 36-53 60q-9 11-14 22.5t-5 25.5q0 30 21 51t51 21q30 0 51-21t21-51q0-14-5-26t-14-22l-53-60Zm0-468v119q0 30 21 51t51 21q17 0 31.5-7t24.5-20l16-20q64 38 104 118.5T718-384q0 120-84 204T430-96q-120 0-204-84t-84-204q0-112 76-226.5T430-816Zm398 312q-15 0-25.5-10.5T792-540q0-15 10.5-25.5T828-576q15 0 25.5 10.5T864-540q0 15-10.5 25.5T828-504Zm-36-120v-192h72v192h-72Z"/></svg>Caution</p><p class="ghd-alert-body">
 In general, we'd advise you to try setting the permissions of the <b>cache/</b> directory to <b>755</b> and the files inside it - to <b>644</b>. If you absolutely must use higher permissions, try using <b>777</b> for the <b>cache/</b> directory and <b>666</b> for the files in it. Avoid setting the permissions of regular files to <b>777</b>.</p>
 </div>
-<h3>Apache2 Configuration</h3>
+<h2>Apache2 Configuration</h2>
 <p>Enable Apache mod_rewrite plugin.</p>
 <pre><code class="language-bash no-line-numbers">sudo a2enmod rewrite</code></pre>
 <p>The <kbd>AllowOverride</kbd> option for directories in the <b>apache2.conf</b> file must be <b>All</b>.</p>
@@ -47,16 +47,16 @@ vim example.local.conf</code></pre>
 <p>Save your vhost file and restart the apache server.</p>
 <pre data-user="root" data-host="localhost"><code class="language-bash no-line-numbers command-line">a2ensite example.local.conf
 sudo service apache2 restart</code></pre>
-<h3>.htaccess</h3>
+<h2>.htaccess</h2>
 <p>Configuration requires the <kbd>.htaccess</kbd> file as follows. This file is located in the <kbd>/public</kbd> folder.</p>
-<h3>Linux Host File</h3>
+<h2>Linux Host File</h2>
 <p>In this example, the project is defined as <kbd>example.local</kbd> in the <kbd>/etc/hosts</kbd> file.</p>
 <pre><code class="language-bash no-line-numbers">127.0.1.1       example.local</code></pre>
 <p>If you are setting up a <b>multilingual project via a subdomain</b>, add the languages you plan to support as follows.</p>
 <pre><code class="language-bash no-line-numbers">127.0.1.1       example.local
 127.0.1.1       en.example.local
 127.0.1.1       tr.example.local</code></pre>
-<h3>Windows Host File</h3>
+<h2>Windows Host File</h2>
 <p>If you works on a Linux Virtual Machine under the Windows OS you must define a host name in <kbd>C:\Windows\System32\drivers\etc\hosts</kbd> file like below.</p>
 <pre><code class="language-sh"># Copyright (c) 1993-2009 Microsoft Corp.
 #
@@ -76,7 +76,7 @@ sudo service apache2 restart</code></pre>
   192.168.231.130 example.local       # Your Linux virtual machine ip address
   192.168.231.130 tr.example.local
   192.168.231.130 en.example.local</code></pre>
-<h3>Local Environment Configuration</h3>
+<h2>Local Environment Configuration</h2>
 <p>To work in a local environment, </p>
 <ol>
 <li>Copy your <b>local.php.dist</b> file in your project root directory and save it as <b>local.php</b> into your <b>/config/autoload/</b> folder.</li>
@@ -137,12 +137,12 @@ return [
     // Enable debugging; typically used to provide debugging information within templates.
     'debug' =&gt; true,
 ];</code></pre>
-<h3>Run Your Application</h3>
+<h2>Run Your Application</h2>
 <p>If everything went well, you can run your first application by typing your project address into your browser as follows:</p>
 <p><img class="img-fluid" src="/images/example-local.png" alt="Example Local Project" /></p>
-<h3>About Php Mezzio Framework</h3>
+<h2>About Php Mezzio Framework</h2>
 <p>Olodoc uses the super fast micro framework called <a href="https://docs.mezzio.dev/mezzio/" target="_blank">Mezzio</a>. If you would like to get more detailed information about the Mezzio framework, you can take a look at the resources below.</p>
-<div class="table-responsive"><table  class="table table-bordered">
+<table class="table table-bordered">
   <thead class="table-light">
     <tr>
         <th>Source</th>
@@ -162,4 +162,4 @@ return [
         <td>Blog address written by the creator of Mezzio and containing extensive information about Mezzio installation.</td>
     </tr>
   </tbody>
-</table></div>
+</table>

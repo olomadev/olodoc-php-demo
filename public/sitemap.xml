@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:me="http://www.google.com/schemas/sitemap-me/1.0">
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/installation.html</loc>
+		<loc>https://example.com/1.0/installation.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/generating-docs.html</loc>
+		<loc>https://example.com/1.0/generating-docs.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/customizations.html</loc>
+		<loc>https://example.com/1.0/customizations.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/markdown-guide/extended-syntax/index.html</loc>
+		<loc>https://example.com/1.0/markdown-guide/extended-syntax/index.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/markdown-guide/index.html</loc>
+		<loc>https://example.com/1.0/markdown-guide/index.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/markdown-guide/basic-syntax/index.html</loc>
+		<loc>https://example.com/1.0/markdown-guide/basic-syntax/index.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/i18n.html</loc>
+		<loc>https://example.com/1.0/i18n.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/configuration.html</loc>
+		<loc>https://example.com/1.0/configuration.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/index.html</loc>
+		<loc>https://example.com/1.0/index.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/prism-js.html</loc>
+		<loc>https://example.com/1.0/prism-js.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/index.html</loc>
+		<loc>https://example.com/1.0/index.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 	<url>
-		<loc>http://olodoc-skeleton.local/1.0/index.html</loc>
+		<loc>https://example.com/1.0/index.html</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
-		<lastmod>2024-12-11T10:26:56+00:00</lastmod>
+		<lastmod>2024-12-12T10:07:27+00:00</lastmod>
 	</url>
 </urlset>

@@ -1,9 +1,9 @@
 
-## Setup
+# Setup
 
 To install the olodoc app, the <b>Php</b> and composer package must be installed on your computer.
 
-### Requirements
+## Requirements
 
 Only <b>Php 7.4</b> and above versions are supported.
 
@@ -36,8 +36,7 @@ chmod 777 /var/www/myproject/public/sitemap.xml
 > [!CAUTION]
 > In general, we'd advise you to try setting the permissions of the <b>cache/</b> directory to <b>755</b> and the files inside it - to <b>644</b>. If you absolutely must use higher permissions, try using <b>777</b> for the <b>cache/</b> directory and <b>666</b> for the files in it. Avoid setting the permissions of regular files to <b>777</b>.
 
-
-### Apache2 Configuration
+## Apache2 Configuration
 
 Enable Apache mod_rewrite plugin.
 
@@ -93,11 +92,11 @@ a2ensite example.local.conf
 sudo service apache2 restart
 ```
 
-### .htaccess
+## .htaccess
 
 Configuration requires the <kbd>.htaccess</kbd> file as follows. This file is located in the <kbd>/public</kbd> folder.
 
-### Linux Host File
+## Linux Host File
 
 In this example, the project is defined as <kbd>example.local</kbd> in the <kbd>/etc/hosts</kbd> file.
 
@@ -113,7 +112,7 @@ If you are setting up a <b>multilingual project via a subdomain</b>, add the lan
 127.0.1.1       tr.example.local
 ```
 
-### Windows Host File
+## Windows Host File
 
 If you works on a Linux Virtual Machine under the Windows OS you must define a host name in <kbd>C:\Windows\System32\drivers\etc\hosts</kbd> file like below.
 
@@ -138,7 +137,7 @@ If you works on a Linux Virtual Machine under the Windows OS you must define a h
   192.168.231.130 en.example.local
 ```
 
-### Local Environment Configuration
+## Local Environment Configuration
 
 To work in a local environment, 
 
@@ -204,14 +203,14 @@ return [
 ];
 ```
 
-### Run Your Application
+## Run Your Application
 
 If everything went well, you can run your first application by typing your project address into your browser as follows:
 
 ![Example Local Project](/images/example-local.png)
 
 
-### About Php Mezzio Framework
+## About Php Mezzio Framework
 
 Olodoc uses the super fast micro framework called <a href="https://docs.mezzio.dev/mezzio/" target="_blank">Mezzio</a>. If you would like to get more detailed information about the Mezzio framework, you can take a look at the resources below.
 
